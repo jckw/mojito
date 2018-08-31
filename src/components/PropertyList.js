@@ -12,7 +12,7 @@ class PropertyList extends Component {
         return (
             <Box>
                 {allProperties.edges.map(edge => (
-                    <PropertyItem property={edge.node} />
+                    <PropertyItem key={edge.node.id} property={edge.node} />
                 ))}
             </Box>
         )
@@ -25,6 +25,7 @@ export default createFragmentContainer(PropertyList, {
             allProperties {
                 edges {
                     node {
+                        id
                         ...PropertyItem_property
                     }
                 }

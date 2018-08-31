@@ -3,29 +3,47 @@ import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Box, Heading, Text } from 'rebass'
 import { Link } from 'react-router-dom'
+import geocoder from 'geocoder'
 
-import Card from './common/Card'
+import { Subscribe } from 'unstated'
+
+import MapState from '../state/MapState'
 
 class PropertyItem extends Component {
     render() {
         const { id, street, area, postcode, price, bedrooms, bathrooms } = this.props.property
 
         return (
-            <Link
-                to={`/property/${id}`}
-                target="_blank"
-                style={{ textDecoration: 'none', color: '#3D3D3D' }}
-            >
-                <Box>
-                    <Text fontSize={0} fontWeight="extrabold" color="green.normal">
-                        {bedrooms} BEDROOM • {bathrooms} BATHROOM
-                    </Text>
-                    <Heading fontSize={3} fontWeight="bold">
-                        {street}, {area.name}, {postcode}
-                    </Heading>
-                    <Text>£{price} per month</Text>
-                </Box>
-            </Link>
+            <Subscribe to={[MapState]}>
+                {map => {
+                    geocoder.geocode(postcode, (err, data) => {
+                        if (err) {
+                            console.log(err)
+                            return
+                        }
+
+                        map.addVisiblePoint({ id, ...data.results[0].geometry.location })
+                    })
+
+                    return (
+                        <Link
+                            to={`/property/${id}`}
+                            target="_blank"
+                            style={{ textDecoration: 'none', color: '#3D3D3D' }}
+                        >
+                            <Box>
+                                <Text fontSize={0} fontWeight="extrabold" color="green.normal">
+                                    {bedrooms} BEDROOM • {bathrooms} BATHROOM
+                                </Text>
+                                <Heading fontSize={3} fontWeight="bold">
+                                    {street}, {area.name}, {postcode}
+                                </Heading>
+                                <Text>£{price} per month</Text>
+                            </Box>
+                        </Link>
+                    )
+                }}
+            </Subscribe>
         )
     }
 }

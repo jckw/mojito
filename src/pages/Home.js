@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { graphql } from 'babel-plugin-relay/macro'
 import { QueryRenderer } from 'react-relay'
+import { Flex } from 'rebass'
+
 import environment from '../relay/enviroment'
 import PropertyList from '../components/PropertyList'
+import MapView from '../components/MapView'
 
 class Home extends Component {
     render() {
@@ -22,11 +25,11 @@ class Home extends Component {
                     if (!props) {
                         return <div>Loading...</div>
                     }
-                    console.log(props)
                     return (
-                        <div>
+                        <Flex flex={1} flexDirection="row" css={{ height: '100%' }}>
                             <PropertyList query={props} />
-                        </div>
+                            <MapView />
+                        </Flex>
                     )
                 }}
             />

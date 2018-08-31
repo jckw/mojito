@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2495c789bfaf10b50e012b6e67036208
+ * @relayHash 35c21f3d795d204241707551154bef97
  */
 
 /* eslint-disable */
@@ -30,8 +30,8 @@ fragment PropertyList_query on Query {
   allProperties {
     edges {
       node {
-        ...PropertyItem_property
         id
+        ...PropertyItem_property
       }
     }
   }
@@ -64,7 +64,7 @@ return {
   "operationKind": "query",
   "name": "HomeQuery",
   "id": null,
-  "text": "query HomeQuery {\n  ...PropertyList_query\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        ...PropertyItem_property\n        id\n      }\n    }\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n",
+  "text": "query HomeQuery {\n  ...PropertyList_query\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n      }\n    }\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
