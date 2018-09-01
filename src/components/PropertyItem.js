@@ -3,8 +3,6 @@ import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Box, Heading, Text } from 'rebass'
 import { Link } from 'react-router-dom'
-import geocoder from 'geocoder'
-
 import { Subscribe } from 'unstated'
 
 import MapState from '../state/MapState'
@@ -16,14 +14,7 @@ class PropertyItem extends Component {
         return (
             <Subscribe to={[MapState]}>
                 {map => {
-                    geocoder.geocode(postcode, (err, data) => {
-                        if (err) {
-                            console.log(err)
-                            return
-                        }
-
-                        map.addVisiblePoint({ id, ...data.results[0].geometry.location })
-                    })
+                    map.addVisiblePointByPostcode(this.props.property)
 
                     return (
                         <Link

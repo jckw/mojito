@@ -15,7 +15,8 @@ export type PropertyList_query = {|
   +allProperties: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: ?{|
-        +$fragmentRefs: PropertyItem_property$ref
+        +id: string,
+        +$fragmentRefs: PropertyItem_property$ref,
       |}
     |}>
   |},
@@ -59,6 +60,13 @@ const node/*: ConcreteFragment*/ = {
               "plural": false,
               "selections": [
                 {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "id",
+                  "args": null,
+                  "storageKey": null
+                },
+                {
                   "kind": "FragmentSpread",
                   "name": "PropertyItem_property",
                   "args": null
@@ -72,5 +80,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '6f2f4c1e8598d091bd4ecb5660a178f9';
+(node/*: any*/).hash = '3f5063f6c94acf9f64b041f6ff91e2b2';
 module.exports = node;

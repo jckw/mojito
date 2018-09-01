@@ -1,4 +1,5 @@
 import { Container } from 'unstated'
+import geocoder from 'geocoder'
 
 class MapContainer extends Container {
     state = {
@@ -6,14 +7,41 @@ class MapContainer extends Container {
         selectedPoint: null
     }
 
-    addVisiblePoint(point) {
-        const containsPoint = this.state.visiblePoints.filter(p => p.id === point.id).length > 0
+    setSelectedPoint(point) {
+        this.setState({ selectedPoint: point })
+    }
 
-        if (containsPoint) {
+    unsetSelectedPoint(point) {
+        this.setState({ selectedPoint: null })
+    }
+
+    addVisiblePoint(point) {
+        if (this.containsPoint(point)) {
             return
         }
 
         this.setState({ visiblePoints: [point, ...this.state.visiblePoints] })
+    }
+
+    containsPoint({ id }) {
+        return this.state.visiblePoints.filter(p => p.id === id).length > 0
+    }
+
+    addVisiblePointByPostcode(point) {
+        if (this.containsPoint(point)) {
+            return
+        }
+
+        const { postcode } = point
+
+        geocoder.geocode(postcode, (err, data) => {
+            if (err) {
+                console.log(err)
+                return
+            }
+
+            this.addVisiblePoint({ ...point, ...data.results[0].geometry.location })
+        })
     }
 }
 
