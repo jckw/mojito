@@ -24,6 +24,7 @@ class MapView extends Component {
                 defaultCenter={{ lat: 51.7471381, lng: -1.2344602000000577 }}
                 defaultOptions={{ styles: mapStyle, disableDefaultUI: true }}
                 onClick={this.onClick}
+                clickableIcons={false}
             >
                 {map.state.visiblePoints.map(point => (
                     <MapMarker
