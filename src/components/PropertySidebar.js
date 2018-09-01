@@ -8,7 +8,6 @@ import AgencyCard from './AgencyCard'
 
 class PropertySidebar extends Component {
     render() {
-        console.log(this.props)
         return (
             <Container maxWidth="17em" flex="1" mx={0} mt={-3} px={0}>
                 <CostsCard property={this.props.property} />

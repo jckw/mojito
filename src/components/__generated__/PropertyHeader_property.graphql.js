@@ -8,6 +8,7 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type PropertyPhotosContainer_property$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type PropertyHeader_property$ref: FragmentReference;
 export type PropertyHeader_property = {|
@@ -16,6 +17,7 @@ export type PropertyHeader_property = {|
   +singleBedrooms: number,
   +doubleBedrooms: number,
   +bathrooms: number,
+  +$fragmentRefs: PropertyPhotosContainer_property$ref,
   +$refType: PropertyHeader_property$ref,
 |};
 */
@@ -62,9 +64,14 @@ const node/*: ConcreteFragment*/ = {
       "name": "bathrooms",
       "args": null,
       "storageKey": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "PropertyPhotosContainer_property",
+      "args": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '8644d82bcf8e89bc6cd5ac8f1e850a06';
+(node/*: any*/).hash = 'b0f840f0c181b22477f7b68296d9bc53';
 module.exports = node;

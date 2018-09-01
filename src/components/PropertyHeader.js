@@ -3,6 +3,7 @@ import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Container, Text, Image, Flex, Heading, Box } from 'rebass'
 
+import PropertyPhotosContainer from './PropertyPhotosContainer'
 import icons from '../assets/icons/features'
 
 const Feature = ({ src, name, show, quantity }) => {
@@ -50,6 +51,7 @@ class PropertyHeader extends Component {
                         quantity={bathrooms}
                     />
                 </Container>
+                <PropertyPhotosContainer property={this.props.property} />
             </Box>
         )
     }
@@ -63,6 +65,7 @@ export default createFragmentContainer(PropertyHeader, {
             singleBedrooms
             doubleBedrooms
             bathrooms
+            ...PropertyPhotosContainer_property
         }
     `
 })

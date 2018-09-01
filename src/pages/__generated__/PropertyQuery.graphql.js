@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash be09900ae6c375696cf927c173b65b16
+ * @relayHash bd40ecde05a18b46ea885ba1b0dfebc9
  */
 
 /* eslint-disable */
@@ -47,6 +47,7 @@ fragment PropertyHeader_property on PropertyType {
   singleBedrooms
   doubleBedrooms
   bathrooms
+  ...PropertyPhotosContainer_property
 }
 
 fragment PropertySidebar_property on PropertyType {
@@ -91,6 +92,17 @@ fragment AgencyCard_agency on LettingAgencyType {
   id
   name
 }
+
+fragment PropertyPhotosContainer_property on PropertyType {
+  photos {
+    edges {
+      node {
+        photo
+        id
+      }
+    }
+  }
+}
 */
 
 const node/*: ConcreteRequest*/ = (function(){
@@ -122,7 +134,7 @@ return {
   "operationKind": "query",
   "name": "PropertyQuery",
   "id": null,
-  "text": "query PropertyQuery(\n  $id: ID!\n) {\n  property(id: $id) {\n    ...PropertySingle_property\n    id\n  }\n}\n\nfragment PropertySingle_property on PropertyType {\n  ...PropertyHeader_property\n  ...PropertySidebar_property\n  ...FeatureGrid_property\n}\n\nfragment PropertyHeader_property on PropertyType {\n  street\n  postcode\n  singleBedrooms\n  doubleBedrooms\n  bathrooms\n}\n\nfragment PropertySidebar_property on PropertyType {\n  ...CostsCard_property\n  agency {\n    ...AgencyCard_agency\n    id\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  doubleBedrooms\n  singleBedrooms\n  totalArea\n  bathrooms\n  ensuites\n  furnished\n  dishwasher\n  shower\n  garden\n  dryer\n  washingMachine\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment CostsCard_property on PropertyType {\n  price\n}\n\nfragment AgencyCard_agency on LettingAgencyType {\n  id\n  name\n}\n",
+  "text": "query PropertyQuery(\n  $id: ID!\n) {\n  property(id: $id) {\n    ...PropertySingle_property\n    id\n  }\n}\n\nfragment PropertySingle_property on PropertyType {\n  ...PropertyHeader_property\n  ...PropertySidebar_property\n  ...FeatureGrid_property\n}\n\nfragment PropertyHeader_property on PropertyType {\n  street\n  postcode\n  singleBedrooms\n  doubleBedrooms\n  bathrooms\n  ...PropertyPhotosContainer_property\n}\n\nfragment PropertySidebar_property on PropertyType {\n  ...CostsCard_property\n  agency {\n    ...AgencyCard_agency\n    id\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  doubleBedrooms\n  singleBedrooms\n  totalArea\n  bathrooms\n  ensuites\n  furnished\n  dishwasher\n  shower\n  garden\n  dryer\n  washingMachine\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment CostsCard_property on PropertyType {\n  price\n}\n\nfragment AgencyCard_agency on LettingAgencyType {\n  id\n  name\n}\n\nfragment PropertyPhotosContainer_property on PropertyType {\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -166,7 +178,7 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "washingMachine",
+            "name": "dryer",
             "args": null,
             "storageKey": null
           },
@@ -197,6 +209,47 @@ return {
             "name": "bathrooms",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "photos",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "PropertyPhotoConnection",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "edges",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "PropertyPhotoEdge",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "name": "node",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "PropertyPhotoType",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "photo",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      v2
+                    ]
+                  }
+                ]
+              }
+            ]
           },
           {
             "kind": "ScalarField",
@@ -269,14 +322,14 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "dryer",
+            "name": "postcode",
             "args": null,
             "storageKey": null
           },
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "postcode",
+            "name": "washingMachine",
             "args": null,
             "storageKey": null
           },

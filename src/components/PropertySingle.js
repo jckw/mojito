@@ -4,7 +4,6 @@ import { createFragmentContainer } from 'react-relay'
 import { Box, Container, Flex } from 'rebass'
 
 import FeatureGrid from './FeatureGrid'
-import AgencyCard from './AgencyCard'
 import PropertyHeader from './PropertyHeader'
 import PropertySidebar from './PropertySidebar'
 
