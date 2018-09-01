@@ -2,47 +2,20 @@ import React, { Component } from 'react'
 import { Marker } from 'react-google-maps'
 
 class MapMarker extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            selected: false
-        }
-    }
-
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClick, false)
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClick, false)
-    }
-
-    handleClick = e => {
-        if (this.node.contains(e.target)) {
-            return
-        }
-
-        const { map } = this.props
-        map.unsetSelectedPoint()
-
-        this.setState({ selected: false })
-    }
-
     onClick = () => {
         const { map, point } = this.props
         map.setSelectedPoint(point)
-        this.setState({ selected: true })
     }
 
     render() {
-        const { price } = this.props.point
+        const { map } = this.props
+        const { id, price } = this.props.point
 
         return (
             <div ref={node => (this.node = node)}>
                 <Marker
                     icon={
-                        this.state.selected
+                        map.state.selectedPoint && map.state.selectedPoint.id === id
                             ? 'https://developers.google.com/maps/documentation/javascript/images/custom-marker.png'
                             : null
                     }

@@ -11,7 +11,18 @@ class MapContainer extends Container {
         this.setState({ selectedPoint: point })
     }
 
-    unsetSelectedPoint(point) {
+    setSelectedProperty(property) {
+        geocoder.geocode(property.postcode, (err, data) => {
+            if (err) {
+                console.log(err)
+                return
+            }
+
+            this.setState({ selectedPoint: { ...property, ...data.results[0].geometry.location } })
+        })
+    }
+
+    unsetSelectedPoint() {
         this.setState({ selectedPoint: null })
     }
 

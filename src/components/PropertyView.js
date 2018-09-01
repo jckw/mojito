@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { QueryRenderer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
-import environment from '../relay/enviroment'
 import { Subscribe } from 'unstated'
+import environment from '../relay/enviroment'
 
 import MapState from '../state/MapState'
 

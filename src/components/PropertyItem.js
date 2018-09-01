@@ -9,18 +9,19 @@ import MapState from '../state/MapState'
 
 class PropertyItem extends Component {
     render() {
-        const { id, street, area, postcode, price, bedrooms, bathrooms } = this.props.property
+        const { property } = this.props
+        const { id, street, area, postcode, price, bedrooms, bathrooms } = property
 
         return (
             <Subscribe to={[MapState]}>
                 {map => {
-                    map.addVisiblePointByPostcode(this.props.property)
+                    map.addVisiblePointByPostcode(property)
 
                     return (
-                        <Link
-                            to={`/property/${id}`}
-                            target="_blank"
-                            style={{ textDecoration: 'none', color: '#3D3D3D' }}
+                        <a
+                            onClick={() => {
+                                map.setSelectedProperty(property)
+                            }}
                         >
                             <Box>
                                 <Text fontSize={0} fontWeight="extrabold" color="green.normal">
@@ -31,7 +32,7 @@ class PropertyItem extends Component {
                                 </Heading>
                                 <Text>£{price} per month</Text>
                             </Box>
-                        </Link>
+                        </a>
                     )
                 }}
             </Subscribe>

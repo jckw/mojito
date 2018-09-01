@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Subscribe } from 'unstated'
-import { Box } from 'rebass'
+import { Container } from 'rebass'
 
 import PropertyView from './PropertyView'
 import PropertyList from './PropertyList'
@@ -13,13 +13,13 @@ class MapSidebar extends Component {
         return (
             <Subscribe to={[MapState]}>
                 {map => (
-                    <Box>
+                    <Container maxWidth={['400px']} width="100%">
                         {map.state.selectedPoint !== null ? (
                             <PropertyView />
                         ) : (
                             <PropertyList query={query} />
                         )}
-                    </Box>
+                    </Container>
                 )}
             </Subscribe>
         )

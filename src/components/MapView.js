@@ -9,31 +9,36 @@ import mapStyle from '../assets/mapStyle.json'
 import MapMarker from './MapMarker'
 
 class MapView extends Component {
+    onClick = () => {
+        const { map } = this.props
+
+        map.unsetSelectedPoint()
+    }
+
     render() {
+        const { map } = this.props
+
         return (
-            <Subscribe to={[MapState]}>
-                {map => {
-                    return (
-                        <GoogleMap
-                            defaultZoom={14}
-                            defaultCenter={{ lat: 51.7471381, lng: -1.2344602000000577 }}
-                            defaultOptions={{ styles: mapStyle, disableDefaultUI: true }}
-                        >
-                            {map.state.visiblePoints.map(point => (
-                                <MapMarker
-                                    key={point.id}
-                                    point={point}
-                                    position={{ lat: point.lat, lng: point.lng }}
-                                    map={map}
-                                />
-                            ))}
-                        </GoogleMap>
-                    )
-                }}
-            </Subscribe>
+            <GoogleMap
+                defaultZoom={14}
+                defaultCenter={{ lat: 51.7471381, lng: -1.2344602000000577 }}
+                defaultOptions={{ styles: mapStyle, disableDefaultUI: true }}
+                onClick={this.onClick}
+            >
+                {map.state.visiblePoints.map(point => (
+                    <MapMarker
+                        key={point.id}
+                        point={point}
+                        position={{ lat: point.lat, lng: point.lng }}
+                        map={map}
+                    />
+                ))}
+            </GoogleMap>
         )
     }
 }
+
+const MapViewWithState = () => <Subscribe to={[MapState]}>{map => <MapView map={map} />}</Subscribe>
 
 export default compose(
     withProps({
@@ -45,4 +50,4 @@ export default compose(
     }),
     withScriptjs,
     withGoogleMap
-)(MapView)
+)(MapViewWithState)
