@@ -4,8 +4,8 @@ import { QueryRenderer } from 'react-relay'
 import { Flex } from 'rebass'
 
 import environment from '../relay/enviroment'
-import PropertyList from '../components/PropertyList'
 import MapView from '../components/MapView'
+import MapSidebar from '../components/MapSidebar'
 
 class Home extends Component {
     render() {
@@ -27,7 +27,7 @@ class Home extends Component {
                     }
                     return (
                         <Flex flex={1} flexDirection="row" css={{ height: '100%' }}>
-                            <PropertyList query={props} />
+                            <MapSidebar query={props} />
                             <MapView />
                         </Flex>
                     )
