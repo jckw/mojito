@@ -4,13 +4,13 @@ import { graphql } from 'babel-plugin-relay/macro'
 import { Subscribe } from 'unstated'
 import environment from '../relay/enviroment'
 
-import MapState from '../state/MapState'
+import VisiblePropertiesState from '../state/VisiblePropertiesState'
 
 class PropertyView extends Component {
     render() {
         return (
-            <Subscribe to={[MapState]}>
-                {map => (
+            <Subscribe to={[VisiblePropertiesState]}>
+                {properties => (
                     <QueryRenderer
                         environment={environment}
                         query={graphql`
@@ -20,7 +20,7 @@ class PropertyView extends Component {
                                 }
                             }
                         `}
-                        variables={{ id: map.state.selectedPoint.id }}
+                        variables={{ id: properties.state.selectedProperty.id }}
                         render={({ error, props }) => {
                             if (error) {
                                 console.log(error)

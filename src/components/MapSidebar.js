@@ -5,16 +5,16 @@ import { Container } from 'rebass'
 import PropertyView from './PropertyView'
 import PropertyList from './PropertyList'
 
-import MapState from '../state/MapState'
+import VisiblePropertiesState from '../state/VisiblePropertiesState'
 
 class MapSidebar extends Component {
     render() {
         const { query } = this.props
         return (
-            <Subscribe to={[MapState]}>
-                {map => (
+            <Subscribe to={[VisiblePropertiesState]}>
+                {properties => (
                     <Container maxWidth={['400px']} width="100%">
-                        {map.state.selectedPoint !== null ? (
+                        {properties.state.selectedProperty !== null ? (
                             <PropertyView />
                         ) : (
                             <PropertyList query={query} />

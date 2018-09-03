@@ -3,19 +3,20 @@ import { Marker } from 'react-google-maps'
 
 class MapMarker extends Component {
     onClick = () => {
-        const { map, point } = this.props
-        map.setSelectedPoint(point)
+        const { properties, point } = this.props
+        properties.setSelectedProperty(point)
     }
 
     render() {
-        const { map } = this.props
+        const { properties } = this.props
         const { id, price } = this.props.point
 
         return (
             <div ref={node => (this.node = node)}>
                 <Marker
                     icon={
-                        map.state.selectedPoint && map.state.selectedPoint.id === id
+                        properties.state.selectedProperty &&
+                        properties.state.selectedProperty.id === id
                             ? 'https://developers.google.com/maps/documentation/javascript/images/custom-marker.png'
                             : null
                     }

@@ -2,25 +2,25 @@ import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Box, Heading, Text } from 'rebass'
-import { Link } from 'react-router-dom'
 import { Subscribe } from 'unstated'
 
-import MapState from '../state/MapState'
+import VisiblePropertiesState from '../state/VisiblePropertiesState'
 
 class PropertyItem extends Component {
     render() {
         const { property } = this.props
-        const { id, street, area, postcode, price, bedrooms, bathrooms } = property
+        const { street, area, postcode, price, bedrooms, bathrooms } = property
 
         return (
-            <Subscribe to={[MapState]}>
-                {map => {
-                    map.addVisiblePointByPostcode(property)
+            <Subscribe to={[VisiblePropertiesState]}>
+                {properties => {
+                    // TODO: Come up with a better way to add properties to state
+                    // properties.addVisibleProperty(property)
 
                     return (
                         <a
                             onClick={() => {
-                                map.setSelectedProperty(property)
+                                properties.setSelectedProperty(property)
                             }}
                         >
                             <Box>

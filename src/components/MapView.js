@@ -4,19 +4,19 @@ import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import { Box } from 'rebass'
 import { Subscribe } from 'unstated'
 
-import MapState from '../state/MapState'
+import VisiblePropertiesState from '../state/VisiblePropertiesState'
 import mapStyle from '../assets/mapStyle.json'
 import MapMarker from './MapMarker'
 
 class MapView extends Component {
     onClick = () => {
-        const { map } = this.props
+        const { properties } = this.props
 
-        map.unsetSelectedPoint()
+        properties.unsetSelectedProperty()
     }
 
     render() {
-        const { map } = this.props
+        const { properties } = this.props
 
         return (
             <GoogleMap
@@ -26,12 +26,15 @@ class MapView extends Component {
                 onClick={this.onClick}
                 clickableIcons={false}
             >
-                {map.state.visiblePoints.map(point => (
+                {properties.state.visibleProperties.map(p => (
                     <MapMarker
-                        key={point.id}
-                        point={point}
-                        position={{ lat: point.lat, lng: point.lng }}
-                        map={map}
+                        key={p.id}
+                        point={p}
+                        position={
+                            // Shouldn't be doing this! No fragment container
+                            { lat: p.geometry[0], lng: p.geometry[1] }
+                        }
+                        properties={properties}
                     />
                 ))}
             </GoogleMap>
@@ -39,7 +42,11 @@ class MapView extends Component {
     }
 }
 
-const MapViewWithState = () => <Subscribe to={[MapState]}>{map => <MapView map={map} />}</Subscribe>
+const MapViewWithState = () => (
+    <Subscribe to={[VisiblePropertiesState]}>
+        {properties => <MapView {...{ properties }} />}
+    </Subscribe>
+)
 
 export default compose(
     withProps({
