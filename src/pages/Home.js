@@ -15,6 +15,7 @@ class Home extends Component {
                 query={graphql`
                     query HomeQuery {
                         ...PropertyList_query
+                        ...MapView_query
                     }
                 `}
                 render={({ error, props }) => {
@@ -25,10 +26,11 @@ class Home extends Component {
                     if (!props) {
                         return <div>Loading...</div>
                     }
+
                     return (
                         <Flex flex={1} flexDirection="row" css={{ height: '100%' }}>
                             <MapSidebar query={props} />
-                            <MapView />
+                            <MapView query={props} />
                         </Flex>
                     )
                 }}

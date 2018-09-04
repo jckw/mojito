@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4526dc19699212060cbb6227f6a0d3c0
+ * @relayHash 3e38ce04e799c715a469eeda0a44ee1d
  */
 
 /* eslint-disable */
@@ -11,32 +11,21 @@
 import type { ConcreteRequest } from 'relay-runtime';
 type MapView_query$ref = any;
 type PropertyList_query$ref = any;
-export type HomeQueryVariables = {||};
-export type HomeQueryResponse = {|
-  +$fragmentRefs: PropertyList_query$ref & MapView_query$ref
+export type MapViewRefetchQueryVariables = {||};
+export type MapViewRefetchQueryResponse = {|
+  +$fragmentRefs: MapView_query$ref & PropertyList_query$ref
 |};
-export type HomeQuery = {|
-  variables: HomeQueryVariables,
-  response: HomeQueryResponse,
+export type MapViewRefetchQuery = {|
+  variables: MapViewRefetchQueryVariables,
+  response: MapViewRefetchQueryResponse,
 |};
 */
 
 
 /*
-query HomeQuery {
-  ...PropertyList_query
+query MapViewRefetchQuery {
   ...MapView_query
-}
-
-fragment PropertyList_query on Query {
-  allProperties {
-    edges {
-      node {
-        id
-        ...PropertyItem_property
-      }
-    }
-  }
+  ...PropertyList_query
 }
 
 fragment MapView_query on Query {
@@ -50,12 +39,15 @@ fragment MapView_query on Query {
   }
 }
 
-fragment MapMarker_property on PropertyType {
-  id
-  location {
-    coordinates
+fragment PropertyList_query on Query {
+  allProperties {
+    edges {
+      node {
+        id
+        ...PropertyItem_property
+      }
+    }
   }
-  price
 }
 
 fragment PropertyItem_property on PropertyType {
@@ -70,6 +62,14 @@ fragment PropertyItem_property on PropertyType {
   bedrooms
   bathrooms
 }
+
+fragment MapMarker_property on PropertyType {
+  id
+  location {
+    coordinates
+  }
+  price
+}
 */
 
 const node/*: ConcreteRequest*/ = (function(){
@@ -83,32 +83,32 @@ var v0 = {
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "HomeQuery",
+  "name": "MapViewRefetchQuery",
   "id": null,
-  "text": "query HomeQuery {\n  ...PropertyList_query\n  ...MapView_query\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n      }\n    }\n  }\n}\n\nfragment MapView_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n      }\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  price\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n",
+  "text": "query MapViewRefetchQuery {\n  ...MapView_query\n  ...PropertyList_query\n}\n\nfragment MapView_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n      }\n    }\n  }\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n      }\n    }\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "HomeQuery",
+    "name": "MapViewRefetchQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "PropertyList_query",
+        "name": "MapView_query",
         "args": null
       },
       {
         "kind": "FragmentSpread",
-        "name": "MapView_query",
+        "name": "PropertyList_query",
         "args": null
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "HomeQuery",
+    "name": "MapViewRefetchQuery",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -139,6 +139,31 @@ return {
                 "plural": false,
                 "selections": [
                   v0,
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "name": "location",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "GeometryObjectType",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "coordinates",
+                        "args": null,
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "price",
+                    "args": null,
+                    "storageKey": null
+                  },
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -175,13 +200,6 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "price",
-                    "args": null,
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
                     "name": "bedrooms",
                     "args": null,
                     "storageKey": null
@@ -192,24 +210,6 @@ return {
                     "name": "bathrooms",
                     "args": null,
                     "storageKey": null
-                  },
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "name": "location",
-                    "storageKey": null,
-                    "args": null,
-                    "concreteType": "GeometryObjectType",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "name": "coordinates",
-                        "args": null,
-                        "storageKey": null
-                      }
-                    ]
                   }
                 ]
               }
@@ -222,5 +222,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '9d31fa9b7734932d18b6ec1c3b69dde2';
+(node/*: any*/).hash = '5be51d4a549be86f8ce475b9eb557676';
 module.exports = node;

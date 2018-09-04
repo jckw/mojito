@@ -4,12 +4,12 @@ import { graphql } from 'babel-plugin-relay/macro'
 import { Subscribe } from 'unstated'
 import environment from '../relay/enviroment'
 
-import VisiblePropertiesState from '../state/VisiblePropertiesState'
+import SelectedPropertyState from '../state/SelectedPropertyState'
 
 class PropertyView extends Component {
     render() {
         return (
-            <Subscribe to={[VisiblePropertiesState]}>
+            <Subscribe to={[SelectedPropertyState]}>
                 {properties => (
                     <QueryRenderer
                         environment={environment}

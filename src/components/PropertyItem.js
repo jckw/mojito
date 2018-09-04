@@ -4,7 +4,7 @@ import { graphql } from 'babel-plugin-relay/macro'
 import { Box, Heading, Text } from 'rebass'
 import { Subscribe } from 'unstated'
 
-import VisiblePropertiesState from '../state/VisiblePropertiesState'
+import SelectedPropertyState from '../state/SelectedPropertyState'
 
 class PropertyItem extends Component {
     render() {
@@ -12,11 +12,8 @@ class PropertyItem extends Component {
         const { street, area, postcode, price, bedrooms, bathrooms } = property
 
         return (
-            <Subscribe to={[VisiblePropertiesState]}>
+            <Subscribe to={[SelectedPropertyState]}>
                 {properties => {
-                    // TODO: Come up with a better way to add properties to state
-                    // properties.addVisibleProperty(property)
-
                     return (
                         <a
                             onClick={() => {
