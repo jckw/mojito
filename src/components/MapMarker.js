@@ -6,6 +6,9 @@ import { Subscribe } from 'unstated'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
 
+import markerSelected from '../assets/markerSelected.png'
+import markerUnselected from '../assets/markerUnselected.png'
+
 class MapMarker extends Component {
     onClick = () => {
         const { properties, property } = this.props
@@ -20,10 +23,9 @@ class MapMarker extends Component {
             <Marker
                 icon={
                     properties.state.selectedProperty && properties.state.selectedProperty.id === id
-                        ? 'https://developers.google.com/maps/documentation/javascript/images/custom-marker.png'
-                        : null
+                        ? markerSelected
+                        : markerUnselected
                 }
-                label={`£${price}`}
                 onClick={this.onClick}
                 position={{
                     lng: location.coordinates[0],
@@ -48,7 +50,6 @@ export default createFragmentContainer(MapMarkerWithState, {
             location {
                 coordinates
             }
-            price
         }
     `
 })

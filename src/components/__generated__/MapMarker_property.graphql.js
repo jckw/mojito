@@ -15,7 +15,6 @@ export type MapMarker_property = {|
   +location: {|
     +coordinates: ?any
   |},
-  +price: number,
   +$refType: MapMarker_property$ref,
 |};
 */
@@ -52,16 +51,9 @@ const node/*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ]
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "price",
-      "args": null,
-      "storageKey": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '7b02566caaadda6ff93f497033516e23';
+(node/*: any*/).hash = '2f6e2368a05e84edc7d6c1ac79336747';
 module.exports = node;

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3e38ce04e799c715a469eeda0a44ee1d
+ * @relayHash 8c665224a168face4022f39394b0d383
  */
 
 /* eslint-disable */
@@ -68,7 +68,6 @@ fragment MapMarker_property on PropertyType {
   location {
     coordinates
   }
-  price
 }
 */
 
@@ -85,7 +84,7 @@ return {
   "operationKind": "query",
   "name": "MapViewRefetchQuery",
   "id": null,
-  "text": "query MapViewRefetchQuery {\n  ...MapView_query\n  ...PropertyList_query\n}\n\nfragment MapView_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n      }\n    }\n  }\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n      }\n    }\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  price\n}\n",
+  "text": "query MapViewRefetchQuery {\n  ...MapView_query\n  ...PropertyList_query\n}\n\nfragment MapView_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n      }\n    }\n  }\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n      }\n    }\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -160,13 +159,6 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "price",
-                    "args": null,
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
                     "name": "street",
                     "args": null,
                     "storageKey": null
@@ -194,6 +186,13 @@ return {
                     "kind": "ScalarField",
                     "alias": null,
                     "name": "postcode",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "price",
                     "args": null,
                     "storageKey": null
                   },

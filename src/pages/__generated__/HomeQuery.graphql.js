@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4526dc19699212060cbb6227f6a0d3c0
+ * @relayHash 4d16ced0ea6885e4d5c5e7a0cb6ee51a
  */
 
 /* eslint-disable */
@@ -55,7 +55,6 @@ fragment MapMarker_property on PropertyType {
   location {
     coordinates
   }
-  price
 }
 
 fragment PropertyItem_property on PropertyType {
@@ -85,7 +84,7 @@ return {
   "operationKind": "query",
   "name": "HomeQuery",
   "id": null,
-  "text": "query HomeQuery {\n  ...PropertyList_query\n  ...MapView_query\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n      }\n    }\n  }\n}\n\nfragment MapView_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n      }\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  price\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n",
+  "text": "query HomeQuery {\n  ...PropertyList_query\n  ...MapView_query\n}\n\nfragment PropertyList_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n      }\n    }\n  }\n}\n\nfragment MapView_query on Query {\n  allProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n      }\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  price\n  bedrooms\n  bathrooms\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
