@@ -20,12 +20,13 @@ class PropertyItem extends Component {
                                 properties.setSelectedProperty(property)
                             }}
                         >
-                            <Box>
+                            <Box my={3}>
                                 <Text fontSize={0} fontWeight="extrabold" color="green.normal">
                                     {bedrooms} BEDROOM • {bathrooms} BATHROOM
                                 </Text>
-                                <Heading fontSize={3} fontWeight="bold">
-                                    {street}, {area.name}, {postcode}
+                                <Heading fontSize={2} fontWeight="bold">
+                                    {street}, {area.name},{' '}
+                                    <span style={{ display: 'inline-block' }}>{postcode}</span>
                                 </Heading>
                                 <Text>£{price} per month</Text>
                             </Box>

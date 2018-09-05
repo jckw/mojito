@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { QueryRenderer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
+import { Box, Heading } from 'rebass'
 import { Subscribe } from 'unstated'
 import environment from '../relay/enviroment'
 
@@ -17,6 +18,10 @@ class PropertyView extends Component {
                             query PropertyViewQuery($id: ID!) {
                                 property(id: $id) {
                                     street
+                                    area {
+                                        name
+                                    }
+                                    postcode
                                 }
                             }
                         `}
@@ -30,7 +35,16 @@ class PropertyView extends Component {
                                 return <div>Loading...</div>
                             }
 
-                            return <div>{props.property.street}</div>
+                            return (
+                                <Box pt={3}>
+                                    <Heading fontSize={3}>
+                                        {props.property.street}, {props.property.area.name},{' '}
+                                        <span style={{ display: 'inline-block' }}>
+                                            {props.property.postcode}
+                                        </span>
+                                    </Heading>
+                                </Box>
+                            )
                         }}
                     />
                 )}

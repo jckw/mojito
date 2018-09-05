@@ -7,13 +7,13 @@ import PropertyList from './PropertyList'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
 
-class MapSidebar extends Component {
+class PropertyColumn extends Component {
     render() {
         const { query } = this.props
         return (
             <Subscribe to={[SelectedPropertyState]}>
                 {properties => (
-                    <Container maxWidth={['400px']} width="100%">
+                    <Container maxWidth={['300px']} width="100%">
                         {properties.state.selectedProperty !== null ? (
                             <PropertyView />
                         ) : (
@@ -26,4 +26,4 @@ class MapSidebar extends Component {
     }
 }
 
-export default MapSidebar
+export default PropertyColumn

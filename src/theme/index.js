@@ -17,6 +17,9 @@ const theme = {
         black: '#3D3D3D',
         white: '#fff',
         green: {
+            pale: '#EDF1EE',
+            grey: '#DDDFDD',
+            dark: '#7C827B',
             normal: '#236E55'
         }
     },

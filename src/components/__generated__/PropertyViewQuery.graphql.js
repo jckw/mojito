@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 11819095b08894bb9eb12cec80cdad2b
+ * @relayHash ba43d7bfa58d95a28a14c1f393ebb3f1
  */
 
 /* eslint-disable */
@@ -14,7 +14,11 @@ export type PropertyViewQueryVariables = {|
 |};
 export type PropertyViewQueryResponse = {|
   +property: ?{|
-    +street: string
+    +street: string,
+    +area: {|
+      +name: string
+    |},
+    +postcode: string,
   |}
 |};
 export type PropertyViewQuery = {|
@@ -30,6 +34,11 @@ query PropertyViewQuery(
 ) {
   property(id: $id) {
     street
+    area {
+      name
+      id
+    }
+    postcode
     id
   }
 }
@@ -58,13 +67,34 @@ v2 = {
   "name": "street",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v4 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "postcode",
+  "args": null,
+  "storageKey": null
+},
+v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "PropertyViewQuery",
   "id": null,
-  "text": "query PropertyViewQuery(\n  $id: ID!\n) {\n  property(id: $id) {\n    street\n    id\n  }\n}\n",
+  "text": "query PropertyViewQuery(\n  $id: ID!\n) {\n  property(id: $id) {\n    street\n    area {\n      name\n      id\n    }\n    postcode\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -82,7 +112,20 @@ return {
         "concreteType": "PropertyType",
         "plural": false,
         "selections": [
-          v2
+          v2,
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "area",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "CityAreaType",
+            "plural": false,
+            "selections": [
+              v3
+            ]
+          },
+          v4
         ]
       }
     ]
@@ -103,12 +146,20 @@ return {
         "selections": [
           v2,
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
-            "name": "id",
+            "name": "area",
+            "storageKey": null,
             "args": null,
-            "storageKey": null
-          }
+            "concreteType": "CityAreaType",
+            "plural": false,
+            "selections": [
+              v3,
+              v5
+            ]
+          },
+          v4,
+          v5
         ]
       }
     ]
@@ -116,5 +167,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '18169cb8dab6dbc732fec48590a93cf1';
+(node/*: any*/).hash = '699cdac2ef11945f6a3d3bb2dea95a61';
 module.exports = node;
