@@ -1,11 +1,11 @@
 const theme = {
     breakpoints: [32, 48, 64, 80],
-    space: [0, 4, 8, 16, 24, 32, 64, 128],
+    space: [0, 4, 8, 12, 16, 24, 32, 64, 128],
     fonts: {
         sans: 'Open Sans',
         mono: 'Menlo, monospace'
     },
-    fontSizes: [12, 14, 16, 20, 24, 32, 38, 48, 64, 72, 96],
+    fontSizes: [10, 12, 14, 16, 20, 24, 32, 38, 48, 64, 72, 96],
     fontWeights: {
         normal: 400,
         medium: 500,
@@ -15,15 +15,16 @@ const theme = {
     },
     colors: {
         black: '#3D3D3D',
+        grey: '#717070',
         white: '#fff',
         green: {
             pale: '#EDF1EE',
             grey: '#DDDFDD',
             dark: '#7C827B',
-            normal: '#236E55'
+            normal: '#39BF8F'
         }
     },
-    radii: [0, 2, 4, 12],
+    radii: [0, 2, 4, 8, 16],
     lineHeights: {
         heading: '1.1em'
     },

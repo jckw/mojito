@@ -12,7 +12,7 @@ type MapMarker_property$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type MapView_query$ref: FragmentReference;
 export type MapView_query = {|
-  +allProperties: ?{|
+  +filteredProperties: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: ?{|
         +id: string,
@@ -29,16 +29,41 @@ const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
   "name": "MapView_query",
   "type": "Query",
-  "metadata": null,
-  "argumentDefinitions": [],
+  "metadata": {
+    "connection": [
+      {
+        "count": null,
+        "cursor": null,
+        "direction": "forward",
+        "path": [
+          "filteredProperties"
+        ]
+      }
+    ]
+  },
+  "argumentDefinitions": [
+    {
+      "kind": "LocalArgument",
+      "name": "geometry",
+      "type": "Geometry",
+      "defaultValue": null
+    }
+  ],
   "selections": [
     {
       "kind": "LinkedField",
-      "alias": null,
-      "name": "allProperties",
+      "alias": "filteredProperties",
+      "name": "__MapView_filteredProperties_connection",
       "storageKey": null,
-      "args": null,
-      "concreteType": "PropertyConnection",
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "location_Intersects",
+          "variableName": "geometry",
+          "type": "Geometry"
+        }
+      ],
+      "concreteType": "PropertyTypeConnection",
       "plural": false,
       "selections": [
         {
@@ -47,7 +72,7 @@ const node/*: ConcreteFragment*/ = {
           "name": "edges",
           "storageKey": null,
           "args": null,
-          "concreteType": "PropertyEdge",
+          "concreteType": "PropertyTypeEdge",
           "plural": true,
           "selections": [
             {
@@ -70,8 +95,47 @@ const node/*: ConcreteFragment*/ = {
                   "kind": "FragmentSpread",
                   "name": "MapMarker_property",
                   "args": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "__typename",
+                  "args": null,
+                  "storageKey": null
                 }
               ]
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "cursor",
+              "args": null,
+              "storageKey": null
+            }
+          ]
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "pageInfo",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "PageInfo",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "endCursor",
+              "args": null,
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "hasNextPage",
+              "args": null,
+              "storageKey": null
             }
           ]
         }
@@ -80,5 +144,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'e8306b1d52f4648b0ab472e4aba2c692';
+(node/*: any*/).hash = 'cbf70c95a77c3faf995a4582107accbb';
 module.exports = node;

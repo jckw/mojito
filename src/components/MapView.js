@@ -17,20 +17,43 @@ class MapView extends Component {
         properties.unsetSelectedProperty()
     }
 
+    _onDragEnd = () => {
+        const { relay } = this.props
+        const bounds = this.map.getBounds()
+        const { north, east, south, west } = bounds.toJSON()
+
+        const data = {
+            type: 'Polygon',
+            coordinates: [
+                [[east, north], [west, north], [west, south], [east, south], [east, north]]
+            ]
+        }
+
+        const geometry = JSON.stringify(data)
+        relay.refetch({ geometry }) // make this happen for zoom end too
+        // need to:
+        //   - look up variables in relay/GraphQL
+        //   - decide how to do the initial render: what's the first $geometry?
+        //   - involve pagination soon
+    }
+
     render() {
         const { query } = this.props
 
         return (
             <GoogleMap
+                ref={map => (this.map = map)}
                 defaultZoom={14}
                 defaultCenter={{ lat: 51.7471381, lng: -1.2344602000000577 }}
                 defaultOptions={{ styles: mapStyle, disableDefaultUI: true }}
                 onClick={this._onClick}
                 clickableIcons={false}
+                onDragEnd={this._onDragEnd}
             >
-                {query.allProperties.edges.map(e => (
-                    <MapMarker key={e.node.id} property={e.node} />
-                ))}
+                {query.filteredProperties &&
+                    query.filteredProperties.edges.map(e => (
+                        <MapMarker key={e.node.id} property={e.node} />
+                    ))}
             </GoogleMap>
         )
     }
@@ -58,8 +81,12 @@ export default createRefetchContainer(
     ComposedMapView,
     {
         query: graphql`
-            fragment MapView_query on Query {
-                allProperties {
+            fragment MapView_query on Query @argumentDefinitions(geometry: { type: "Geometry" }) {
+                filteredProperties(location_Intersects: $geometry, first: 10)
+                    @connection(
+                        key: "MapView_filteredProperties"
+                        filters: ["location_Intersects"]
+                    ) {
                     edges {
                         node {
                             id
@@ -71,9 +98,9 @@ export default createRefetchContainer(
         `
     },
     graphql`
-        query MapViewRefetchQuery {
-            ...MapView_query
-            ...PropertyList_query
+        query MapViewRefetchQuery($geometry: Geometry!) {
+            ...MapView_query @arguments(geometry: $geometry)
+            ...PropertyList_query @arguments(geometry: $geometry)
         }
     `
 )
