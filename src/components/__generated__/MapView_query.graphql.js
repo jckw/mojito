@@ -32,7 +32,7 @@ const node/*: ConcreteFragment*/ = {
   "metadata": {
     "connection": [
       {
-        "count": null,
+        "count": "first",
         "cursor": null,
         "direction": "forward",
         "path": [
@@ -46,6 +46,12 @@ const node/*: ConcreteFragment*/ = {
       "kind": "LocalArgument",
       "name": "geometry",
       "type": "Geometry",
+      "defaultValue": null
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "first",
+      "type": "Int",
       "defaultValue": null
     }
   ],
@@ -144,5 +150,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'cbf70c95a77c3faf995a4582107accbb';
+(node/*: any*/).hash = 'c1d08ccc73908a9b093de878d54c09d1';
 module.exports = node;

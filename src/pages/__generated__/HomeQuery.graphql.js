@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5f8e242a63f5ece94b3af1b1d086c511
+ * @relayHash 0e1fdfbe5e66eb60ab80b58ef433bf38
  */
 
 /* eslint-disable */
@@ -11,7 +11,10 @@
 import type { ConcreteRequest } from 'relay-runtime';
 type MapView_query$ref = any;
 type PropertyList_query$ref = any;
-export type HomeQueryVariables = {||};
+export type HomeQueryVariables = {|
+  geometry?: ?any,
+  first: number,
+|};
 export type HomeQueryResponse = {|
   +$fragmentRefs: PropertyList_query$ref & MapView_query$ref
 |};
@@ -23,13 +26,16 @@ export type HomeQuery = {|
 
 
 /*
-query HomeQuery {
-  ...PropertyList_query
-  ...MapView_query
+query HomeQuery(
+  $geometry: Geometry
+  $first: Int!
+) {
+  ...PropertyList_query_2ME50e
+  ...MapView_query_2ME50e
 }
 
-fragment PropertyList_query on Query {
-  filteredProperties(first: 10) {
+fragment PropertyList_query_2ME50e on Query {
+  filteredProperties(location_Intersects: $geometry, first: $first) {
     edges {
       node {
         id
@@ -45,8 +51,8 @@ fragment PropertyList_query on Query {
   }
 }
 
-fragment MapView_query on Query {
-  filteredProperties(first: 10) {
+fragment MapView_query_2ME50e on Query {
+  filteredProperties(location_Intersects: $geometry, first: $first) {
     edges {
       node {
         id
@@ -102,20 +108,54 @@ fragment PriceTag_property on PropertyType {
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
-    "kind": "Literal",
+    "kind": "LocalArgument",
+    "name": "geometry",
+    "type": "Geometry",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
     "name": "first",
-    "value": 10,
-    "type": "Int"
+    "type": "Int!",
+    "defaultValue": null
   }
 ],
-v1 = {
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "first",
+    "variableName": "first",
+    "type": null
+  },
+  {
+    "kind": "Variable",
+    "name": "geometry",
+    "variableName": "geometry",
+    "type": null
+  }
+],
+v2 = [
+  {
+    "kind": "Variable",
+    "name": "first",
+    "variableName": "first",
+    "type": "Int"
+  },
+  {
+    "kind": "Variable",
+    "name": "location_Intersects",
+    "variableName": "geometry",
+    "type": "Geometry"
+  }
+],
+v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v2 = [
+v4 = [
   {
     "kind": "ScalarField",
     "alias": null,
@@ -123,45 +163,45 @@ v2 = [
     "args": null,
     "storageKey": null
   },
-  v1
+  v3
 ];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "HomeQuery",
   "id": null,
-  "text": "query HomeQuery {\n  ...PropertyList_query\n  ...MapView_query\n}\n\nfragment PropertyList_query on Query {\n  filteredProperties(first: 10) {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapView_query on Query {\n  filteredProperties(first: 10) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query HomeQuery(\n  $geometry: Geometry\n  $first: Int!\n) {\n  ...PropertyList_query_2ME50e\n  ...MapView_query_2ME50e\n}\n\nfragment PropertyList_query_2ME50e on Query {\n  filteredProperties(location_Intersects: $geometry, first: $first) {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapView_query_2ME50e on Query {\n  filteredProperties(location_Intersects: $geometry, first: $first) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "HomeQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "FragmentSpread",
         "name": "PropertyList_query",
-        "args": null
+        "args": v1
       },
       {
         "kind": "FragmentSpread",
         "name": "MapView_query",
-        "args": null
+        "args": v1
       }
     ]
   },
   "operation": {
     "kind": "Operation",
     "name": "HomeQuery",
-    "argumentDefinitions": [],
+    "argumentDefinitions": v0,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "filteredProperties",
-        "storageKey": "filteredProperties(first:10)",
-        "args": v0,
+        "storageKey": null,
+        "args": v2,
         "concreteType": "PropertyTypeConnection",
         "plural": false,
         "selections": [
@@ -190,7 +230,7 @@ return {
                     "args": null,
                     "storageKey": null
                   },
-                  v1,
+                  v3,
                   {
                     "kind": "LinkedField",
                     "alias": null,
@@ -199,7 +239,7 @@ return {
                     "args": null,
                     "concreteType": "CityAreaType",
                     "plural": false,
-                    "selections": v2
+                    "selections": v4
                   },
                   {
                     "kind": "ScalarField",
@@ -230,7 +270,7 @@ return {
                     "args": null,
                     "concreteType": "LettingAgencyType",
                     "plural": false,
-                    "selections": v2
+                    "selections": v4
                   },
                   {
                     "kind": "LinkedField",
@@ -266,7 +306,7 @@ return {
                                 "args": null,
                                 "storageKey": null
                               },
-                              v1
+                              v3
                             ]
                           }
                         ]
@@ -347,7 +387,7 @@ return {
         "kind": "LinkedHandle",
         "alias": null,
         "name": "filteredProperties",
-        "args": v0,
+        "args": v2,
         "handle": "connection",
         "key": "MapView_filteredProperties",
         "filters": [
@@ -359,5 +399,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '9d31fa9b7734932d18b6ec1c3b69dde2';
+(node/*: any*/).hash = '202d342b55611ef8725742544dc15822';
 module.exports = node;

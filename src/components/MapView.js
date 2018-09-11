@@ -30,11 +30,6 @@ class MapView extends Component {
         }
 
         const geometry = JSON.stringify(data)
-        relay.refetch({ geometry }) // make this happen for zoom end too
-        // need to:
-        //   - look up variables in relay/GraphQL
-        //   - decide how to do the initial render: what's the first $geometry?
-        //   - involve pagination soon
     }
 
     render() {
@@ -73,8 +68,9 @@ const ComposedMapView = compose(
 
 export default createFragmentContainer(withState(ComposedMapView, [SelectedPropertyState]), {
     query: graphql`
-        fragment MapView_query on Query @argumentDefinitions(geometry: { type: "Geometry" }) {
-            filteredProperties(location_Intersects: $geometry, first: 10)
+        fragment MapView_query on Query
+            @argumentDefinitions(geometry: { type: "Geometry" }, first: { type: "Int" }) {
+            filteredProperties(location_Intersects: $geometry, first: $first)
                 @connection(key: "MapView_filteredProperties", filters: ["location_Intersects"]) {
                 edges {
                     node {
