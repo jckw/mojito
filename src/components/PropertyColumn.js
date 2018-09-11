@@ -13,7 +13,7 @@ class PropertyColumn extends Component {
         return (
             <Subscribe to={[SelectedPropertyState]}>
                 {properties => (
-                    <Container maxWidth={['300px']} width="100%">
+                    <Container maxWidth={['600px']} width="100%">
                         {properties.state.selectedProperty !== null ? (
                             <PropertyView />
                         ) : (

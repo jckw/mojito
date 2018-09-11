@@ -2,8 +2,15 @@ import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Box } from 'rebass'
+import styled from 'styled-components'
 
 import PropertyItem from './PropertyItem'
+
+const Grid = styled(Box)`
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr;
+`
 
 class PropertyList extends Component {
     render() {
@@ -11,11 +18,11 @@ class PropertyList extends Component {
 
         console.log('rendering')
         return (
-            <Box>
+            <Grid>
                 {filteredProperties.edges.map(edge => (
                     <PropertyItem key={edge.node.id} property={edge.node} />
                 ))}
-            </Box>
+            </Grid>
         )
     }
 }

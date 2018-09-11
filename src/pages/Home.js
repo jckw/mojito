@@ -29,8 +29,8 @@ class Home extends Component {
 
                     return (
                         <Flex flex={1} flexDirection="row" css={{ height: '100%' }}>
-                            <PropertyColumn query={props} />
                             <MapView query={props} />
+                            <PropertyColumn query={props} />
                         </Flex>
                     )
                 }}
