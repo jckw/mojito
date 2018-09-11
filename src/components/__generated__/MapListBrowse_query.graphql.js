@@ -8,32 +8,33 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type MapMarker_property$ref = any;
 type PropertyItem_property$ref = any;
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type PropertyList_query$ref: FragmentReference;
-export type PropertyList_query = {|
+declare export opaque type MapListBrowse_query$ref: FragmentReference;
+export type MapListBrowse_query = {|
   +filteredProperties: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: ?{|
         +id: string,
-        +$fragmentRefs: PropertyItem_property$ref,
+        +$fragmentRefs: MapMarker_property$ref & PropertyItem_property$ref,
       |}
     |}>
   |},
-  +$refType: PropertyList_query$ref,
+  +$refType: MapListBrowse_query$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "PropertyList_query",
+  "name": "MapListBrowse_query",
   "type": "Query",
   "metadata": {
     "connection": [
       {
-        "count": "first",
-        "cursor": null,
+        "count": "count",
+        "cursor": "cursor",
         "direction": "forward",
         "path": [
           "filteredProperties"
@@ -44,14 +45,14 @@ const node/*: ConcreteFragment*/ = {
   "argumentDefinitions": [
     {
       "kind": "LocalArgument",
-      "name": "geometry",
-      "type": "Geometry",
-      "defaultValue": null
+      "name": "count",
+      "type": "Int",
+      "defaultValue": 10
     },
     {
       "kind": "LocalArgument",
-      "name": "first",
-      "type": "Int",
+      "name": "cursor",
+      "type": "String",
       "defaultValue": null
     }
   ],
@@ -59,16 +60,9 @@ const node/*: ConcreteFragment*/ = {
     {
       "kind": "LinkedField",
       "alias": "filteredProperties",
-      "name": "__MapView_filteredProperties_connection",
+      "name": "__MapListBrowse_filteredProperties_connection",
       "storageKey": null,
-      "args": [
-        {
-          "kind": "Variable",
-          "name": "location_Intersects",
-          "variableName": "geometry",
-          "type": "Geometry"
-        }
-      ],
+      "args": null,
       "concreteType": "PropertyTypeConnection",
       "plural": false,
       "selections": [
@@ -96,6 +90,11 @@ const node/*: ConcreteFragment*/ = {
                   "name": "id",
                   "args": null,
                   "storageKey": null
+                },
+                {
+                  "kind": "FragmentSpread",
+                  "name": "MapMarker_property",
+                  "args": null
                 },
                 {
                   "kind": "FragmentSpread",
@@ -150,5 +149,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'f274b3b8d5f89c60988f25dc765b9f7b';
+(node/*: any*/).hash = '15f8ed970724ca0bbe1006c58abd1d04';
 module.exports = node;

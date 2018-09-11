@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { createFragmentContainer } from 'react-relay'
-import { graphql } from 'babel-plugin-relay/macro'
 import { Box } from 'rebass'
 import styled from 'styled-components'
 
@@ -26,19 +24,4 @@ class PropertyList extends Component {
     }
 }
 
-export default createFragmentContainer(PropertyList, {
-    query: graphql`
-        fragment PropertyList_query on Query
-            @argumentDefinitions(geometry: { type: "Geometry" }, first: { type: "Int" }) {
-            filteredProperties(location_Intersects: $geometry, first: $first)
-                @connection(key: "MapView_filteredProperties", filters: ["location_Intersects"]) {
-                edges {
-                    node {
-                        id
-                        ...PropertyItem_property
-                    }
-                }
-            }
-        }
-    `
-})
+export default PropertyList
