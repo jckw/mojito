@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { compose, withProps } from 'recompose'
-import { createRefetchContainer } from 'react-relay'
+import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import { Box } from 'rebass'
@@ -77,30 +77,18 @@ const ComposedMapView = compose(
     withGoogleMap
 )(MapViewWithState)
 
-export default createRefetchContainer(
-    ComposedMapView,
-    {
-        query: graphql`
-            fragment MapView_query on Query @argumentDefinitions(geometry: { type: "Geometry" }) {
-                filteredProperties(location_Intersects: $geometry, first: 10)
-                    @connection(
-                        key: "MapView_filteredProperties"
-                        filters: ["location_Intersects"]
-                    ) {
-                    edges {
-                        node {
-                            id
-                            ...MapMarker_property
-                        }
+export default createFragmentContainer(ComposedMapView, {
+    query: graphql`
+        fragment MapView_query on Query @argumentDefinitions(geometry: { type: "Geometry" }) {
+            filteredProperties(location_Intersects: $geometry, first: 10)
+                @connection(key: "MapView_filteredProperties", filters: ["location_Intersects"]) {
+                edges {
+                    node {
+                        id
+                        ...MapMarker_property
                     }
                 }
             }
-        `
-    },
-    graphql`
-        query MapViewRefetchQuery($geometry: Geometry!) {
-            ...MapView_query @arguments(geometry: $geometry)
-            ...PropertyList_query @arguments(geometry: $geometry)
         }
     `
-)
+})
