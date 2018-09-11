@@ -22,7 +22,7 @@ class Home extends Component {
                     }
                 `}
                 variables={{
-                    geometry: JSON.stringify(map.state.geometry),
+                    geometry: JSON.stringify(map.state.bounds),
                     first: map.state.first
                 }}
                 render={({ error, props }) => {

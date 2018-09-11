@@ -9,7 +9,7 @@ class MapStateContainer extends Container {
         first: 10
     }
 
-    setBounds(north, east, south, west) {
+    setBounds({ north, east, south, west }) {
         const bounds = {
             type: 'Polygon',
             coordinates: [

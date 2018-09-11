@@ -9,6 +9,7 @@ import SelectedPropertyState from '../state/SelectedPropertyState'
 import mapStyle from '../assets/mapStyle.json'
 import MapMarker from './MapMarker'
 import withState from '../utils/withState'
+import MapState from '../state/MapState'
 
 class MapView extends Component {
     _onClick = () => {
@@ -18,18 +19,9 @@ class MapView extends Component {
     }
 
     _onDragEnd = () => {
-        const { relay } = this.props
+        const { map } = this.props
         const bounds = this.map.getBounds()
-        const { north, east, south, west } = bounds.toJSON()
-
-        const data = {
-            type: 'Polygon',
-            coordinates: [
-                [[east, north], [west, north], [west, south], [east, south], [east, north]]
-            ]
-        }
-
-        const geometry = JSON.stringify(data)
+        map.setBounds(bounds.toJSON())
     }
 
     render() {
@@ -66,19 +58,25 @@ const ComposedMapView = compose(
     withGoogleMap
 )(MapView)
 
-export default createFragmentContainer(withState(ComposedMapView, [SelectedPropertyState]), {
-    query: graphql`
-        fragment MapView_query on Query
-            @argumentDefinitions(geometry: { type: "Geometry" }, first: { type: "Int" }) {
-            filteredProperties(location_Intersects: $geometry, first: $first)
-                @connection(key: "MapView_filteredProperties", filters: ["location_Intersects"]) {
-                edges {
-                    node {
-                        id
-                        ...MapMarker_property
+export default createFragmentContainer(
+    withState(ComposedMapView, [SelectedPropertyState, MapState]),
+    {
+        query: graphql`
+            fragment MapView_query on Query
+                @argumentDefinitions(geometry: { type: "Geometry" }, first: { type: "Int" }) {
+                filteredProperties(location_Intersects: $geometry, first: $first)
+                    @connection(
+                        key: "MapView_filteredProperties"
+                        filters: ["location_Intersects"]
+                    ) {
+                    edges {
+                        node {
+                            id
+                            ...MapMarker_property
+                        }
                     }
                 }
             }
-        }
-    `
-})
+        `
+    }
+)
