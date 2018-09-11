@@ -10,8 +10,8 @@
 import type { ConcreteFragment } from 'relay-runtime';
 type MapMarker_property$ref = any;
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type MapView_query$ref: FragmentReference;
-export type MapView_query = {|
+declare export opaque type MarkerSet_query$ref: FragmentReference;
+export type MarkerSet_query = {|
   +filteredProperties: ?{|
     +edges: $ReadOnlyArray<?{|
       +node: ?{|
@@ -20,14 +20,14 @@ export type MapView_query = {|
       |}
     |}>
   |},
-  +$refType: MapView_query$ref,
+  +$refType: MarkerSet_query$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "MapView_query",
+  "name": "MarkerSet_query",
   "type": "Query",
   "metadata": {
     "connection": [
@@ -150,5 +150,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'c1d08ccc73908a9b093de878d54c09d1';
+(node/*: any*/).hash = '95502e5828ba191538a5385292ac828d';
 module.exports = node;

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0e1fdfbe5e66eb60ab80b58ef433bf38
+ * @relayHash 21d2fde17b20547623d57f2c01fe3e79
  */
 
 /* eslint-disable */
@@ -9,14 +9,14 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type MapView_query$ref = any;
+type MarkerSet_query$ref = any;
 type PropertyList_query$ref = any;
 export type HomeQueryVariables = {|
   geometry?: ?any,
   first: number,
 |};
 export type HomeQueryResponse = {|
-  +$fragmentRefs: PropertyList_query$ref & MapView_query$ref
+  +$fragmentRefs: PropertyList_query$ref & MarkerSet_query$ref
 |};
 export type HomeQuery = {|
   variables: HomeQueryVariables,
@@ -31,7 +31,7 @@ query HomeQuery(
   $first: Int!
 ) {
   ...PropertyList_query_2ME50e
-  ...MapView_query_2ME50e
+  ...MarkerSet_query_2ME50e
 }
 
 fragment PropertyList_query_2ME50e on Query {
@@ -51,7 +51,7 @@ fragment PropertyList_query_2ME50e on Query {
   }
 }
 
-fragment MapView_query_2ME50e on Query {
+fragment MarkerSet_query_2ME50e on Query {
   filteredProperties(location_Intersects: $geometry, first: $first) {
     edges {
       node {
@@ -170,7 +170,7 @@ return {
   "operationKind": "query",
   "name": "HomeQuery",
   "id": null,
-  "text": "query HomeQuery(\n  $geometry: Geometry\n  $first: Int!\n) {\n  ...PropertyList_query_2ME50e\n  ...MapView_query_2ME50e\n}\n\nfragment PropertyList_query_2ME50e on Query {\n  filteredProperties(location_Intersects: $geometry, first: $first) {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapView_query_2ME50e on Query {\n  filteredProperties(location_Intersects: $geometry, first: $first) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query HomeQuery(\n  $geometry: Geometry\n  $first: Int!\n) {\n  ...PropertyList_query_2ME50e\n  ...MarkerSet_query_2ME50e\n}\n\nfragment PropertyList_query_2ME50e on Query {\n  filteredProperties(location_Intersects: $geometry, first: $first) {\n    edges {\n      node {\n        id\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MarkerSet_query_2ME50e on Query {\n  filteredProperties(location_Intersects: $geometry, first: $first) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -186,7 +186,7 @@ return {
       },
       {
         "kind": "FragmentSpread",
-        "name": "MapView_query",
+        "name": "MarkerSet_query",
         "args": v1
       }
     ]
@@ -399,5 +399,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '202d342b55611ef8725742544dc15822';
+(node/*: any*/).hash = '95af2253fbb0aaf9e751c55f38b43a5a';
 module.exports = node;

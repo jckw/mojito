@@ -18,7 +18,7 @@ class Home extends Component {
                 query={graphql`
                     query HomeQuery($geometry: Geometry, $first: Int!) {
                         ...PropertyList_query @arguments(geometry: $geometry, first: $first)
-                        ...MapView_query @arguments(geometry: $geometry, first: $first)
+                        ...MarkerSet_query @arguments(geometry: $geometry, first: $first)
                     }
                 `}
                 variables={{

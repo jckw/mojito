@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { compose, withProps } from 'recompose'
-import { createFragmentContainer } from 'react-relay'
-import { graphql } from 'babel-plugin-relay/macro'
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import { Box } from 'rebass'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
 import mapStyle from '../assets/mapStyle.json'
-import MapMarker from './MapMarker'
 import withState from '../utils/withState'
 import MapState from '../state/MapState'
+import MarkerSet from './MarkerSet'
 
 class MapView extends Component {
     _onClick = () => {
@@ -25,8 +23,6 @@ class MapView extends Component {
     }
 
     render() {
-        const { query } = this.props
-
         return (
             <GoogleMap
                 ref={map => (this.map = map)}
@@ -37,10 +33,7 @@ class MapView extends Component {
                 clickableIcons={false}
                 onDragEnd={this._onDragEnd}
             >
-                {query.filteredProperties &&
-                    query.filteredProperties.edges.map(e => (
-                        <MapMarker key={e.node.id} property={e.node} />
-                    ))}
+                <MarkerSet query={this.props.query} />
             </GoogleMap>
         )
     }
@@ -58,25 +51,4 @@ const ComposedMapView = compose(
     withGoogleMap
 )(MapView)
 
-export default createFragmentContainer(
-    withState(ComposedMapView, [SelectedPropertyState, MapState]),
-    {
-        query: graphql`
-            fragment MapView_query on Query
-                @argumentDefinitions(geometry: { type: "Geometry" }, first: { type: "Int" }) {
-                filteredProperties(location_Intersects: $geometry, first: $first)
-                    @connection(
-                        key: "MapView_filteredProperties"
-                        filters: ["location_Intersects"]
-                    ) {
-                    edges {
-                        node {
-                            id
-                            ...MapMarker_property
-                        }
-                    }
-                }
-            }
-        `
-    }
-)
+export default withState(ComposedMapView, [SelectedPropertyState, MapState])

@@ -2,40 +2,34 @@ import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Box } from 'rebass'
-import styled from 'styled-components'
 
-import PropertyItem from './PropertyItem'
+import MapMarker from './MapMarker'
 
-const Grid = styled(Box)`
-    display: grid;
-    grid-gap: 15px;
-    grid-template-columns: 1fr 1fr;
-`
-
-class PropertyList extends Component {
+class MarkerSet extends Component {
     render() {
-        const { filteredProperties } = this.props.query
+        const { query } = this.props
 
         return (
-            <Grid>
-                {filteredProperties.edges.map(edge => (
-                    <PropertyItem key={edge.node.id} property={edge.node} />
-                ))}
-            </Grid>
+            <Box>
+                {query.filteredProperties &&
+                    query.filteredProperties.edges.map(e => (
+                        <MapMarker key={e.node.id} property={e.node} />
+                    ))}
+            </Box>
         )
     }
 }
 
-export default createFragmentContainer(PropertyList, {
+export default createFragmentContainer(MarkerSet, {
     query: graphql`
-        fragment PropertyList_query on Query
+        fragment MarkerSet_query on Query
             @argumentDefinitions(geometry: { type: "Geometry" }, first: { type: "Int" }) {
             filteredProperties(location_Intersects: $geometry, first: $first)
                 @connection(key: "MapView_filteredProperties", filters: ["location_Intersects"]) {
                 edges {
                     node {
                         id
-                        ...PropertyItem_property
+                        ...MapMarker_property
                     }
                 }
             }
