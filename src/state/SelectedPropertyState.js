@@ -1,6 +1,8 @@
 import { Container } from 'unstated'
 
 class SelectedPropertyContainer extends Container {
+    static stateName = 'properties'
+
     state = {
         selectedProperty: null
     }

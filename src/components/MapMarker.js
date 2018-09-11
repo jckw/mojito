@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Marker } from 'react-google-maps'
-import { Subscribe } from 'unstated'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
 
 import markerSelected from '../assets/markerSelected.png'
 import markerUnselected from '../assets/markerUnselected.png'
+import withState from '../utils/withState'
 
 class MapMarker extends Component {
     onClick = () => {
@@ -37,13 +37,7 @@ class MapMarker extends Component {
     }
 }
 
-const MapMarkerWithState = props => (
-    <Subscribe to={[SelectedPropertyState]}>
-        {properties => <MapMarker properties={properties} {...props} />}
-    </Subscribe>
-)
-
-export default createFragmentContainer(MapMarkerWithState, {
+export default createFragmentContainer(withState(MapMarker, [SelectedPropertyState]), {
     property: graphql`
         fragment MapMarker_property on PropertyType {
             id

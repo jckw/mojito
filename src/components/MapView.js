@@ -4,11 +4,11 @@ import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
 import { Box } from 'rebass'
-import { Subscribe } from 'unstated'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
 import mapStyle from '../assets/mapStyle.json'
 import MapMarker from './MapMarker'
+import withState from '../utils/withState'
 
 class MapView extends Component {
     _onClick = () => {
@@ -59,12 +59,6 @@ class MapView extends Component {
     }
 }
 
-const MapViewWithState = props => (
-    <Subscribe to={[SelectedPropertyState]}>
-        {properties => <MapView properties={properties} {...props} />}
-    </Subscribe>
-)
-
 const ComposedMapView = compose(
     withProps({
         googleMapURL:
@@ -75,9 +69,9 @@ const ComposedMapView = compose(
     }),
     withScriptjs,
     withGoogleMap
-)(MapViewWithState)
+)(MapView)
 
-export default createFragmentContainer(ComposedMapView, {
+export default createFragmentContainer(withState(ComposedMapView, [SelectedPropertyState]), {
     query: graphql`
         fragment MapView_query on Query @argumentDefinitions(geometry: { type: "Geometry" }) {
             filteredProperties(location_Intersects: $geometry, first: 10)

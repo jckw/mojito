@@ -1,7 +1,7 @@
 import { Container } from 'unstated'
 
 class MapStateContainer extends Container {
-    static name = 'map'
+    static stateName = 'map'
 
     state = {
         bounds: undefined,

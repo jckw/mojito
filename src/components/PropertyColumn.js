@@ -1,29 +1,25 @@
 import React, { Component } from 'react'
-import { Subscribe } from 'unstated'
 import { Container } from 'rebass'
 
 import PropertyView from './PropertyView'
 import PropertyList from './PropertyList'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
+import withState from '../utils/withState'
 
 class PropertyColumn extends Component {
     render() {
-        const { query } = this.props
+        const { query, properties } = this.props
         return (
-            <Subscribe to={[SelectedPropertyState]}>
-                {properties => (
-                    <Container maxWidth={['600px']} width="100%">
-                        {properties.state.selectedProperty !== null ? (
-                            <PropertyView />
-                        ) : (
-                            <PropertyList query={query} />
-                        )}
-                    </Container>
+            <Container maxWidth={['600px']} width="100%">
+                {properties.state.selectedProperty !== null ? (
+                    <PropertyView />
+                ) : (
+                    <PropertyList query={query} />
                 )}
-            </Subscribe>
+            </Container>
         )
     }
 }
 
-export default PropertyColumn
+export default withState(PropertyColumn, [SelectedPropertyState])
