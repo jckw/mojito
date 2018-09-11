@@ -6,7 +6,6 @@ import { Flex } from 'rebass'
 import environment from '../relay/enviroment'
 import MapView from '../components/MapView'
 import PropertyColumn from '../components/PropertyColumn'
-import FilterColumn from '../components/FilterColumn'
 
 class Home extends Component {
     render() {
@@ -30,7 +29,6 @@ class Home extends Component {
 
                     return (
                         <Flex flex={1} flexDirection="row" css={{ height: '100%' }}>
-                            <FilterColumn />
                             <PropertyColumn query={props} />
                             <MapView query={props} />
                         </Flex>
