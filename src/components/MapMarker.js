@@ -17,7 +17,7 @@ class MapMarker extends Component {
 
     render() {
         const { property, properties } = this.props
-        const { id, price, location } = property
+        const { id, location } = property
 
         return (
             <Marker

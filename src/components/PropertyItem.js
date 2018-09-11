@@ -23,6 +23,7 @@ class PropertyItem extends Component {
 
         const photos = photoEdges.edges.map(e => (
             <img
+                key={e.node.photo}
                 style={{ height: 'auto', width: '100%' }}
                 src={`http://localhost:8000/media/${e.node.photo}`}
             />
@@ -69,19 +70,19 @@ class PropertyItem extends Component {
                                 Managed by {agency.name}
                             </Text>
                             <Flex justifyContent="space-between" mt={2}>
-                                <InlineFlex alignItem="center">
+                                <InlineFlex alignItems="center">
                                     <img src={cyclist} />
                                     <Text ml={1} fontSize={1} color="#D1D1D1">
                                         5 mins
                                     </Text>
                                 </InlineFlex>
-                                <InlineFlex alignItem="center">
+                                <InlineFlex alignItems="center">
                                     <img src={people} />
                                     <Text ml={1} fontSize={1} color="#D1D1D1">
                                         4 bedroom
                                     </Text>
                                 </InlineFlex>
-                                <InlineFlex alignItem="center">
+                                <InlineFlex alignItems="center">
                                     <img src={bathroom} />
                                     <Text ml={1} fontSize={1} color="#D1D1D1">
                                         1 bathroom
