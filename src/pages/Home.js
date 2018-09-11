@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { graphql } from 'babel-plugin-relay/macro'
 import { QueryRenderer } from 'react-relay'
-import { Flex } from 'rebass'
 
 import environment from '../relay/enviroment'
-import MapView from '../components/MapView'
-import PropertyColumn from '../components/PropertyColumn'
 import withState from '../utils/withState'
 import MapState from '../state/MapState'
+import MapListBrowse from '../components/MapListBrowse'
 
 class Home extends Component {
     render() {
@@ -34,12 +32,7 @@ class Home extends Component {
                         return <div>Loading...</div>
                     }
 
-                    return (
-                        <Flex flex={1} flexDirection="row" css={{ height: '100%' }}>
-                            <MapView query={props} />
-                            <PropertyColumn query={props} />
-                        </Flex>
-                    )
+                    return <MapListBrowse query={props} />
                 }}
             />
         )
