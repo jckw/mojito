@@ -6,8 +6,9 @@ import { Box } from 'rebass'
 import SelectedPropertyState from '../state/SelectedPropertyState'
 import mapStyle from '../assets/mapStyle.json'
 import withState from '../utils/withState'
-import MapState from '../state/MapState'
 import MarkerSet from './MarkerSet'
+
+import { getBounds } from '../utils/MapHelpers'
 
 class MapView extends Component {
     _onClick = () => {
@@ -17,9 +18,12 @@ class MapView extends Component {
     }
 
     _onDragEnd = () => {
-        const { map } = this.props
+        const { relay } = this.props
         const bounds = this.map.getBounds()
-        map.setBounds(bounds.toJSON())
+
+        const geometry = JSON.stringify(getBounds(bounds.toJSON()))
+
+        relay.refetchConnection(10, null, { geometry })
     }
 
     render() {
@@ -51,4 +55,4 @@ const ComposedMapView = compose(
     withGoogleMap
 )(MapView)
 
-export default withState(ComposedMapView, [SelectedPropertyState, MapState])
+export default withState(ComposedMapView, [SelectedPropertyState])

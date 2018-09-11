@@ -54,6 +54,12 @@ const node/*: ConcreteFragment*/ = {
       "name": "cursor",
       "type": "String",
       "defaultValue": null
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "geometry",
+      "type": "Geometry",
+      "defaultValue": null
     }
   ],
   "selections": [
@@ -62,7 +68,14 @@ const node/*: ConcreteFragment*/ = {
       "alias": "filteredProperties",
       "name": "__MapListBrowse_filteredProperties_connection",
       "storageKey": null,
-      "args": null,
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "location_Intersects",
+          "variableName": "geometry",
+          "type": "Geometry"
+        }
+      ],
       "concreteType": "PropertyTypeConnection",
       "plural": false,
       "selections": [
@@ -149,5 +162,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '15f8ed970724ca0bbe1006c58abd1d04';
+(node/*: any*/).hash = '500b554f826a4e63f851d0bb4238c4cc';
 module.exports = node;
