@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { compose, withProps } from 'recompose'
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps'
+import throttle from 'lodash/throttle'
 import { Box } from 'rebass'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
@@ -17,7 +18,7 @@ class MapView extends Component {
         properties.unsetSelectedProperty()
     }
 
-    _onDragEnd = () => {
+    refetch = () => {
         const { relay } = this.props
         const bounds = this.map.getBounds()
 
@@ -35,7 +36,7 @@ class MapView extends Component {
                 defaultOptions={{ styles: mapStyle, disableDefaultUI: true }}
                 onClick={this._onClick}
                 clickableIcons={false}
-                onDragEnd={this._onDragEnd}
+                onBoundsChanged={throttle(this.refetch, 200)}
             >
                 <MarkerSet query={this.props.query} />
             </GoogleMap>
