@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Flex, Provider } from 'rebass'
+import { Flex } from 'rebass'
 import { Provider as StateProvider } from 'unstated'
+import { ThemeProvider } from 'styled-components'
 
 import Home from './pages/Home'
 import Page404 from './pages/404'
@@ -11,7 +12,7 @@ class App extends Component {
     render() {
         return (
             <StateProvider>
-                <Provider theme={theme}>
+                <ThemeProvider theme={theme}>
                     <Router>
                         <Flex flexDirection="column" css={{ minHeight: '100vh' }}>
                             <Switch>
@@ -20,7 +21,7 @@ class App extends Component {
                             </Switch>
                         </Flex>
                     </Router>
-                </Provider>
+                </ThemeProvider>
             </StateProvider>
         )
     }

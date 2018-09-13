@@ -15,11 +15,13 @@ class PropertyList extends Component {
         const { filteredProperties } = this.props.query
 
         return (
-            <Grid>
-                {filteredProperties.edges.map(edge => (
-                    <PropertyItem key={edge.node.id} property={edge.node} />
-                ))}
-            </Grid>
+            <Box>
+                <Grid>
+                    {filteredProperties.edges.map(edge => (
+                        <PropertyItem key={edge.node.id} property={edge.node} />
+                    ))}
+                </Grid>
+            </Box>
         )
     }
 }

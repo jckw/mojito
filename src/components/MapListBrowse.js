@@ -11,7 +11,7 @@ class MapListBrowse extends Component {
         const { query, relay } = this.props
 
         return (
-            <Flex flex={1} flexDirection="row" css={{ height: '100%' }}>
+            <Flex flexDirection="row" css={{ flex: 1 }}>
                 <MapView query={query} relay={relay} />
                 <PropertyColumn query={query} />
             </Flex>

@@ -49,7 +49,7 @@ const ComposedMapView = compose(
         googleMapURL:
             'https://maps.googleapis.com/maps/api/js?key=AIzaSyD6fgy1K4D5fIsJKU3JyXkd1narRswi5Cs&v=3.exp&libraries=geometry,drawing,places',
         loadingElement: <div style={{ height: '100vh', flex: '1', background: '#efefef' }} />,
-        containerElement: <Box flex={1} />,
+        containerElement: <Box css={{ flex: 1 }} />,
         mapElement: <div style={{ height: '100%' }} />
     }),
     withScriptjs,

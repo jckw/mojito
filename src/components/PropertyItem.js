@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
-import { Card, Heading, Text, Relative, Absolute, Box, Flex } from 'rebass'
+import { Card, Heading, Text, Box, Flex } from 'rebass'
 import styled from 'styled-components'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
 import PriceTag from './PriceTag'
+import Relative from './Relative'
+import Absolute from './Absolute'
 
 import cyclist from '../assets/icons/cyclist.svg'
 import people from '../assets/icons/people.svg'
@@ -42,6 +44,7 @@ class PropertyItem extends Component {
                         bg="white"
                         boxShadow="0px 4px 8px -4px rgba(0, 0, 0, 0.5)"
                         p={3}
+                        css={{ overflow: 'hidden' }}
                     >
                         <Absolute top={20} right={-3}>
                             <PriceTag property={property} />
