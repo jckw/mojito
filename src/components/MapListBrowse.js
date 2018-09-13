@@ -5,15 +5,19 @@ import { Flex } from 'rebass'
 
 import MapView from '../components/MapView'
 import PropertyColumn from '../components/PropertyColumn'
+import FilterRow from '../components/FilterRow'
 
 class MapListBrowse extends Component {
     render() {
         const { query, relay } = this.props
 
         return (
-            <Flex flexDirection="row" css={{ flex: 1 }}>
-                <MapView query={query} relay={relay} />
-                <PropertyColumn query={query} />
+            <Flex flexDirection="column" css={{ flex: 1 }}>
+                <FilterRow />
+                <Flex flexDirection="row" css={{ flex: 1 }}>
+                    <MapView query={query} relay={relay} />
+                    <PropertyColumn query={query} />
+                </Flex>
             </Flex>
         )
     }

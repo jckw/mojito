@@ -60,7 +60,7 @@ class PropertyItem extends Component {
                             {photos.length > 0 ? (
                                 <Box>{photos}</Box>
                             ) : (
-                                <Box css={{ width: '100%', height: '100%' }} bg="grey" />
+                                <Box css={{ width: '100%', height: '100%' }} bg="grey.0" />
                             )}
                         </Flex>
 
@@ -69,7 +69,7 @@ class PropertyItem extends Component {
                                 {street}, {area.name},{' '}
                                 <span style={{ display: 'inline-block' }}>{postcode}</span>
                             </Heading>
-                            <Text fontSize={1} color="grey" fontWeight="semibold">
+                            <Text fontSize={1} color="grey.0" fontWeight="semibold">
                                 Managed by {agency.name}
                             </Text>
                             <Flex justifyContent="space-between" mt={2}>
