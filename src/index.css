@@ -3,3 +3,16 @@ body {
     padding: 0;
     font-family: 'Open Sans';
 }
+
+.rc-slider-track {
+    background-color: #39bf8f !important;
+}
+
+.rc-slider-handle {
+    border: 2px solid #39bf8f !important;
+}
+
+.rc-slider-handle:focus,
+.rc-slider-handle:active {
+    box-shadow: 0 0 5px rgba(57, 191, 143, 0.6) !important;
+}

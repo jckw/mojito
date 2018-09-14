@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { createFragmentContainer } from 'react-relay'
+import { graphql } from 'babel-plugin-relay/macro'
 import { Flex, Button, Card, Box, Text } from 'rebass'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
@@ -24,8 +26,6 @@ class FilterRange extends Component {
             max,
             step
         } = this.props
-
-        console.log(this.props)
 
         return (
             <Relative css={{ zIndex: showingInput ? 2 : 0 }} ml={2}>
@@ -68,25 +68,27 @@ class FilterRange extends Component {
     }
 }
 
-const PRICE_RANGE = [0, 700]
-const BEDROOMS_RANGE = [1, 16]
-
 class FilterRow extends Component {
     constructor(props) {
         super(props)
 
+        const { minPrice, maxPrice, minBedrooms, maxBedrooms } = props.query.meta
+
+        this.PRICE_RANGE = [minPrice, maxPrice]
+        this.BEDROOMS_RANGE = [minBedrooms, maxBedrooms]
+
         this.state = {
             priceSet: false,
-            priceRange: PRICE_RANGE,
+            priceRange: this.PRICE_RANGE,
             showPriceInput: false,
             bedroomsSet: false,
-            bedroomsRange: BEDROOMS_RANGE,
+            bedroomsRange: this.BEDROOMS_RANGE,
             showBedroomsInput: false
         }
     }
 
     closeInputs = () => {
-        const { relay } = this.props
+        const { refetch } = this.props
         const { priceSet, bedroomsSet } = this.state
 
         this.setState({ showPriceInput: false, showBedroomsInput: false })
@@ -101,7 +103,7 @@ class FilterRow extends Component {
             maxBedrooms: bedroomsSet ? maxBedrooms : undefined
         }
 
-        relay.refetchConnection(10, null, data)
+        refetch(10, null, data)
     }
 
     onPriceChange = priceRange => {
@@ -158,8 +160,8 @@ class FilterRow extends Component {
                     onClick={this.openPriceInput}
                     formatTo={value => `£${value[0]} - £${value[1]} pp`}
                     isSet={this.state.priceSet}
-                    min={PRICE_RANGE[0]}
-                    max={PRICE_RANGE[1]}
+                    min={this.PRICE_RANGE[0]}
+                    max={this.PRICE_RANGE[1]}
                     step={10}
                     onClose={this.closeInputs}
                 />
@@ -172,8 +174,8 @@ class FilterRow extends Component {
                     onClick={this.openBedroomsInput}
                     formatTo={value => `${value[0]} to ${value[1]} bedrooms`}
                     isSet={this.state.bedroomsSet}
-                    min={BEDROOMS_RANGE[0]}
-                    max={BEDROOMS_RANGE[1]}
+                    min={this.BEDROOMS_RANGE[0]}
+                    max={this.BEDROOMS_RANGE[1]}
                     onClose={this.closeInputs}
                 />
             </Flex>
@@ -181,4 +183,15 @@ class FilterRow extends Component {
     }
 }
 
-export default FilterRow
+export default createFragmentContainer(FilterRow, {
+    query: graphql`
+        fragment FilterRow_query on Query {
+            meta {
+                maxBedrooms
+                minBedrooms
+                maxPrice
+                minPrice
+            }
+        }
+    `
+})

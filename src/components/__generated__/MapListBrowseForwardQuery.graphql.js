@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7b3af0a9cc1b2334bbd8838cc2f1efcd
+ * @relayHash 4842bab72015106854267f2be392b9fe
  */
 
 /* eslint-disable */
@@ -58,6 +58,7 @@ fragment MapListBrowse_query_4C0LBB on Query {
       hasNextPage
     }
   }
+  ...FilterRow_query
 }
 
 fragment MapMarker_property on PropertyType {
@@ -90,6 +91,15 @@ fragment PropertyItem_property on PropertyType {
     }
   }
   ...PriceTag_property
+}
+
+fragment FilterRow_query on Query {
+  meta {
+    maxBedrooms
+    minBedrooms
+    maxPrice
+    minPrice
+  }
 }
 
 fragment PriceTag_property on PropertyType {
@@ -208,7 +218,7 @@ return {
   "operationKind": "query",
   "name": "MapListBrowseForwardQuery",
   "id": null,
-  "text": "query MapListBrowseForwardQuery(\n  $count: Int!\n  $cursor: String\n  $geometry: Geometry\n  $minPrice: Float\n  $maxPrice: Float\n  $minBedrooms: Float\n  $maxBedrooms: Float\n) {\n  ...MapListBrowse_query_4C0LBB\n}\n\nfragment MapListBrowse_query_4C0LBB on Query {\n  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry, price_Gte: $minPrice, price_Lte: $maxPrice, bedrooms_Gte: $minBedrooms, bedrooms_Lte: $maxBedrooms) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query MapListBrowseForwardQuery(\n  $count: Int!\n  $cursor: String\n  $geometry: Geometry\n  $minPrice: Float\n  $maxPrice: Float\n  $minBedrooms: Float\n  $maxBedrooms: Float\n) {\n  ...MapListBrowse_query_4C0LBB\n}\n\nfragment MapListBrowse_query_4C0LBB on Query {\n  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry, price_Gte: $minPrice, price_Lte: $maxPrice, bedrooms_Gte: $minBedrooms, bedrooms_Lte: $maxBedrooms) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -472,6 +482,45 @@ return {
           "price_Lte",
           "bedrooms_Gte",
           "bedrooms_Lte"
+        ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "meta",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "MetaType",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "maxBedrooms",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "minBedrooms",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "maxPrice",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "minPrice",
+            "args": null,
+            "storageKey": null
+          }
         ]
       }
     ]

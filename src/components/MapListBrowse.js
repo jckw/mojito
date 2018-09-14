@@ -13,7 +13,7 @@ class MapListBrowse extends Component {
 
         return (
             <Flex flexDirection="column" css={{ flex: 1 }}>
-                <FilterRow relay={relay} />
+                <FilterRow refetch={relay.refetchConnection} query={query} />
                 <Flex flexDirection="row" css={{ flex: 1 }}>
                     <MapView query={query} relay={relay} />
                     <PropertyColumn query={query} />
@@ -64,6 +64,7 @@ export default createPaginationContainer(
                         }
                     }
                 }
+                ...FilterRow_query
             }
         `
     },

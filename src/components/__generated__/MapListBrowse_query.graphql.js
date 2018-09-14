@@ -8,6 +8,7 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type FilterRow_query$ref = any;
 type MapMarker_property$ref = any;
 type PropertyItem_property$ref = any;
 import type { FragmentReference } from "relay-runtime";
@@ -21,6 +22,7 @@ export type MapListBrowse_query = {|
       |}
     |}>
   |},
+  +$fragmentRefs: FilterRow_query$ref,
   +$refType: MapListBrowse_query$ref,
 |};
 */
@@ -206,9 +208,14 @@ const node/*: ConcreteFragment*/ = {
           ]
         }
       ]
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "FilterRow_query",
+      "args": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '62e0700306c7c1e9795d5c19096bf432';
+(node/*: any*/).hash = 'e4951f52e4b45f2e72e7a51d4e35cf05';
 module.exports = node;
