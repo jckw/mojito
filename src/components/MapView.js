@@ -11,6 +11,8 @@ import MarkerSet from './MarkerSet'
 
 import { getBounds } from '../utils/MapHelpers'
 
+import { ITEMS_PER_PAGE } from '../settings'
+
 class MapView extends Component {
     _onClick = () => {
         const { properties } = this.props
@@ -24,7 +26,7 @@ class MapView extends Component {
 
         const geometry = JSON.stringify(getBounds(bounds.toJSON()))
 
-        relay.refetchConnection(10, null, { geometry })
+        relay.refetchConnection(ITEMS_PER_PAGE, null, { geometry })
     }
 
     render() {

@@ -7,6 +7,8 @@ import MapView from '../components/MapView'
 import PropertyColumn from '../components/PropertyColumn'
 import FilterRow from '../components/FilterRow'
 
+import { ITEMS_PER_PAGE } from '../settings'
+
 class MapListBrowse extends Component {
     render() {
         const { query, relay } = this.props
@@ -29,7 +31,7 @@ export default createPaginationContainer(
         query: graphql`
             fragment MapListBrowse_query on Query
                 @argumentDefinitions(
-                    count: { type: "Int", defaultValue: 10 }
+                    count: { type: "Int" }
                     cursor: { type: "String" }
                     geometry: { type: "Geometry", defaultValue: null }
                     minPrice: { type: "Float" }
@@ -85,7 +87,7 @@ export default createPaginationContainer(
             { geometry, minPrice, maxPrice, minBedrooms, maxBedrooms }
         ) {
             return {
-                count,
+                count: ITEMS_PER_PAGE,
                 cursor,
                 geometry,
                 minPrice,

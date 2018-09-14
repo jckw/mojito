@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 429740084a1cd7761cfc0ec47e0be04b
+ * @relayHash 2efccc84188edc0d26f3505861d8859d
  */
 
 /* eslint-disable */
@@ -27,7 +27,7 @@ query HomeQuery {
 }
 
 fragment MapListBrowse_query on Query {
-  filteredProperties(first: 10) {
+  filteredProperties {
     edges {
       node {
         id
@@ -92,22 +92,14 @@ fragment PriceTag_property on PropertyType {
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 10,
-    "type": "Int"
-  }
-],
-v1 = {
+var v0 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v2 = [
+v1 = [
   {
     "kind": "ScalarField",
     "alias": null,
@@ -115,14 +107,14 @@ v2 = [
     "args": null,
     "storageKey": null
   },
-  v1
+  v0
 ];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "HomeQuery",
   "id": null,
-  "text": "query HomeQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties(first: 10) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query HomeQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -147,8 +139,8 @@ return {
         "kind": "LinkedField",
         "alias": null,
         "name": "filteredProperties",
-        "storageKey": "filteredProperties(first:10)",
-        "args": v0,
+        "storageKey": null,
+        "args": null,
         "concreteType": "PropertyTypeConnection",
         "plural": false,
         "selections": [
@@ -177,7 +169,7 @@ return {
                     "args": null,
                     "storageKey": null
                   },
-                  v1,
+                  v0,
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -193,7 +185,7 @@ return {
                     "args": null,
                     "concreteType": "CityAreaType",
                     "plural": false,
-                    "selections": v2
+                    "selections": v1
                   },
                   {
                     "kind": "ScalarField",
@@ -235,7 +227,7 @@ return {
                     "args": null,
                     "concreteType": "LettingAgencyType",
                     "plural": false,
-                    "selections": v2
+                    "selections": v1
                   },
                   {
                     "kind": "LinkedField",
@@ -271,7 +263,7 @@ return {
                                 "args": null,
                                 "storageKey": null
                               },
-                              v1
+                              v0
                             ]
                           }
                         ]
@@ -334,7 +326,7 @@ return {
         "kind": "LinkedHandle",
         "alias": null,
         "name": "filteredProperties",
-        "args": v0,
+        "args": null,
         "handle": "connection",
         "key": "MapListBrowse_filteredProperties",
         "filters": [
