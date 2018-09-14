@@ -21,7 +21,7 @@ const InlineFlex = styled(Flex)`
 class PropertyItem extends Component {
     render() {
         const { property, properties } = this.props
-        const { street, area, postcode, agency, photos: photoEdges } = property
+        const { street, area, postcode, agency, photos: photoEdges, bedrooms, bathrooms } = property
 
         const photos = photoEdges.edges.map(e => (
             <img
@@ -82,13 +82,13 @@ class PropertyItem extends Component {
                                 <InlineFlex alignItems="center">
                                     <img src={people} />
                                     <Text ml={1} fontSize={1} color="#D1D1D1">
-                                        4 bedroom
+                                        {bedrooms} bedroom
                                     </Text>
                                 </InlineFlex>
                                 <InlineFlex alignItems="center">
                                     <img src={bathroom} />
                                     <Text ml={1} fontSize={1} color="#D1D1D1">
-                                        1 bathroom
+                                        {bathrooms} bathroom
                                     </Text>
                                 </InlineFlex>
                             </Flex>

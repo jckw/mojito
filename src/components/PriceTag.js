@@ -5,7 +5,7 @@ import { Card, Text } from 'rebass'
 
 class PriceTag extends Component {
     render() {
-        const price = 500
+        const { price } = this.props.property
 
         return (
             <Card borderRadius={3} bg="green.normal" py={1} px={2}>
