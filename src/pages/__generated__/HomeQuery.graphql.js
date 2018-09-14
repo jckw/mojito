@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 64d4a6c1ed5a5459afeee1f5a9394d77
+ * @relayHash 921de2380f9549440df155ec6f45d7e9
  */
 
 /* eslint-disable */
@@ -328,7 +328,11 @@ return {
         "handle": "connection",
         "key": "MapListBrowse_filteredProperties",
         "filters": [
-          "location_Intersects"
+          "location_Intersects",
+          "price_Gte",
+          "price_Lte",
+          "bedrooms_Gte",
+          "bedrooms_Lte"
         ]
       }
     ]

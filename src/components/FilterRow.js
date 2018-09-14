@@ -87,9 +87,21 @@ class FilterRow extends Component {
 
     closeInputs = () => {
         const { relay } = this.props
+        const { priceSet, bedroomsSet } = this.state
+
         this.setState({ showPriceInput: false, showBedroomsInput: false })
 
-        // relay.refetch
+        const [minPrice, maxPrice] = this.state.priceRange
+        const [minBedrooms, maxBedrooms] = this.state.bedroomsRange
+
+        const data = {
+            minPrice: priceSet ? minPrice : undefined,
+            maxPrice: priceSet ? maxPrice : undefined,
+            minBedrooms: bedroomsSet ? minBedrooms : undefined,
+            maxBedrooms: bedroomsSet ? maxBedrooms : undefined
+        }
+
+        relay.refetchConnection(10, null, data)
     }
 
     onPriceChange = priceRange => {
@@ -97,8 +109,7 @@ class FilterRow extends Component {
     }
 
     unsetPrice = () => {
-        this.setState({ priceSet: false })
-        this.closeInputs()
+        this.setState({ priceSet: false }, this.closeInputs)
     }
 
     openPriceInput = () => {
@@ -110,8 +121,7 @@ class FilterRow extends Component {
     }
 
     unsetBedrooms = () => {
-        this.setState({ bedroomsSet: false })
-        this.closeInputs()
+        this.setState({ bedroomsSet: false }, this.closeInputs)
     }
 
     openBedroomsInput = () => {

@@ -32,11 +32,29 @@ export default createPaginationContainer(
                     count: { type: "Int", defaultValue: 10 }
                     cursor: { type: "String" }
                     geometry: { type: "Geometry", defaultValue: null }
+                    minPrice: { type: "Float" }
+                    maxPrice: { type: "Float" }
+                    minBedrooms: { type: "Float" }
+                    maxBedrooms: { type: "Float" }
                 ) {
-                filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry)
+                filteredProperties(
+                    first: $count
+                    after: $cursor
+                    location_Intersects: $geometry
+                    price_Gte: $minPrice
+                    price_Lte: $maxPrice
+                    bedrooms_Gte: $minBedrooms
+                    bedrooms_Lte: $maxBedrooms
+                )
                     @connection(
                         key: "MapListBrowse_filteredProperties"
-                        filters: ["location_Intersects"]
+                        filters: [
+                            "location_Intersects"
+                            "price_Gte"
+                            "price_Lte"
+                            "bedrooms_Gte"
+                            "bedrooms_Lte"
+                        ]
                     ) {
                     edges {
                         node {
@@ -60,17 +78,41 @@ export default createPaginationContainer(
                 count: totalCount
             }
         },
-        getVariables(props, { count, cursor }, { geometry }) {
+        getVariables(
+            props,
+            { count, cursor },
+            { geometry, minPrice, maxPrice, minBedrooms, maxBedrooms }
+        ) {
             return {
                 count,
                 cursor,
-                geometry
+                geometry,
+                minPrice,
+                maxPrice,
+                minBedrooms,
+                maxBedrooms
             }
         },
         query: graphql`
-            query MapListBrowseForwardQuery($count: Int!, $cursor: String, $geometry: Geometry) {
+            query MapListBrowseForwardQuery(
+                $count: Int!
+                $cursor: String
+                $geometry: Geometry
+                $minPrice: Float
+                $maxPrice: Float
+                $minBedrooms: Float
+                $maxBedrooms: Float
+            ) {
                 ...MapListBrowse_query
-                    @arguments(count: $count, cursor: $cursor, geometry: $geometry)
+                    @arguments(
+                        count: $count
+                        cursor: $cursor
+                        geometry: $geometry
+                        minPrice: $minPrice
+                        maxPrice: $maxPrice
+                        minBedrooms: $minBedrooms
+                        maxBedrooms: $maxBedrooms
+                    )
             }
         `
     }

@@ -60,6 +60,30 @@ const node/*: ConcreteFragment*/ = {
       "name": "geometry",
       "type": "Geometry",
       "defaultValue": null
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "minPrice",
+      "type": "Float",
+      "defaultValue": null
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "maxPrice",
+      "type": "Float",
+      "defaultValue": null
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "minBedrooms",
+      "type": "Float",
+      "defaultValue": null
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "maxBedrooms",
+      "type": "Float",
+      "defaultValue": null
     }
   ],
   "selections": [
@@ -71,9 +95,33 @@ const node/*: ConcreteFragment*/ = {
       "args": [
         {
           "kind": "Variable",
+          "name": "bedrooms_Gte",
+          "variableName": "minBedrooms",
+          "type": "Float"
+        },
+        {
+          "kind": "Variable",
+          "name": "bedrooms_Lte",
+          "variableName": "maxBedrooms",
+          "type": "Float"
+        },
+        {
+          "kind": "Variable",
           "name": "location_Intersects",
           "variableName": "geometry",
           "type": "Geometry"
+        },
+        {
+          "kind": "Variable",
+          "name": "price_Gte",
+          "variableName": "minPrice",
+          "type": "Float"
+        },
+        {
+          "kind": "Variable",
+          "name": "price_Lte",
+          "variableName": "maxPrice",
+          "type": "Float"
         }
       ],
       "concreteType": "PropertyTypeConnection",
@@ -162,5 +210,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '500b554f826a4e63f851d0bb4238c4cc';
+(node/*: any*/).hash = '62e0700306c7c1e9795d5c19096bf432';
 module.exports = node;

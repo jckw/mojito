@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7cad8493185a2568c717570824993586
+ * @relayHash 7b3af0a9cc1b2334bbd8838cc2f1efcd
  */
 
 /* eslint-disable */
@@ -14,6 +14,10 @@ export type MapListBrowseForwardQueryVariables = {|
   count: number,
   cursor?: ?string,
   geometry?: ?any,
+  minPrice?: ?number,
+  maxPrice?: ?number,
+  minBedrooms?: ?number,
+  maxBedrooms?: ?number,
 |};
 export type MapListBrowseForwardQueryResponse = {|
   +$fragmentRefs: MapListBrowse_query$ref
@@ -30,12 +34,16 @@ query MapListBrowseForwardQuery(
   $count: Int!
   $cursor: String
   $geometry: Geometry
+  $minPrice: Float
+  $maxPrice: Float
+  $minBedrooms: Float
+  $maxBedrooms: Float
 ) {
-  ...MapListBrowse_query_2CgvIp
+  ...MapListBrowse_query_4C0LBB
 }
 
-fragment MapListBrowse_query_2CgvIp on Query {
-  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry) {
+fragment MapListBrowse_query_4C0LBB on Query {
+  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry, price_Gte: $minPrice, price_Lte: $maxPrice, bedrooms_Gte: $minBedrooms, bedrooms_Lte: $maxBedrooms) {
     edges {
       node {
         id
@@ -108,6 +116,30 @@ var v0 = [
     "name": "geometry",
     "type": "Geometry",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "minPrice",
+    "type": "Float",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "maxPrice",
+    "type": "Float",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "minBedrooms",
+    "type": "Float",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "maxBedrooms",
+    "type": "Float",
+    "defaultValue": null
   }
 ],
 v1 = [
@@ -116,6 +148,18 @@ v1 = [
     "name": "after",
     "variableName": "cursor",
     "type": "String"
+  },
+  {
+    "kind": "Variable",
+    "name": "bedrooms_Gte",
+    "variableName": "minBedrooms",
+    "type": "Float"
+  },
+  {
+    "kind": "Variable",
+    "name": "bedrooms_Lte",
+    "variableName": "maxBedrooms",
+    "type": "Float"
   },
   {
     "kind": "Variable",
@@ -128,6 +172,18 @@ v1 = [
     "name": "location_Intersects",
     "variableName": "geometry",
     "type": "Geometry"
+  },
+  {
+    "kind": "Variable",
+    "name": "price_Gte",
+    "variableName": "minPrice",
+    "type": "Float"
+  },
+  {
+    "kind": "Variable",
+    "name": "price_Lte",
+    "variableName": "maxPrice",
+    "type": "Float"
   }
 ],
 v2 = {
@@ -152,7 +208,7 @@ return {
   "operationKind": "query",
   "name": "MapListBrowseForwardQuery",
   "id": null,
-  "text": "query MapListBrowseForwardQuery(\n  $count: Int!\n  $cursor: String\n  $geometry: Geometry\n) {\n  ...MapListBrowse_query_2CgvIp\n}\n\nfragment MapListBrowse_query_2CgvIp on Query {\n  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query MapListBrowseForwardQuery(\n  $count: Int!\n  $cursor: String\n  $geometry: Geometry\n  $minPrice: Float\n  $maxPrice: Float\n  $minBedrooms: Float\n  $maxBedrooms: Float\n) {\n  ...MapListBrowse_query_4C0LBB\n}\n\nfragment MapListBrowse_query_4C0LBB on Query {\n  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry, price_Gte: $minPrice, price_Lte: $maxPrice, bedrooms_Gte: $minBedrooms, bedrooms_Lte: $maxBedrooms) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -181,6 +237,30 @@ return {
             "kind": "Variable",
             "name": "geometry",
             "variableName": "geometry",
+            "type": null
+          },
+          {
+            "kind": "Variable",
+            "name": "maxBedrooms",
+            "variableName": "maxBedrooms",
+            "type": null
+          },
+          {
+            "kind": "Variable",
+            "name": "maxPrice",
+            "variableName": "maxPrice",
+            "type": null
+          },
+          {
+            "kind": "Variable",
+            "name": "minBedrooms",
+            "variableName": "minBedrooms",
+            "type": null
+          },
+          {
+            "kind": "Variable",
+            "name": "minPrice",
+            "variableName": "minPrice",
             "type": null
           }
         ]
@@ -387,7 +467,11 @@ return {
         "handle": "connection",
         "key": "MapListBrowse_filteredProperties",
         "filters": [
-          "location_Intersects"
+          "location_Intersects",
+          "price_Gte",
+          "price_Lte",
+          "bedrooms_Gte",
+          "bedrooms_Lte"
         ]
       }
     ]
@@ -395,5 +479,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '965e4b7e348e672b1d1dd3eff32ff299';
+(node/*: any*/).hash = 'bd77bc84c6c1068c04b19a1a6629c1ac';
 module.exports = node;
