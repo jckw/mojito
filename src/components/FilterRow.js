@@ -28,9 +28,9 @@ class FilterRange extends Component {
         } = this.props
 
         return (
-            <Relative css={{ zIndex: showingInput ? 2 : 0 }} ml={2}>
+            <Relative css={{ zIndex: showingInput ? 2 : 0 }} ml={3}>
                 <Button variant={isSet ? 'outlineSelected' : 'outline'} onClick={onClick}>
-                    {isSet ? formatTo(value) : name}
+                    <Text>{isSet ? formatTo(value) : name}</Text>
                 </Button>
                 {showingInput && (
                     <Absolute top="100%" right={0} css={{ zIndex: 2 }}>

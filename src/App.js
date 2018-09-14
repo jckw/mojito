@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components'
 import Home from './pages/Home'
 import Page404 from './pages/404'
 import theme from './theme'
+import Header from './components/Header'
 
 class App extends Component {
     render() {
@@ -15,6 +16,7 @@ class App extends Component {
                 <ThemeProvider theme={theme}>
                     <Router>
                         <Flex flexDirection="column" css={{ minHeight: '100vh' }}>
+                            <Header />
                             <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route component={Page404} />
