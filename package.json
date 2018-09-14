@@ -5,6 +5,7 @@
     "dependencies": {
         "geocoder": "^0.2.3",
         "lodash": "^4.17.10",
+        "rc-slider": "^8.6.2",
         "react": "^16.4.2",
         "react-dom": "^16.4.2",
         "react-google-maps": "^9.4.5",

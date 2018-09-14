@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
     black: '#3D3D3D',
     grey: ['#717070', '#A2A0A0', '#E7F2EE'],
     white: '#fff',
@@ -9,6 +9,7 @@ const colors = {
         normal: '#39BF8F'
     }
 }
+
 const theme = {
     breakpoints: [32, 48, 64, 80],
     space: [0, 4, 8, 12, 16, 24, 32, 64, 128],
@@ -30,7 +31,8 @@ const theme = {
         heading: '1.1em'
     },
     shadows: {
-        normal: '0px 2px 7px -1px rgba(0, 0, 0, 0.5)'
+        normal: '0px 2px 7px -1px rgba(0, 0, 0, 0.5)',
+        light: '0px 2px 7px -1px rgba(0, 0, 0, 0.2)'
     },
     buttons: {
         outline: {
@@ -41,6 +43,23 @@ const theme = {
             fontWeight: 400,
             paddingLeft: '18px',
             paddingRight: '18px'
+        },
+        outlineSelected: {
+            color: colors.green.normal,
+            backgroundColor: 'transparent',
+            borderRadius: '8px',
+            boxShadow: `inset 0 0 0 1px ${colors.green.normal}`,
+            fontWeight: 400,
+            paddingLeft: '18px',
+            paddingRight: '18px'
+        },
+        transparent: {
+            color: colors.grey[1],
+            backgroundColor: 'transparent',
+            borderRadius: '8px',
+            boxShadow: 'none',
+            fontWeight: 400,
+            padding: 0
         }
     }
 }

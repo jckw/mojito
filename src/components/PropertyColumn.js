@@ -11,7 +11,7 @@ class PropertyColumn extends Component {
     render() {
         const { query, properties } = this.props
         return (
-            <Container maxWidth={['600px']} width="100%" px={3}>
+            <Container maxWidth={['600px']} width="100%" px={5} py={2}>
                 {properties.state.selectedProperty !== null ? (
                     <PropertyView />
                 ) : (
