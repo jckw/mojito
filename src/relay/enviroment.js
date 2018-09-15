@@ -1,7 +1,12 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime'
 
+const RELAY_ENDPOINT =
+    process.env.NODE_ENV === 'production'
+        ? 'https://app.movemaison.com/graphql'
+        : 'http://127.0.0.1:8000/graphql'
+
 function fetchQuery(operation, variables) {
-    return fetch('http://127.0.0.1:8000/graphql', {
+    return fetch(RELAY_ENDPOINT, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
