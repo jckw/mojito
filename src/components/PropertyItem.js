@@ -18,6 +18,8 @@ const InlineFlex = styled(Flex)`
     display: inline-flex;
 `
 
+const BASE_MEDIA_URL = process.env.NODE_ENV === 'production' ? 'https://movemaison-media.s3.amazonaws.com' : 'http://localhost:8000'
+
 class PropertyItem extends Component {
     render() {
         const { property, properties } = this.props
@@ -27,7 +29,7 @@ class PropertyItem extends Component {
             <img
                 key={e.node.photo}
                 style={{ height: 'auto', width: '100%' }}
-                src={`http://localhost:8000/media/${e.node.photo}`}
+                src={`${BASE_MEDIA_URL}/media/${e.node.photo}`}
             />
         ))
 
