@@ -18,7 +18,10 @@ const InlineFlex = styled(Flex)`
     display: inline-flex;
 `
 
-const BASE_MEDIA_URL = process.env.NODE_ENV === 'production' ? 'https://movemaison-media.s3.amazonaws.com' : 'http://localhost:8000'
+const BASE_MEDIA_URL =
+    process.env.NODE_ENV === 'production'
+        ? 'https://movemaison-media.s3.amazonaws.com'
+        : 'http://localhost:8000'
 
 class PropertyItem extends Component {
     render() {
@@ -72,7 +75,7 @@ class PropertyItem extends Component {
                                 <span style={{ display: 'inline-block' }}>{postcode}</span>
                             </Heading>
                             <Text fontSize={1} color="grey.0" fontWeight="semibold">
-                                Managed by {agency.name}
+                                {agency ? `Managed by ${agency.name}` : 'No managing agency'}
                             </Text>
                             <Flex justifyContent="space-between" mt={2}>
                                 <InlineFlex alignItems="center">
