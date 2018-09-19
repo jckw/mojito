@@ -4,7 +4,7 @@ export const colors = {
     white: '#fff',
     green: {
         pale: '#EDF1EE',
-        grey: '#DDDFDD',
+        grey: '#a2bbb2',
         dark: '#7C827B',
         normal: '#39BF8F'
     }
@@ -37,7 +37,7 @@ const theme = {
     },
     buttons: {
         outline: {
-            color: colors.grey[1],
+            color: colors.green.grey,
             backgroundColor: 'transparent',
             borderRadius: '6px',
             boxShadow: `inset 0 0 0 1px ${colors.grey[2]}`,
