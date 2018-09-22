@@ -10,14 +10,22 @@ import FilterRow from '../components/FilterRow'
 import { ITEMS_PER_PAGE } from '../settings'
 
 class MapListBrowse extends Component {
+    refetch = filters => {
+        const { relay } = this.props
+
+        this.setState({ ...this.state, ...filters }, () =>
+            relay.refetchConnection(ITEMS_PER_PAGE, null, this.state)
+        )
+    }
+
     render() {
         const { query, relay } = this.props
 
         return (
             <Flex flexDirection="column" css={{ flex: 1 }}>
-                <FilterRow refetch={relay.refetchConnection} query={query} />
+                <FilterRow refetch={this.refetch} query={query} />
                 <Flex flexDirection="row" css={{ flex: 1 }}>
-                    <MapView query={query} relay={relay} />
+                    <MapView refetch={this.refetch} query={query} />
                     <PropertyColumn query={query} />
                 </Flex>
             </Flex>

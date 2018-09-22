@@ -8,8 +8,6 @@ import 'rc-slider/assets/index.css'
 import Relative from './Relative'
 import Absolute from './Absolute'
 
-import { ITEMS_PER_PAGE } from '../settings'
-
 const Range = Slider.Range
 
 class FilterRange extends Component {
@@ -105,7 +103,7 @@ class FilterRow extends Component {
             maxBedrooms: bedroomsSet ? maxBedrooms : undefined
         }
 
-        refetch(ITEMS_PER_PAGE, null, data)
+        refetch(data)
     }
 
     onPriceChange = priceRange => {
