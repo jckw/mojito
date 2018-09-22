@@ -11,7 +11,7 @@ export const colors = {
 }
 
 const theme = {
-    breakpoints: [32, 48, 64, 80],
+    breakpoints: ['600px', '900px', '1200px', '1800px'],
     space: [0, 4, 8, 12, 16, 24, 32, 64, 128],
     fonts: {
         sans: 'Open Sans',

@@ -16,7 +16,7 @@ class App extends Component {
             <StateProvider>
                 <ThemeProvider theme={theme}>
                     <Router>
-                        <Flex flexDirection="column" css={{ minHeight: '100vh' }}>
+                        <Flex flexDirection="column" css={{ height: '100vh' }}>
                             <Helmet>
                                 <title>Search student properties in Oxford | movemaison</title>
                                 <link

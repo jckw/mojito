@@ -11,7 +11,13 @@ class PropertyColumn extends Component {
     render() {
         const { query, properties } = this.props
         return (
-            <Container maxWidth={['600px']} width="100%" px={5} py={2}>
+            <Container
+                maxWidth={['300px', '300px', '600px', '900px']}
+                width="100%"
+                px={5}
+                py={2}
+                css={{ overflowY: 'scroll' }}
+            >
                 {properties.state.selectedProperty !== null ? (
                     <PropertyView />
                 ) : (

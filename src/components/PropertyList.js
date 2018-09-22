@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Box } from 'rebass'
 import styled from 'styled-components'
+import { gridTemplateColumns } from 'styled-system'
 
 import PropertyItem from './PropertyItem'
 
 const Grid = styled(Box)`
     display: grid;
     grid-gap: 15px;
-    grid-template-columns: 1fr 1fr;
+    ${gridTemplateColumns};
 `
 
 class PropertyList extends Component {
@@ -16,7 +17,7 @@ class PropertyList extends Component {
 
         return (
             <Box>
-                <Grid>
+                <Grid gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr 1fr']}>
                     {filteredProperties.edges.map(edge => (
                         <PropertyItem key={edge.node.id} property={edge.node} />
                     ))}

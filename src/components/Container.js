@@ -1,4 +1,7 @@
-import React from 'react'
 import { Box } from 'rebass'
+import { maxWidth } from 'styled-system'
+import styled from 'styled-components'
 
-export default ({ maxWidth, ...rest }) => <Box css={{ maxWidth }} {...rest} />
+export default styled(Box)`
+    ${maxWidth}
+`

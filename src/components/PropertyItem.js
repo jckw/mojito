@@ -60,7 +60,7 @@ class PropertyItem extends Component {
                             justifyContent="center"
                             m={-3}
                             mb={2}
-                            css={{ height: '155px', overflowY: 'hidden' }}
+                            css={{ height: '180px', overflowY: 'hidden' }}
                         >
                             {photos.length > 0 ? (
                                 <Box>{photos}</Box>
