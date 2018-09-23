@@ -9,6 +9,7 @@
         "geocoder": "^0.2.3",
         "graphql": "0.13.2",
         "lodash": "^4.17.10",
+        "nuka-carousel": "^4.4.0",
         "rc-slider": "^8.6.2",
         "react": "^16.4.2",
         "react-dom": "^16.4.2",
