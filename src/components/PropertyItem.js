@@ -86,7 +86,7 @@ class PropertyItem extends Component {
                             {photos.length > 0 ? (
                                 <Box css={{ height: '100%' }}>
                                     {/* TODO: Don't use a fixed width - too hacky! */}
-                                    <Carousel style={{ height: '100%', width: '300px' }}>
+                                    <Carousel style={{ height: '100%', width: '300px' }} wrapAround>
                                         {photos}
                                     </Carousel>
                                 </Box>
