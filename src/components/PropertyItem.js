@@ -73,7 +73,7 @@ class PropertyItem extends Component {
                             css={{ height: '180px', overflowY: 'hidden' }}
                         >
                             {photos.length > 0 ? (
-                                <Box>{photos}</Box>
+                                <Box css={{ height: '100%' }}>{photos}</Box>
                             ) : (
                                 <Box css={{ width: '100%', height: '100%' }} bg="grey.0" />
                             )}
