@@ -14,8 +14,7 @@ class PropertyColumn extends Component {
             <Container
                 maxWidth={['300px', '300px', '600px', '900px']}
                 width="100%"
-                px={5}
-                py={2}
+                p={5}
                 css={{ overflowY: 'scroll' }}
             >
                 {properties.state.selectedProperty !== null ? (

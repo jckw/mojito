@@ -55,7 +55,6 @@ class PropertyItem extends Component {
             <a onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 <Relative>
                     <Card
-                        my={3}
                         borderRadius={4}
                         bg="white"
                         boxShadow="0px 4px 8px -4px rgba(0, 0, 0, 0.5)"

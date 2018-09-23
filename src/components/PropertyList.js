@@ -7,7 +7,7 @@ import PropertyItem from './PropertyItem'
 
 const Grid = styled(Box)`
     display: grid;
-    grid-gap: 15px;
+    grid-gap: 24px;
     ${gridTemplateColumns};
 `
 

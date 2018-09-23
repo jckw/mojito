@@ -10,6 +10,7 @@ class SelectedPropertyContainer extends Container {
 
     setSelectedProperty(selectedProperty) {
         this.setState({ selectedProperty })
+        this.unsetHoveredProperty()
     }
 
     unsetSelectedProperty() {
