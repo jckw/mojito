@@ -19,19 +19,19 @@ class MapMarker extends Component {
         const { property, properties } = this.props
         const { id, location } = property
 
+        const isHighlighted =
+            (properties.state.selectedProperty && properties.state.selectedProperty.id === id) ||
+            (properties.state.hoveredProperty && properties.state.hoveredProperty.id === id)
+
         return (
             <Marker
-                icon={
-                    (properties.state.selectedProperty && properties.state.selectedProperty.id === id) ||
-                    (properties.state.hoveredProperty && properties.state.hoveredProperty.id === id)
-                        ? markerSelected
-                        : markerUnselected
-                }
+                icon={isHighlighted ? markerSelected : markerUnselected}
                 onClick={this.onClick}
                 position={{
                     lng: location.coordinates[0],
                     lat: location.coordinates[1]
                 }}
+                zIndex={isHighlighted ? 1 : 0}
                 {...this.props}
             />
         )
