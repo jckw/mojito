@@ -24,8 +24,23 @@ const BASE_MEDIA_URL =
         : 'http://localhost:8000'
 
 class PropertyItem extends Component {
-    render() {
+    onMouseOver = () => {
         const { property, properties } = this.props
+        properties.setHoveredProperty(property)
+    }
+
+    onMouseOut = () => {
+        const { properties } = this.props
+        properties.unsetHoveredProperty()
+    }
+
+    onClick = () => {
+        const { property, properties } = this.props
+        properties.setSelectedProperty(property)
+    }
+
+    render() {
+        const { property } = this.props
         const { street, area, postcode, agency, photos: photoEdges, bedrooms, bathrooms } = property
 
         const photos = photoEdges.edges.map(e => (
@@ -37,11 +52,7 @@ class PropertyItem extends Component {
         ))
 
         return (
-            <a
-                onClick={() => {
-                    properties.setSelectedProperty(property)
-                }}
-            >
+            <a onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 <Relative>
                     <Card
                         my={3}

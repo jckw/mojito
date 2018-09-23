@@ -22,7 +22,8 @@ class MapMarker extends Component {
         return (
             <Marker
                 icon={
-                    properties.state.selectedProperty && properties.state.selectedProperty.id === id
+                    (properties.state.selectedProperty && properties.state.selectedProperty.id === id) ||
+                    (properties.state.hoveredProperty && properties.state.hoveredProperty.id === id)
                         ? markerSelected
                         : markerUnselected
                 }

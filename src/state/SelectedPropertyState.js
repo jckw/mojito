@@ -4,7 +4,8 @@ class SelectedPropertyContainer extends Container {
     static stateName = 'properties'
 
     state = {
-        selectedProperty: null
+        selectedProperty: null,
+        hoveredProperty: null
     }
 
     setSelectedProperty(selectedProperty) {
@@ -13,6 +14,14 @@ class SelectedPropertyContainer extends Container {
 
     unsetSelectedProperty() {
         this.setState({ selectedProperty: null })
+    }
+
+    setHoveredProperty(hoveredProperty) {
+        this.setState({ hoveredProperty })
+    }
+
+    unsetHoveredProperty() {
+        this.setState({ hoveredProperty: null })
     }
 }
 
