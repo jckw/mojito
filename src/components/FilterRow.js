@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
-import { Flex } from 'rebass'
+import { Flex, Box } from 'rebass'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
@@ -72,19 +72,7 @@ class FilterRow extends Component {
 
     render() {
         return (
-            <Flex
-                flexDirection="row"
-                justifyContent="flex-end"
-                px={3}
-                py={3}
-                fontSize={2}
-                css={{
-                    borderBottom: '1px solid #E7F2EE',
-                    borderTop: '1px solid #E7F2EE',
-                    marginTop: '-1px',
-                    zIndex: 2
-                }}
-            >
+            <Box>
                 {(this.state.showPriceInput || this.state.showBedroomsInput) && (
                     <Absolute
                         top={0}
@@ -92,38 +80,53 @@ class FilterRow extends Component {
                         left={0}
                         right={0}
                         bg="rgba(255, 255, 255, 0.8)"
-                        css={{ zIndex: 1 }}
+                        css={{ zIndex: 2 }}
                         onClick={this.closeInputs}
                     />
                 )}
-                <FilterRange
-                    name="Price per person"
-                    showingInput={this.state.showPriceInput}
-                    value={this.state.priceRange}
-                    onChange={this.onPriceChange}
-                    onUnset={this.unsetPrice}
-                    onClick={this.openPriceInput}
-                    formatTo={value => `£${value[0]} - £${value[1]} pp`}
-                    isSet={this.state.priceSet}
-                    min={this.PRICE_RANGE[0]}
-                    max={this.PRICE_RANGE[1]}
-                    step={10}
-                    onClose={this.closeInputs}
-                />
-                <FilterRange
-                    name="Bedrooms"
-                    showingInput={this.state.showBedroomsInput}
-                    value={this.state.bedroomsRange}
-                    onChange={this.onBedroomsChange}
-                    onUnset={this.unsetBedrooms}
-                    onClick={this.openBedroomsInput}
-                    formatTo={value => `${value[0]} to ${value[1]} bedrooms`}
-                    isSet={this.state.bedroomsSet}
-                    min={this.BEDROOMS_RANGE[0]}
-                    max={this.BEDROOMS_RANGE[1]}
-                    onClose={this.closeInputs}
-                />
-            </Flex>
+                <Flex
+                    flexDirection="row"
+                    justifyContent="flex-end"
+                    px={3}
+                    py={3}
+                    fontSize={2}
+                    css={{
+                        borderBottom: '1px solid #E7F2EE',
+                        borderTop: '1px solid #E7F2EE',
+                        marginTop: '-1px',
+                        zIndex: 2,
+                        position: 'relative'
+                    }}
+                >
+                    <FilterRange
+                        name="Price per person"
+                        showingInput={this.state.showPriceInput}
+                        value={this.state.priceRange}
+                        onChange={this.onPriceChange}
+                        onUnset={this.unsetPrice}
+                        onClick={this.openPriceInput}
+                        formatTo={value => `£${value[0]} - £${value[1]} pp`}
+                        isSet={this.state.priceSet}
+                        min={this.PRICE_RANGE[0]}
+                        max={this.PRICE_RANGE[1]}
+                        step={10}
+                        onClose={this.closeInputs}
+                    />
+                    <FilterRange
+                        name="Bedrooms"
+                        showingInput={this.state.showBedroomsInput}
+                        value={this.state.bedroomsRange}
+                        onChange={this.onBedroomsChange}
+                        onUnset={this.unsetBedrooms}
+                        onClick={this.openBedroomsInput}
+                        formatTo={value => `${value[0]} to ${value[1]} bedrooms`}
+                        isSet={this.state.bedroomsSet}
+                        min={this.BEDROOMS_RANGE[0]}
+                        max={this.BEDROOMS_RANGE[1]}
+                        onClose={this.closeInputs}
+                    />
+                </Flex>
+            </Box>
         )
     }
 }

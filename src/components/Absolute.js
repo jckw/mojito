@@ -1,18 +1,11 @@
-import React from 'react'
 import { Box } from 'rebass'
+import styled from 'styled-components'
+import { top, bottom, left, right } from 'styled-system'
 
-const getValue = value => (typeof value === 'number' ? `${value}px` : value)
-
-export default ({ top, bottom, left, right, css, ...rest }) => (
-    <Box
-        css={{
-            top: getValue(top),
-            right: getValue(right),
-            bottom: getValue(bottom),
-            left: getValue(bottom),
-            position: 'absolute',
-            ...css
-        }}
-        {...rest}
-    />
-)
+export default styled(Box)`
+    ${top}
+    ${bottom}
+    ${left}
+    ${right}
+    position: absolute;
+`
