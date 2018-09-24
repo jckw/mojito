@@ -6,20 +6,36 @@ import { Flex } from 'rebass'
 import MapView from '../components/MapView'
 import PropertyColumn from '../components/PropertyColumn'
 import FilterRow from '../components/FilterRow'
+import theme from '../theme'
 
 import { ITEMS_PER_PAGE } from '../settings'
 
 class MapListBrowse extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            filters: {}
+        }
+    }
+
+    mapShouldShow = () => window.innerWidth > parseInt(theme.breakpoints[0], 10)
+
     refetch = filters => {
         const { relay } = this.props
+        let finalFilters = filters
 
-        this.setState({ ...this.state, ...filters }, () =>
-            relay.refetchConnection(ITEMS_PER_PAGE, null, this.state)
+        if (filters.geometry && !this.mapShouldShow()) {
+            finalFilters.geometry = undefined
+        }
+
+        this.setState({ filters: { ...this.state.filters, ...finalFilters } }, () =>
+            relay.refetchConnection(ITEMS_PER_PAGE, null, this.state.filters)
         )
     }
 
     render() {
-        const { query, relay } = this.props
+        const { query } = this.props
 
         return (
             <Flex flexDirection="column" css={{ flex: 1 }}>

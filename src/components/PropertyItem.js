@@ -68,8 +68,7 @@ class PropertyItem extends Component {
                         css={{
                             overflow: 'hidden',
                             display: 'flex',
-                            flexDirection: 'column',
-                            height: '215px'
+                            flexDirection: 'column'
                         }}
                     >
                         <Absolute top={20} right={-3} css={{ zIndex: 1 }}>
@@ -85,8 +84,7 @@ class PropertyItem extends Component {
                         >
                             {photos.length > 0 ? (
                                 <Box css={{ height: '100%' }}>
-                                    {/* TODO: Don't use a fixed width - too hacky! */}
-                                    <Carousel style={{ height: '100%', width: '300px' }} wrapAround>
+                                    <Carousel style={{ height: '100%' }} wrapAround>
                                         {photos}
                                     </Carousel>
                                 </Box>

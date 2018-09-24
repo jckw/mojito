@@ -12,7 +12,7 @@ class PropertyColumn extends Component {
         const { query, properties } = this.props
         return (
             <Container
-                maxWidth={['300px', '300px', '600px', '900px']}
+                maxWidth={['none', '300px', '600px', '900px']}
                 width="100%"
                 p={5}
                 css={{ overflowY: 'scroll' }}
