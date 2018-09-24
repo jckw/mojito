@@ -4,6 +4,7 @@ import { graphql } from 'babel-plugin-relay/macro'
 import { Card, Heading, Text, Box, Flex } from 'rebass'
 import styled from 'styled-components'
 import Carousel from 'nuka-carousel'
+import { Link } from 'react-router-dom'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
 import PriceTag from './PriceTag'
@@ -58,7 +59,7 @@ class PropertyItem extends Component {
         ))
 
         return (
-            <a onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+            <Box onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 <Relative>
                     <Card
                         borderRadius={4}
@@ -93,7 +94,10 @@ class PropertyItem extends Component {
                             )}
                         </Flex>
 
-                        <a onClick={this.onClick} style={{ cursor: 'pointer' }}>
+                        <Link
+                            to="/properties/oxford/cowley/1234"
+                            style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
+                        >
                             <Heading fontSize={2} fontWeight="bold">
                                 {street}, {area.name},{' '}
                                 <span style={{ display: 'inline-block' }}>{postcode}</span>
@@ -121,10 +125,10 @@ class PropertyItem extends Component {
                                     </Text>
                                 </InlineFlex>
                             </Flex>
-                        </a>
+                        </Link>
                     </Card>
                 </Relative>
-            </a>
+            </Box>
         )
     }
 }

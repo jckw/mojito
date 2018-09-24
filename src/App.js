@@ -5,7 +5,8 @@ import { Provider as StateProvider } from 'unstated'
 import { ThemeProvider } from 'styled-components'
 import { Helmet } from 'react-helmet'
 
-import Home from './pages/Home'
+import Search from './pages/Search'
+import Single from './pages/Single'
 import Page404 from './pages/404'
 import theme from './theme'
 import Header from './components/Header'
@@ -26,7 +27,11 @@ class App extends Component {
                             </Helmet>
                             <Header />
                             <Switch>
-                                <Route exact path="/" component={Home} />
+                                <Route exact path="/" component={Search} />
+                                <Route
+                                    path="/properties/:citySlug/:areaSlug/:pk"
+                                    component={Single}
+                                />
                                 <Route component={Page404} />
                             </Switch>
                         </Flex>

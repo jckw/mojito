@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2efccc84188edc0d26f3505861d8859d
+ * @relayHash 6a413130fb2cc4e60b4b94bd5ef6efbe
  */
 
 /* eslint-disable */
@@ -10,19 +10,19 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type MapListBrowse_query$ref = any;
-export type HomeQueryVariables = {||};
-export type HomeQueryResponse = {|
+export type SearchQueryVariables = {||};
+export type SearchQueryResponse = {|
   +$fragmentRefs: MapListBrowse_query$ref
 |};
-export type HomeQuery = {|
-  variables: HomeQueryVariables,
-  response: HomeQueryResponse,
+export type SearchQuery = {|
+  variables: SearchQueryVariables,
+  response: SearchQueryResponse,
 |};
 */
 
 
 /*
-query HomeQuery {
+query SearchQuery {
   ...MapListBrowse_query
 }
 
@@ -112,13 +112,13 @@ v1 = [
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "HomeQuery",
+  "name": "SearchQuery",
   "id": null,
-  "text": "query HomeQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query SearchQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "HomeQuery",
+    "name": "SearchQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -132,7 +132,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "HomeQuery",
+    "name": "SearchQuery",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -381,5 +381,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'a1e3a97ff999be21ecaf121e7f095c01';
+(node/*: any*/).hash = '1a14198112ec75c879a91b4d308c9255';
 module.exports = node;

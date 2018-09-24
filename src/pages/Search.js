@@ -6,13 +6,13 @@ import { Flex, Heading, Button } from 'rebass'
 import environment from '../relay/enviroment'
 import MapListBrowse from '../components/MapListBrowse'
 
-class Home extends Component {
+class Search extends Component {
     render() {
         return (
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query HomeQuery {
+                    query SearchQuery {
                         ...MapListBrowse_query
                     }
                 `}
@@ -46,4 +46,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default Search
