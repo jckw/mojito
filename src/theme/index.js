@@ -59,6 +59,10 @@ const theme = {
             boxShadow: 'none',
             fontWeight: 400,
             padding: 0
+        },
+        roundedFilled: {
+            backgroundColor: '#39bf8f',
+            borderRadius: '99px'
         }
     }
 }

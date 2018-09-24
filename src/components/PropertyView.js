@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { QueryRenderer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
-import { Box, Heading } from 'rebass'
+import { Box, Heading, Button } from 'rebass'
 import environment from '../relay/enviroment'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
@@ -25,10 +25,20 @@ class PropertyView extends Component {
                     }
                 `}
                 variables={{ id: properties.state.selectedProperty.id }}
-                render={({ error, props }) => {
+                render={({ error, props, retry }) => {
                     if (error) {
                         console.log(error)
-                        return <div>Error!</div>
+                        return (
+                            <Box>
+                                <Heading textAlign="center" mb={3} mx={5}>
+                                    Sorry, we're having trouble collecting details for our
+                                    properties...
+                                </Heading>
+                                <Button variant="roundedFilled" onClick={retry}>
+                                    Try again
+                                </Button>
+                            </Box>
+                        )
                     }
                     if (!props) {
                         return <div>Loading...</div>
