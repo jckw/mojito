@@ -38,7 +38,7 @@ class MapListBrowse extends Component {
         const { query } = this.props
 
         return (
-            <Flex flexDirection="column" css={{ flex: 1 }}>
+            <Flex flexDirection={['column-reverse', 'column']} css={{ flex: 1 }}>
                 <FilterRow refetch={this.refetch} query={query} />
                 <Flex flexDirection="row" css={{ flex: 1 }}>
                     <MapView refetch={this.refetch} query={query} />

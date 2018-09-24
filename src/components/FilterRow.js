@@ -1,72 +1,12 @@
 import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
-import { Flex, Button, Card, Box, Text } from 'rebass'
+import { Flex } from 'rebass'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
-import Relative from './Relative'
+import FilterRange from './FilterRange'
 import Absolute from './Absolute'
-
-const Range = Slider.Range
-
-class FilterRange extends Component {
-    render() {
-        const {
-            name,
-            showingInput,
-            value,
-            onChange,
-            onUnset,
-            onClick,
-            onClose,
-            formatTo,
-            isSet,
-            min,
-            max,
-            step
-        } = this.props
-
-        return (
-            <Relative css={{ zIndex: showingInput ? 2 : 0 }} ml={3}>
-                <Button variant={isSet ? 'outlineSelected' : 'outline'} onClick={onClick}>
-                    <Text>{isSet ? formatTo(value) : name}</Text>
-                </Button>
-                {showingInput && (
-                    <Absolute top="100%" right={0} css={{ zIndex: 2 }}>
-                        <Card
-                            bg="white"
-                            boxShadow="light"
-                            borderRadius={3}
-                            p={4}
-                            mt={2}
-                            width="250px"
-                        >
-                            <Box mb={3} mx={5} py={4}>
-                                <Range
-                                    min={min}
-                                    max={max}
-                                    allowCross={false}
-                                    value={value}
-                                    onChange={onChange}
-                                    step={step || 1}
-                                />
-                            </Box>
-                            <Flex justifyContent="space-between">
-                                <Button variant="transparent" onClick={onUnset}>
-                                    Clear
-                                </Button>
-                                <Button variant="transparent" onClick={onClose}>
-                                    <Text color="green.normal">Apply</Text>
-                                </Button>
-                            </Flex>
-                        </Card>
-                    </Absolute>
-                )}
-            </Relative>
-        )
-    }
-}
 
 class FilterRow extends Component {
     constructor(props) {
@@ -138,7 +78,12 @@ class FilterRow extends Component {
                 px={3}
                 py={3}
                 fontSize={2}
-                css={{ borderBottom: '1px solid #E7F2EE' }}
+                css={{
+                    borderBottom: '1px solid #E7F2EE',
+                    borderTop: '1px solid #E7F2EE',
+                    marginTop: '-1px',
+                    zIndex: 2
+                }}
             >
                 {(this.state.showPriceInput || this.state.showBedroomsInput) && (
                     <Absolute
