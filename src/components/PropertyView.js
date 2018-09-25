@@ -9,13 +9,22 @@ import withState from '../utils/withState'
 
 class PropertyView extends Component {
     render() {
-        const { properties } = this.props
+        const { propertySlug, citySlug, areaSlug } = this.props
+
         return (
             <QueryRenderer
                 environment={environment}
                 query={graphql`
-                    query PropertyViewQuery($id: ID!) {
-                        property(id: $id) {
+                    query PropertyViewQuery(
+                        $propertySlug: String!
+                        $citySlug: String!
+                        $areaSlug: String!
+                    ) {
+                        property(
+                            propertySlug: $propertySlug
+                            citySlug: $citySlug
+                            areaSlug: $areaSlug
+                        ) {
                             street
                             area {
                                 name
@@ -24,7 +33,7 @@ class PropertyView extends Component {
                         }
                     }
                 `}
-                variables={{ id: properties.state.selectedProperty.id }}
+                variables={{ propertySlug, citySlug, areaSlug }}
                 render={({ error, props, retry }) => {
                     if (error) {
                         console.log(error)
@@ -60,4 +69,4 @@ class PropertyView extends Component {
     }
 }
 
-export default withState(PropertyView, [SelectedPropertyState])
+export default PropertyView

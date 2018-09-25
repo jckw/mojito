@@ -95,7 +95,8 @@ class PropertyItem extends Component {
                         </Flex>
 
                         <Link
-                            to="/properties/oxford/cowley/1234"
+                            target="_blank"
+                            to={`/properties/${area.city.slug}/${area.slug}/${property.slug}`}
                             style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
                         >
                             <Heading fontSize={2} fontWeight="bold">
@@ -138,8 +139,13 @@ export default createFragmentContainer(withState(PropertyItem, [SelectedProperty
         fragment PropertyItem_property on PropertyType {
             id
             street
+            slug
             area {
                 name
+                slug
+                city {
+                    slug
+                }
             }
             postcode
             bedrooms

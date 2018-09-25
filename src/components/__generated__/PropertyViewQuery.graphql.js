@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ba43d7bfa58d95a28a14c1f393ebb3f1
+ * @relayHash c29d3480f1207d68faae68c56b4e33a3
  */
 
 /* eslint-disable */
@@ -10,7 +10,9 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type PropertyViewQueryVariables = {|
-  id: string
+  propertySlug: string,
+  citySlug: string,
+  areaSlug: string,
 |};
 export type PropertyViewQueryResponse = {|
   +property: ?{|
@@ -30,9 +32,11 @@ export type PropertyViewQuery = {|
 
 /*
 query PropertyViewQuery(
-  $id: ID!
+  $propertySlug: String!
+  $citySlug: String!
+  $areaSlug: String!
 ) {
-  property(id: $id) {
+  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {
     street
     area {
       name
@@ -48,17 +52,41 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "id",
-    "type": "ID!",
+    "name": "propertySlug",
+    "type": "String!",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "citySlug",
+    "type": "String!",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "areaSlug",
+    "type": "String!",
     "defaultValue": null
   }
 ],
 v1 = [
   {
     "kind": "Variable",
-    "name": "id",
-    "variableName": "id",
-    "type": "ID!"
+    "name": "areaSlug",
+    "variableName": "areaSlug",
+    "type": "String!"
+  },
+  {
+    "kind": "Variable",
+    "name": "citySlug",
+    "variableName": "citySlug",
+    "type": "String!"
+  },
+  {
+    "kind": "Variable",
+    "name": "propertySlug",
+    "variableName": "propertySlug",
+    "type": "String!"
   }
 ],
 v2 = {
@@ -94,7 +122,7 @@ return {
   "operationKind": "query",
   "name": "PropertyViewQuery",
   "id": null,
-  "text": "query PropertyViewQuery(\n  $id: ID!\n) {\n  property(id: $id) {\n    street\n    area {\n      name\n      id\n    }\n    postcode\n    id\n  }\n}\n",
+  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    street\n    area {\n      name\n      id\n    }\n    postcode\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -167,5 +195,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '699cdac2ef11945f6a3d3bb2dea95a61';
+(node/*: any*/).hash = '3bb1d328780c8fe3957e44e5846bb6b9';
 module.exports = node;

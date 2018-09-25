@@ -14,13 +14,18 @@ declare export opaque type PropertyItem_property$ref: FragmentReference;
 export type PropertyItem_property = {|
   +id: string,
   +street: string,
+  +slug: string,
   +area: {|
-    +name: string
+    +name: string,
+    +slug: string,
+    +city: {|
+      +slug: string
+    |},
   |},
   +postcode: string,
   +bedrooms: number,
   +bathrooms: number,
-  +agency: {|
+  +agency: ?{|
     +name: string
   |},
   +photos: ?{|
@@ -37,15 +42,20 @@ export type PropertyItem_property = {|
 
 
 const node/*: ConcreteFragment*/ = (function(){
-var v0 = [
-  {
-    "kind": "ScalarField",
-    "alias": null,
-    "name": "name",
-    "args": null,
-    "storageKey": null
-  }
-];
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "slug",
+  "args": null,
+  "storageKey": null
+},
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+};
 return {
   "kind": "Fragment",
   "name": "PropertyItem_property",
@@ -67,6 +77,7 @@ return {
       "args": null,
       "storageKey": null
     },
+    v0,
     {
       "kind": "LinkedField",
       "alias": null,
@@ -75,7 +86,22 @@ return {
       "args": null,
       "concreteType": "CityAreaType",
       "plural": false,
-      "selections": v0
+      "selections": [
+        v1,
+        v0,
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "city",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "CityType",
+          "plural": false,
+          "selections": [
+            v0
+          ]
+        }
+      ]
     },
     {
       "kind": "ScalarField",
@@ -106,7 +132,9 @@ return {
       "args": null,
       "concreteType": "LettingAgencyType",
       "plural": false,
-      "selections": v0
+      "selections": [
+        v1
+      ]
     },
     {
       "kind": "LinkedField",
@@ -157,5 +185,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '18404afc54cd9862e24df2ff80d0a029';
+(node/*: any*/).hash = '364468e6a0e2a0aac78dec1f8e2262a2';
 module.exports = node;
