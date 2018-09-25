@@ -96,7 +96,7 @@ class PropertyItem extends Component {
 
                         <Link
                             target="_blank"
-                            to={`/properties/${area.city.slug}/${area.slug}/${property.slug}`}
+                            to={property.url}
                             style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
                         >
                             <Heading fontSize={2} fontWeight="bold">
@@ -139,13 +139,9 @@ export default createFragmentContainer(withState(PropertyItem, [SelectedProperty
         fragment PropertyItem_property on PropertyType {
             id
             street
-            slug
+            url
             area {
                 name
-                slug
-                city {
-                    slug
-                }
             }
             postcode
             bedrooms

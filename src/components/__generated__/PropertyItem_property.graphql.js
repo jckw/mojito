@@ -14,13 +14,9 @@ declare export opaque type PropertyItem_property$ref: FragmentReference;
 export type PropertyItem_property = {|
   +id: string,
   +street: string,
-  +slug: string,
+  +url: ?string,
   +area: {|
-    +name: string,
-    +slug: string,
-    +city: {|
-      +slug: string
-    |},
+    +name: string
   |},
   +postcode: string,
   +bedrooms: number,
@@ -42,20 +38,15 @@ export type PropertyItem_property = {|
 
 
 const node/*: ConcreteFragment*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "slug",
-  "args": null,
-  "storageKey": null
-},
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-};
+var v0 = [
+  {
+    "kind": "ScalarField",
+    "alias": null,
+    "name": "name",
+    "args": null,
+    "storageKey": null
+  }
+];
 return {
   "kind": "Fragment",
   "name": "PropertyItem_property",
@@ -77,7 +68,13 @@ return {
       "args": null,
       "storageKey": null
     },
-    v0,
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "url",
+      "args": null,
+      "storageKey": null
+    },
     {
       "kind": "LinkedField",
       "alias": null,
@@ -86,22 +83,7 @@ return {
       "args": null,
       "concreteType": "CityAreaType",
       "plural": false,
-      "selections": [
-        v1,
-        v0,
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "name": "city",
-          "storageKey": null,
-          "args": null,
-          "concreteType": "CityType",
-          "plural": false,
-          "selections": [
-            v0
-          ]
-        }
-      ]
+      "selections": v0
     },
     {
       "kind": "ScalarField",
@@ -132,9 +114,7 @@ return {
       "args": null,
       "concreteType": "LettingAgencyType",
       "plural": false,
-      "selections": [
-        v1
-      ]
+      "selections": v0
     },
     {
       "kind": "LinkedField",
@@ -185,5 +165,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '364468e6a0e2a0aac78dec1f8e2262a2';
+(node/*: any*/).hash = '159bcd34c492151303b3450b3593a8a5';
 module.exports = node;

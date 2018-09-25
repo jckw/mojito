@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ebc2aa065ba26f9255defefa40669292
+ * @relayHash 5a271f1bd1d00fdeef12e83965481940
  */
 
 /* eslint-disable */
@@ -50,19 +50,15 @@ fragment MapMarker_property on PropertyType {
   location {
     coordinates
   }
+  url
 }
 
 fragment PropertyItem_property on PropertyType {
   id
   street
-  slug
+  url
   area {
     name
-    slug
-    city {
-      slug
-      id
-    }
     id
   }
   postcode
@@ -105,26 +101,22 @@ var v0 = {
   "args": null,
   "storageKey": null
 },
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "slug",
-  "args": null,
-  "storageKey": null
-},
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-};
+v1 = [
+  {
+    "kind": "ScalarField",
+    "alias": null,
+    "name": "name",
+    "args": null,
+    "storageKey": null
+  },
+  v0
+];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "SearchQuery",
   "id": null,
-  "text": "query SearchQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  slug\n  area {\n    name\n    slug\n    city {\n      slug\n      id\n    }\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query SearchQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  url\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  url\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -183,11 +175,17 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
+                    "name": "url",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
                     "name": "street",
                     "args": null,
                     "storageKey": null
                   },
-                  v1,
                   {
                     "kind": "LinkedField",
                     "alias": null,
@@ -196,24 +194,7 @@ return {
                     "args": null,
                     "concreteType": "CityAreaType",
                     "plural": false,
-                    "selections": [
-                      v2,
-                      v1,
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "name": "city",
-                        "storageKey": null,
-                        "args": null,
-                        "concreteType": "CityType",
-                        "plural": false,
-                        "selections": [
-                          v1,
-                          v0
-                        ]
-                      },
-                      v0
-                    ]
+                    "selections": v1
                   },
                   {
                     "kind": "ScalarField",
@@ -255,10 +236,7 @@ return {
                     "args": null,
                     "concreteType": "LettingAgencyType",
                     "plural": false,
-                    "selections": [
-                      v2,
-                      v0
-                    ]
+                    "selections": v1
                   },
                   {
                     "kind": "LinkedField",

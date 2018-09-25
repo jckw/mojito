@@ -11,7 +11,9 @@ import withState from '../utils/withState'
 
 class MapMarker extends Component {
     onClick = () => {
-        return false
+        const { property } = this.props
+        const win = window.open(property.url, '_blank')
+        win.focus()
     }
 
     render() {
@@ -44,6 +46,7 @@ export default createFragmentContainer(withState(MapMarker, [SelectedPropertySta
             location {
                 coordinates
             }
+            url
         }
     `
 })
