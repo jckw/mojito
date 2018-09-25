@@ -6,9 +6,7 @@ import { Box } from 'rebass'
 import { display } from 'styled-system'
 import styled from 'styled-components'
 
-import SelectedPropertyState from '../state/SelectedPropertyState'
 import mapStyle from '../assets/mapStyle.json'
-import withState from '../utils/withState'
 import MarkerSet from './MarkerSet'
 
 import { getBounds } from '../utils/MapHelpers'
@@ -18,12 +16,6 @@ const Hide = styled(Box)`
 `
 
 class MapView extends Component {
-    _onClick = () => {
-        const { properties } = this.props
-
-        properties.unsetSelectedProperty()
-    }
-
     refetch = () => {
         const { refetch } = this.props
         const bounds = this.map.getBounds()
@@ -40,7 +32,6 @@ class MapView extends Component {
                 defaultZoom={14}
                 defaultCenter={{ lat: 51.7471381, lng: -1.2344602000000577 }}
                 defaultOptions={{ styles: mapStyle, disableDefaultUI: true }}
-                onClick={this._onClick}
                 clickableIcons={false}
                 onBoundsChanged={throttle(this.refetch, 200)}
                 display={['none', 'block']}
@@ -63,4 +54,4 @@ const ComposedMapView = compose(
     withGoogleMap
 )(MapView)
 
-export default withState(ComposedMapView, [SelectedPropertyState])
+export default ComposedMapView

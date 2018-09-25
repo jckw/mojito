@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Flex } from 'rebass'
+import { Box } from 'rebass'
 import { Provider as StateProvider } from 'unstated'
 import { ThemeProvider } from 'styled-components'
 import { Helmet } from 'react-helmet'
@@ -10,7 +10,6 @@ import Search from './pages/Search'
 import Single from './pages/Single'
 import Page404 from './pages/404'
 import theme from './theme'
-import Header from './components/Header'
 
 class App extends Component {
     render() {
@@ -18,7 +17,7 @@ class App extends Component {
             <StateProvider>
                 <ThemeProvider theme={theme}>
                     <Router>
-                        <Flex flexDirection="column" css={{ height: '100vh' }}>
+                        <Box>
                             <Helmet>
                                 <title>Search student properties in Oxford | movemaison</title>
                                 <link
@@ -26,10 +25,9 @@ class App extends Component {
                                     rel="stylesheet"
                                 />
                             </Helmet>
-                            <Header />
                             <Switch>
                                 <Route exact path="/" component={Landing} />
-                                <Route exact path="/city/:citySlug" component={Search} />
+                                <Route exact path="/search/:citySlug" component={Search} />
                                 <Route
                                     exact
                                     path="/properties/:citySlug/:areaSlug/:propertySlug"
@@ -37,7 +35,7 @@ class App extends Component {
                                 />
                                 <Route component={Page404} />
                             </Switch>
-                        </Flex>
+                        </Box>
                     </Router>
                 </ThemeProvider>
             </StateProvider>

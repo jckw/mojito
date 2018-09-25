@@ -11,8 +11,7 @@ import withState from '../utils/withState'
 
 class MapMarker extends Component {
     onClick = () => {
-        const { properties, property } = this.props
-        properties.setSelectedProperty(property)
+        return false
     }
 
     render() {
