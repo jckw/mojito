@@ -15,17 +15,13 @@ import cyclist from '../assets/icons/cyclist.svg'
 import people from '../assets/icons/people.svg'
 import bathroom from '../assets/icons/bathroom.svg'
 import withState from '../utils/withState'
+import getPhotoURL from '../utils/getPhotoURL'
 
 import '../styles/NukaCarousel.css'
 
 const InlineFlex = styled(Flex)`
     display: inline-flex;
 `
-
-const BASE_MEDIA_URL =
-    process.env.NODE_ENV === 'production'
-        ? 'https://movemaison-media.s3.amazonaws.com'
-        : 'http://localhost:8000'
 
 class PropertyItem extends Component {
     onMouseOver = () => {
@@ -50,7 +46,7 @@ class PropertyItem extends Component {
         const photos = photoEdges.edges.map(e => (
             <img
                 key={e.node.photo}
-                src={`${BASE_MEDIA_URL}/media/${e.node.photo}`}
+                src={getPhotoURL(e.node.photo)}
                 onLoad={() => {
                     /* TODO: Find a better fix for this bug - too hacky! */
                     window.dispatchEvent(new Event('resize'))

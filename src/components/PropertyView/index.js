@@ -27,7 +27,7 @@ class PropertyView extends Component {
                                 citySlug: $citySlug
                                 areaSlug: $areaSlug
                             ) {
-                                id
+                                ...PhotoHeader_property
                             }
                         }
                     `}
@@ -51,7 +51,7 @@ class PropertyView extends Component {
                             return <div>Loading...</div>
                         }
 
-                        return <Content />
+                        return <Content property={props.property} />
                     }}
                 />
             </Box>

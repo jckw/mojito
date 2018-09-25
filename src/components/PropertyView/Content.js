@@ -7,7 +7,7 @@ class Content extends Component {
     render() {
         return (
             <Box>
-                <PhotoHeader />
+                <PhotoHeader property={this.props.property} />
                 <Heading>Another property.</Heading>
             </Box>
         )
