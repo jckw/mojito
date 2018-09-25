@@ -27,7 +27,7 @@ const theme = {
         extrabold: 900
     },
     colors,
-    radii: [0, 2, 4, 8, 16],
+    radii: [0, 2, 4, 8, 12, 16],
     lineHeights: {
         heading: '1.1em'
     },

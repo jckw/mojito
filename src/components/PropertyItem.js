@@ -10,11 +10,13 @@ import SelectedPropertyState from '../state/SelectedPropertyState'
 import PriceTag from './PriceTag'
 import Relative from './Relative'
 import Absolute from './Absolute'
+import FeatureIcon from './FeatureIcon'
 
 import cyclist from '../assets/icons/cyclist.svg'
 import people from '../assets/icons/people.svg'
 import bathroom from '../assets/icons/bathroom.svg'
 import withState from '../utils/withState'
+
 import getPhotoURL from '../utils/getPhotoURL'
 
 import '../styles/NukaCarousel.css'
@@ -61,7 +63,6 @@ class PropertyItem extends Component {
                         borderRadius={4}
                         bg="white"
                         boxShadow="0px 4px 8px -4px rgba(0, 0, 0, 0.5)"
-                        p={3}
                         css={{
                             overflow: 'hidden',
                             display: 'flex',
@@ -75,9 +76,8 @@ class PropertyItem extends Component {
                         <Flex
                             flexDirection="column"
                             justifyContent="center"
-                            m={-3}
                             mb={2}
-                            css={{ height: '180px', overflowY: 'hidden' }}
+                            css={{ height: '150px', overflowY: 'hidden' }}
                         >
                             {photos.length > 0 ? (
                                 <Box css={{ height: '100%' }}>
@@ -95,32 +95,33 @@ class PropertyItem extends Component {
                             to={property.url}
                             style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
                         >
-                            <Heading fontSize={2} fontWeight="bold">
-                                {street}, {area.name},{' '}
-                                <span style={{ display: 'inline-block' }}>{postcode}</span>
-                            </Heading>
-                            <Text fontSize={1} color="grey.0" fontWeight="semibold">
-                                {agency ? `Managed by ${agency.name}` : 'No managing agency'}
-                            </Text>
-                            <Flex justifyContent="space-between" mt={2}>
-                                <InlineFlex alignItems="center">
-                                    <img src={cyclist} />
-                                    <Text ml={1} fontSize={1} color="#D1D1D1">
-                                        5 mins
-                                    </Text>
-                                </InlineFlex>
-                                <InlineFlex alignItems="center">
-                                    <img src={people} />
-                                    <Text ml={1} fontSize={1} color="#D1D1D1">
-                                        {bedrooms} bedroom
-                                    </Text>
-                                </InlineFlex>
-                                <InlineFlex alignItems="center">
-                                    <img src={bathroom} />
-                                    <Text ml={1} fontSize={1} color="#D1D1D1">
-                                        {bathrooms} bathroom
-                                    </Text>
-                                </InlineFlex>
+                            <Box px={3} py={1}>
+                                <Text
+                                    fontSize={1}
+                                    mb={1}
+                                    color="grey.0"
+                                    fontWeight="medium"
+                                    style={{ letterSpacing: '0.05em' }}
+                                >
+                                    {agency ? `${agency.name.toUpperCase()}` : 'PRIVATE LANDLORD'} •
+                                    FLAT {/* TODO: Add useful text */}
+                                </Text>
+                                <Heading fontSize={3} fontWeight="bold">
+                                    {street}, {area.name},{' '}
+                                    <span style={{ display: 'inline-block' }}>{postcode}</span>
+                                </Heading>
+                            </Box>
+                            <Flex
+                                justifyContent="space-between"
+                                mt={2}
+                                px={4}
+                                py={3}
+                                css={{ borderTop: '1px solid #E7F2EE' }}
+                            >
+                                <FeatureIcon name="Mins" icon={cyclist} value={5} />
+                                <FeatureIcon name="Beds" icon={people} value={bedrooms} />
+                                <FeatureIcon name="Baths" icon={bathroom} value={bathrooms} />
+                                <FeatureIcon name="Minute" icon={cyclist} value={30} />
                             </Flex>
                         </Link>
                     </Card>
