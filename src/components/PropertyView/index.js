@@ -27,7 +27,7 @@ class PropertyView extends Component {
                                 citySlug: $citySlug
                                 areaSlug: $areaSlug
                             ) {
-                                ...PhotoHeader_property
+                                ...Content_property
                             }
                         }
                     `}

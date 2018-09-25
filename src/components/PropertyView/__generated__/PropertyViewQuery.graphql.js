@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5649dec581e1e3b9e033f8c116e32aab
+ * @relayHash ce9c0592b310dd07498cb326ecf2fa2e
  */
 
 /* eslint-disable */
@@ -9,7 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type PhotoHeader_property$ref = any;
+type Content_property$ref = any;
 export type PropertyViewQueryVariables = {|
   propertySlug: string,
   citySlug: string,
@@ -17,7 +17,7 @@ export type PropertyViewQueryVariables = {|
 |};
 export type PropertyViewQueryResponse = {|
   +property: ?{|
-    +$fragmentRefs: PhotoHeader_property$ref
+    +$fragmentRefs: Content_property$ref
   |}
 |};
 export type PropertyViewQuery = {|
@@ -34,9 +34,24 @@ query PropertyViewQuery(
   $areaSlug: String!
 ) {
   property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {
-    ...PhotoHeader_property
+    ...Content_property
     id
   }
+}
+
+fragment Content_property on PropertyType {
+  street
+  postcode
+  area {
+    name
+    city {
+      name
+      id
+    }
+    id
+  }
+  price
+  ...PhotoHeader_property
 }
 
 fragment PhotoHeader_property on PropertyType {
@@ -95,6 +110,13 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
@@ -104,7 +126,7 @@ return {
   "operationKind": "query",
   "name": "PropertyViewQuery",
   "id": null,
-  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...PhotoHeader_property\n    id\n  }\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n",
+  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  price\n  ...PhotoHeader_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -124,7 +146,7 @@ return {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "PhotoHeader_property",
+            "name": "Content_property",
             "args": null
           }
         ]
@@ -145,6 +167,53 @@ return {
         "concreteType": "PropertyType",
         "plural": false,
         "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "street",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "postcode",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "area",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "CityAreaType",
+            "plural": false,
+            "selections": [
+              v2,
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "city",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "CityType",
+                "plural": false,
+                "selections": [
+                  v2,
+                  v3
+                ]
+              },
+              v3
+            ]
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "price",
+            "args": null,
+            "storageKey": null
+          },
           {
             "kind": "LinkedField",
             "alias": null,
@@ -186,14 +255,14 @@ return {
                         "args": null,
                         "storageKey": null
                       },
-                      v2
+                      v3
                     ]
                   }
                 ]
               }
             ]
           },
-          v2
+          v3
         ]
       }
     ]
@@ -201,5 +270,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '2afbd5cd416559f2a1e2161ab397e6ad';
+(node/*: any*/).hash = 'a49131ff16cf5e46fe7629b2591d27c3';
 module.exports = node;

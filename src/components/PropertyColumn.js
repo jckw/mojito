@@ -12,6 +12,7 @@ class PropertyColumn extends Component {
                 width="100%"
                 p={5}
                 css={{ overflowY: 'scroll' }}
+                m={0}
             >
                 <PropertyList query={query} />
             </Container>

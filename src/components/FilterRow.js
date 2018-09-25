@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
-import { Flex, Box } from 'rebass'
-import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css'
+import { Box } from 'rebass'
 
 import FilterRange from './FilterRange'
 import Absolute from './Absolute'
+import TopRow from './TopRow'
 
 class FilterRow extends Component {
     constructor(props) {
@@ -84,16 +83,10 @@ class FilterRow extends Component {
                         onClick={this.closeInputs}
                     />
                 )}
-                <Flex
+                <TopRow
                     flexDirection="row"
                     justifyContent="flex-end"
-                    px={3}
-                    py={3}
-                    fontSize={2}
                     css={{
-                        borderBottom: '1px solid #E7F2EE',
-                        borderTop: '1px solid #E7F2EE',
-                        marginTop: '-1px',
                         zIndex: 2,
                         position: 'relative'
                     }}
@@ -125,7 +118,7 @@ class FilterRow extends Component {
                         max={this.BEDROOMS_RANGE[1]}
                         onClose={this.closeInputs}
                     />
-                </Flex>
+                </TopRow>
             </Box>
         )
     }
