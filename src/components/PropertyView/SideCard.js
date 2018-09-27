@@ -16,9 +16,10 @@ class SideCard extends Component {
                 boxShadow="0px 4px 8px -4px rgba(0, 0, 0, 0.5)"
                 mt={[0, '-50px']}
                 css={{ boxSizing: 'border-box' }}
+                ml={[0, 2]}
             >
                 <AgencyHeader property={this.props.property} />
-                <Flex mt={3}>
+                <Flex mt={3} flexDirection={['row', 'column', 'row']} alignItems="flex-start">
                     <Card
                         bg="green.normal"
                         css={{ display: 'inline-box' }}
@@ -26,7 +27,8 @@ class SideCard extends Component {
                         px={2}
                         py={1}
                         borderRadius={3}
-                        mr={2}
+                        mr={[2, 0, 2]}
+                        mb={[0, 2, 0]}
                     >
                         <Flex>
                             <Heading fontSize={5} mr={1}>
