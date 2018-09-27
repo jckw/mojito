@@ -3,7 +3,7 @@ export const colors = {
     grey: ['#717070', '#A2A0A0', '#E7F2EE'],
     white: '#fff',
     green: {
-        pale: '#EDF1EE',
+        pale: '#69D4AE',
         grey: '#a2bbb2',
         dark: '#7C827B',
         normal: '#39BF8F'
@@ -53,6 +53,14 @@ const theme = {
             boxShadow: `inset 0 0 0 1px ${colors.green.normal}`,
             fontWeight: 400,
             padding: '10px 14px'
+        },
+        outlineLarge: {
+            color: colors.green.normal,
+            backgroundColor: 'transparent',
+            borderRadius: '6px',
+            boxShadow: `inset 0 0 0 1px ${colors.green.normal}`,
+            fontWeight: 500,
+            padding: '14px 18px'
         },
         transparent: {
             color: colors.grey[1],

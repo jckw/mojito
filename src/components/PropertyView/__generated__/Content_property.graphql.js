@@ -8,6 +8,7 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type BedroomDetails_property$ref = any;
 type FeatureGrid_property$ref = any;
 type PhotoHeader_property$ref = any;
 type SideCard_property$ref = any;
@@ -22,8 +23,8 @@ export type Content_property = {|
       +name: string
     |},
   |},
-  +price: number,
-  +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref,
+  +bedrooms: number,
+  +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref & BedroomDetails_property$ref,
   +$refType: Content_property$ref,
 |};
 */
@@ -85,7 +86,7 @@ return {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "price",
+      "name": "bedrooms",
       "args": null,
       "storageKey": null
     },
@@ -103,10 +104,15 @@ return {
       "kind": "FragmentSpread",
       "name": "SideCard_property",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "BedroomDetails_property",
+      "args": null
     }
   ]
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e7f3a769eaa2a5f8cfbd49614a64c052';
+(node/*: any*/).hash = '216abb3fa1878f1a23c0bf3d028329d6';
 module.exports = node;

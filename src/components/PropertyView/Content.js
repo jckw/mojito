@@ -7,10 +7,11 @@ import PhotoHeader from './PhotoHeader'
 import Container from '../Container'
 import FeatureGrid from './FeatureGrid'
 import SideCard from './SideCard'
+import BedroomDetails from './BedroomDetails'
 
 class Content extends Component {
     render() {
-        const { street, postcode, area, price } = this.props.property
+        const { street, postcode, area } = this.props.property
 
         return (
             <Box>
@@ -28,6 +29,7 @@ class Content extends Component {
                                 {street}, {area.name}, {area.city.name},{' '}
                                 <span style={{ display: 'inline-block' }}>{postcode}</span>
                             </Heading>
+                            <BedroomDetails property={this.props.property} />
                             <FeatureGrid property={this.props.property} />
                         </Box>
                         <SideCard property={this.props.property} />
@@ -49,10 +51,11 @@ export default createFragmentContainer(Content, {
                     name
                 }
             }
-            price
+            bedrooms
             ...PhotoHeader_property
             ...FeatureGrid_property
             ...SideCard_property
+            ...BedroomDetails_property
         }
     `
 })

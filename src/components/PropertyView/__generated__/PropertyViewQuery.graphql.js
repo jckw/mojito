@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 31db23f6db23e8c4ff72a0ba4bba4754
+ * @relayHash 917333f4244b5114768de74b631029a3
  */
 
 /* eslint-disable */
@@ -50,10 +50,11 @@ fragment Content_property on PropertyType {
     }
     id
   }
-  price
+  bedrooms
   ...PhotoHeader_property
   ...FeatureGrid_property
   ...SideCard_property
+  ...BedroomDetails_property
 }
 
 fragment PhotoHeader_property on PropertyType {
@@ -94,6 +95,11 @@ fragment SideCard_property on PropertyType {
   price
   totalPrice
   ...AgencyHeader_property
+}
+
+fragment BedroomDetails_property on PropertyType {
+  doubleBedrooms
+  singleBedrooms
 }
 
 fragment AgencyHeader_property on PropertyType {
@@ -168,7 +174,7 @@ return {
   "operationKind": "query",
   "name": "PropertyViewQuery",
   "id": null,
-  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  price\n  ...PhotoHeader_property\n  ...FeatureGrid_property\n  ...SideCard_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  furnished\n  dishwasher\n  bath\n  shower\n  garden\n  dryer\n  washingMachine\n  microwave\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment SideCard_property on PropertyType {\n  price\n  totalPrice\n  ...AgencyHeader_property\n}\n\nfragment AgencyHeader_property on PropertyType {\n  agency {\n    name\n    id\n  }\n}\n",
+  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  bedrooms\n  ...PhotoHeader_property\n  ...FeatureGrid_property\n  ...SideCard_property\n  ...BedroomDetails_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  furnished\n  dishwasher\n  bath\n  shower\n  garden\n  dryer\n  washingMachine\n  microwave\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment SideCard_property on PropertyType {\n  price\n  totalPrice\n  ...AgencyHeader_property\n}\n\nfragment BedroomDetails_property on PropertyType {\n  doubleBedrooms\n  singleBedrooms\n}\n\nfragment AgencyHeader_property on PropertyType {\n  agency {\n    name\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -212,7 +218,7 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "freezer",
+            "name": "stove",
             "args": null,
             "storageKey": null
           },
@@ -249,7 +255,7 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "price",
+            "name": "bedrooms",
             "args": null,
             "storageKey": null
           },
@@ -367,14 +373,14 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "postcode",
+            "name": "freezer",
             "args": null,
             "storageKey": null
           },
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "stove",
+            "name": "postcode",
             "args": null,
             "storageKey": null
           },
@@ -444,6 +450,13 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
+            "name": "price",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
             "name": "totalPrice",
             "args": null,
             "storageKey": null
@@ -457,6 +470,20 @@ return {
             "concreteType": "LettingAgencyType",
             "plural": false,
             "selections": v4
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "doubleBedrooms",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "singleBedrooms",
+            "args": null,
+            "storageKey": null
           },
           v3
         ]

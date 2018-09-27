@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
-import { Heading, Card, Flex, Box, Text } from 'rebass'
+import { Heading, Card, Flex, Box, Text, Button } from 'rebass'
+
 import AgencyHeader from './AgencyHeader'
+
+import outLink from '../../assets/outLink.svg'
 
 class SideCard extends Component {
     render() {
@@ -43,7 +46,7 @@ class SideCard extends Component {
                         </Flex>
                     </Card>
                     <Card
-                        bg="teal"
+                        bg="green.pale"
                         css={{ display: 'inline-box' }}
                         color="white"
                         px={2}
@@ -63,6 +66,25 @@ class SideCard extends Component {
                         </Flex>
                     </Card>
                 </Flex>
+                <Text
+                    css={{ letterSpacing: '0.05em' }}
+                    color="grey.0"
+                    fontWeight="medium"
+                    fontSize={0}
+                    mt={3}
+                >
+                    12 MONTH LEASE • STARTS AUGUST 18TH
+                </Text>
+                <Box>
+                    <Button width="100%" mt={3} variant="outlineLarge">
+                        Agency listing <img src={outLink} />
+                    </Button>
+                </Box>
+                <Box>
+                    <Button width="100%" mt={3} variant="outlineLarge">
+                        Book a viewing
+                    </Button>
+                </Box>
             </Card>
         )
     }
