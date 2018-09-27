@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ce9c0592b310dd07498cb326ecf2fa2e
+ * @relayHash 31db23f6db23e8c4ff72a0ba4bba4754
  */
 
 /* eslint-disable */
@@ -52,6 +52,8 @@ fragment Content_property on PropertyType {
   }
   price
   ...PhotoHeader_property
+  ...FeatureGrid_property
+  ...SideCard_property
 }
 
 fragment PhotoHeader_property on PropertyType {
@@ -62,6 +64,42 @@ fragment PhotoHeader_property on PropertyType {
         id
       }
     }
+  }
+}
+
+fragment FeatureGrid_property on PropertyType {
+  furnished
+  dishwasher
+  bath
+  shower
+  garden
+  dryer
+  washingMachine
+  microwave
+  fridge
+  freezer
+  stove
+  oven
+  airConditioning
+  kitchenTable
+  desksInRooms
+  doubleGlazing
+  bikeStorage
+  parkingSpace
+  fireAlarm
+  burglarAlarm
+}
+
+fragment SideCard_property on PropertyType {
+  price
+  totalPrice
+  ...AgencyHeader_property
+}
+
+fragment AgencyHeader_property on PropertyType {
+  agency {
+    name
+    id
   }
 }
 */
@@ -120,13 +158,17 @@ v3 = {
   "name": "id",
   "args": null,
   "storageKey": null
-};
+},
+v4 = [
+  v2,
+  v3
+];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "PropertyViewQuery",
   "id": null,
-  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  price\n  ...PhotoHeader_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n",
+  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  price\n  ...PhotoHeader_property\n  ...FeatureGrid_property\n  ...SideCard_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  furnished\n  dishwasher\n  bath\n  shower\n  garden\n  dryer\n  washingMachine\n  microwave\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment SideCard_property on PropertyType {\n  price\n  totalPrice\n  ...AgencyHeader_property\n}\n\nfragment AgencyHeader_property on PropertyType {\n  agency {\n    name\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -170,14 +212,14 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "street",
+            "name": "freezer",
             "args": null,
             "storageKey": null
           },
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "postcode",
+            "name": "street",
             "args": null,
             "storageKey": null
           },
@@ -199,10 +241,7 @@ return {
                 "args": null,
                 "concreteType": "CityType",
                 "plural": false,
-                "selections": [
-                  v2,
-                  v3
-                ]
+                "selections": v4
               },
               v3
             ]
@@ -261,6 +300,163 @@ return {
                 ]
               }
             ]
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "furnished",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "dishwasher",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "bath",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "shower",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "garden",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "dryer",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "washingMachine",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "microwave",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "fridge",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "postcode",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "stove",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "oven",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "airConditioning",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "kitchenTable",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "desksInRooms",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "doubleGlazing",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "bikeStorage",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "parkingSpace",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "fireAlarm",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "burglarAlarm",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "totalPrice",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "agency",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "LettingAgencyType",
+            "plural": false,
+            "selections": v4
           },
           v3
         ]

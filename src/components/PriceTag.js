@@ -9,7 +9,7 @@ class PriceTag extends Component {
 
         return (
             <Card borderRadius={3} bg="green.normal" py={1} px={2}>
-                <Text fontWeight="extrabold" fontSize={3} color="white">
+                <Text fontWeight="heavy" fontSize={3} color="white">
                     £{price}
                 </Text>
             </Card>

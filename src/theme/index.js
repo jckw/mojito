@@ -7,7 +7,8 @@ export const colors = {
         grey: '#a2bbb2',
         dark: '#7C827B',
         normal: '#39BF8F'
-    }
+    },
+    teal: '#2a7f8e'
 }
 
 const theme = {
@@ -24,7 +25,8 @@ const theme = {
         medium: 500,
         semibold: 600,
         bold: 700,
-        extrabold: 900
+        heavy: 800,
+        black: 900
     },
     colors,
     radii: [0, 2, 4, 8, 12, 16],

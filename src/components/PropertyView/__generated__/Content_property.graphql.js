@@ -8,7 +8,9 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type FeatureGrid_property$ref = any;
 type PhotoHeader_property$ref = any;
+type SideCard_property$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Content_property$ref: FragmentReference;
 export type Content_property = {|
@@ -21,7 +23,7 @@ export type Content_property = {|
     |},
   |},
   +price: number,
-  +$fragmentRefs: PhotoHeader_property$ref,
+  +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref,
   +$refType: Content_property$ref,
 |};
 */
@@ -91,10 +93,20 @@ return {
       "kind": "FragmentSpread",
       "name": "PhotoHeader_property",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "FeatureGrid_property",
+      "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "SideCard_property",
+      "args": null
     }
   ]
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '7f611808b6a388fff31f13262f13aaff';
+(node/*: any*/).hash = 'e7f3a769eaa2a5f8cfbd49614a64c052';
 module.exports = node;
