@@ -31,7 +31,7 @@ class FilterRange extends Component {
                 css={{ zIndex: showingInput ? 2 : 0 }}
                 ml={3}
             >
-                <Button variant={isSet ? 'outlineSelected' : 'outline'} onClick={onClick}>
+                <Button variant={isSet ? 'plainSelected' : 'plainUnselected'} onClick={onClick}>
                     <Text>{isSet ? formatTo(value) : name}</Text>
                 </Button>
                 {showingInput && (

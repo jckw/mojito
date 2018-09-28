@@ -1,6 +1,6 @@
 export const colors = {
     black: '#2B2B2B',
-    grey: ['#717070', '#A2A0A0', '#E7F2EE', '#5A5A5A'],
+    grey: ['#717070', '#A2A0A0', '#E7F2EE', '#5A5A5A', '#ADABAB'],
     white: '#fff',
     green: {
         pale: '#69D4AE',
@@ -38,6 +38,24 @@ const theme = {
         light: '0px 2px 7px -1px rgba(0, 0, 0, 0.2)'
     },
     buttons: {
+        plainUnselected: {
+            color: colors.grey[4],
+            borderRadius: '99px',
+            padding: '8px 16px',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            backgroundColor: 'white',
+            fontSize: '12px'
+        },
+        plainSelected: {
+            color: colors.green.normal,
+            borderRadius: '99px',
+            padding: '8px 16px',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            backgroundColor: 'white',
+            fontSize: '12px'
+        },
         outline: {
             color: colors.green.grey,
             backgroundColor: 'transparent',
