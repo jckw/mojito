@@ -95,13 +95,15 @@ class FeatureGrid extends Component {
         // )
 
         return (
-            <Box pb={4}>
-                <Heading fontSize={[4, 5]} mb={2}>
+            <Box mb={4} mt={2}>
+                <Heading fontSize={[3]} color="grey.3" mb={1}>
                     Amenities
                 </Heading>
                 <Flex flexDirection={['column', 'row']}>
                     <Box css={{ flex: 1 }}>
-                        <Heading fontSize={[2, 3]}>Included</Heading>
+                        <Heading fontSize={[1]} color="grey.1" fontWeight="medium">
+                            Included
+                        </Heading>
                         {includedFeatures.map(f => (
                             <Text color="grey.0" fontWeight="light" my={2}>
                                 {f.name}
@@ -109,7 +111,9 @@ class FeatureGrid extends Component {
                         ))}
                     </Box>
                     <Box css={{ flex: 1 }} mt={[2, 0]}>
-                        <Heading fontSize={[2, 3]}>Not included</Heading>
+                        <Heading fontSize={[1]} color="grey.1" fontWeight="medium">
+                            Not included
+                        </Heading>
                         {notIncludedFeatures.map(f => (
                             <Text color="grey.0" fontWeight="light" my={2}>
                                 {f.name}

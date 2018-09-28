@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c2474de8779c2c5551201ede8beff24b
+ * @relayHash 539617bd7d2dfd98835f897355db865d
  */
 
 /* eslint-disable */
@@ -48,6 +48,10 @@ fragment Content_property on PropertyType {
       name
       id
     }
+    id
+  }
+  variant {
+    name
     id
   }
   bedrooms
@@ -180,7 +184,7 @@ return {
   "operationKind": "query",
   "name": "PropertyViewQuery",
   "id": null,
-  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  bedrooms\n  ...PhotoHeader_property\n  ...FeatureGrid_property\n  ...SideCard_property\n  ...BedroomDetails_property\n  ...BathroomDetails_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  furnished\n  dishwasher\n  bath\n  shower\n  garden\n  dryer\n  washingMachine\n  microwave\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment SideCard_property on PropertyType {\n  price\n  totalPrice\n  ...AgencyHeader_property\n}\n\nfragment BedroomDetails_property on PropertyType {\n  doubleBedrooms\n  singleBedrooms\n}\n\nfragment BathroomDetails_property on PropertyType {\n  bathrooms\n  ensuites\n}\n\nfragment AgencyHeader_property on PropertyType {\n  agency {\n    name\n    id\n  }\n}\n",
+  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  variant {\n    name\n    id\n  }\n  bedrooms\n  ...PhotoHeader_property\n  ...FeatureGrid_property\n  ...SideCard_property\n  ...BedroomDetails_property\n  ...BathroomDetails_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  furnished\n  dishwasher\n  bath\n  shower\n  garden\n  dryer\n  washingMachine\n  microwave\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment SideCard_property on PropertyType {\n  price\n  totalPrice\n  ...AgencyHeader_property\n}\n\nfragment BedroomDetails_property on PropertyType {\n  doubleBedrooms\n  singleBedrooms\n}\n\nfragment BathroomDetails_property on PropertyType {\n  bathrooms\n  ensuites\n}\n\nfragment AgencyHeader_property on PropertyType {\n  agency {\n    name\n    id\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -257,6 +261,16 @@ return {
               },
               v3
             ]
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "variant",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "PropertyVariantType",
+            "plural": false,
+            "selections": v4
           },
           {
             "kind": "ScalarField",

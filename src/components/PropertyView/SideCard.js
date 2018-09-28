@@ -12,7 +12,7 @@ class SideCard extends Component {
         const { price, totalPrice } = this.props.property
         return (
             <Card
-                width={['100%', '450px']}
+                width={['100%', '350px']}
                 p={4}
                 borderRadius={5}
                 bg="#F7F7F7"
@@ -22,16 +22,18 @@ class SideCard extends Component {
                 ml={[0, 2]}
             >
                 <AgencyHeader property={this.props.property} />
-                <Flex mt={3} flexDirection={['row', 'column', 'row']} alignItems="flex-start">
+                <Flex mt={3} flexDirection={['row']} alignItems="flex-start">
                     <Card
                         bg="green.normal"
-                        css={{ display: 'inline-box' }}
+                        css={{
+                            display: 'inline-flex',
+                            boxShadow: '0px 2px 10px -5px rgba(0,0,0,0.9)'
+                        }}
                         color="white"
                         px={2}
                         py={1}
                         borderRadius={3}
-                        mr={[2, 0, 2]}
-                        mb={[0, 2, 0]}
+                        mr={[2]}
                     >
                         <Flex>
                             <Heading fontSize={5} mr={1}>
@@ -47,7 +49,10 @@ class SideCard extends Component {
                     </Card>
                     <Card
                         bg="green.pale"
-                        css={{ display: 'inline-box' }}
+                        css={{
+                            display: 'inline-flex',
+                            boxShadow: '0px 2px 10px -5px rgba(74,159,128,0.9)'
+                        }}
                         color="white"
                         px={2}
                         py={1}

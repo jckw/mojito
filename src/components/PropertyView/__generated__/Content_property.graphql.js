@@ -24,6 +24,9 @@ export type Content_property = {|
       +name: string
     |},
   |},
+  +variant: {|
+    +name: string
+  |},
   +bedrooms: number,
   +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref & BedroomDetails_property$ref & BathroomDetails_property$ref,
   +$refType: Content_property$ref,
@@ -38,7 +41,10 @@ var v0 = {
   "name": "name",
   "args": null,
   "storageKey": null
-};
+},
+v1 = [
+  v0
+];
 return {
   "kind": "Fragment",
   "name": "Content_property",
@@ -78,11 +84,19 @@ return {
           "args": null,
           "concreteType": "CityType",
           "plural": false,
-          "selections": [
-            v0
-          ]
+          "selections": v1
         }
       ]
+    },
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "variant",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "PropertyVariantType",
+      "plural": false,
+      "selections": v1
     },
     {
       "kind": "ScalarField",
@@ -120,5 +134,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '85ab13e2becaec88e0fce0dac2991344';
+(node/*: any*/).hash = '9135260ecc7e732568d1c5d6e3bfa3b1';
 module.exports = node;

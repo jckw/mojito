@@ -10,24 +10,46 @@ import SideCard from './SideCard'
 import BedroomDetails from './BedroomDetails'
 import BathroomDetails from './BathroomDetails'
 
+import greyPin from '../../assets/greyPin.svg'
+
+function capFirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 class Content extends Component {
     render() {
-        const { street, postcode, area } = this.props.property
+        const { street, postcode, area, variant } = this.props.property
 
         return (
             <Box>
                 <PhotoHeader property={this.props.property} />
-                <Container maxWidth={['900px']} mx="auto">
+                <Container maxWidth={['800px']} mx="auto">
                     <Flex
-                        mt={[5, 5, 6]}
+                        mt={[5]}
                         mx={[4]}
                         mb={4}
                         flexDirection={['column', 'row']}
                         alignItems="flex-start"
                     >
-                        <Box>
-                            <Heading fontSize={[5, 6]} fontWeight="800" lineHeight="1.1" mb={3}>
-                                {street}, {area.name}, {area.city.name},{' '}
+                        <Box css={{ flex: 1 }}>
+                            <Heading
+                                fontSize={[5]}
+                                fontWeight="heavy"
+                                lineHeight="1.1"
+                                color="black"
+                                mb={1}
+                            >
+                                {capFirst(variant.name)} on {street}
+                            </Heading>
+                            <Heading
+                                fontSize={[3]}
+                                fontWeight="medium"
+                                lineHeight="1.1"
+                                color="grey.0"
+                                mb={3}
+                                css={{ letterSpacing: '-0.02em' }}
+                            >
+                                <img src={greyPin} /> {street}, {area.name}, {area.city.name},{' '}
                                 <span style={{ display: 'inline-block' }}>{postcode}</span>
                             </Heading>
                             <BedroomDetails property={this.props.property} />
@@ -52,6 +74,9 @@ export default createFragmentContainer(Content, {
                 city {
                     name
                 }
+            }
+            variant {
+                name
             }
             bedrooms
             ...PhotoHeader_property

@@ -1,6 +1,6 @@
 export const colors = {
-    black: '#3D3D3D',
-    grey: ['#717070', '#A2A0A0', '#E7F2EE'],
+    black: '#2B2B2B',
+    grey: ['#717070', '#A2A0A0', '#E7F2EE', '#5A5A5A'],
     white: '#fff',
     green: {
         pale: '#69D4AE',
@@ -60,7 +60,8 @@ const theme = {
             borderRadius: '6px',
             boxShadow: `inset 0 0 0 1px ${colors.green.normal}`,
             fontWeight: 500,
-            padding: '14px 18px'
+            padding: '14px 18px',
+            letterSpacing: '-0.02em'
         },
         transparent: {
             color: colors.grey[1],
