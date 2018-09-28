@@ -16,6 +16,15 @@ function capFirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
+const Section = ({ title, children }) => (
+    <Box mb={4}>
+        <Heading fontSize={[3]} color="grey.3" mb={2}>
+            Bathrooms
+        </Heading>
+        {children}
+    </Box>
+)
+
 class Content extends Component {
     render() {
         const { street, postcode, area, variant } = this.props.property
@@ -52,9 +61,15 @@ class Content extends Component {
                                 <img src={greyPin} /> {street}, {area.name}, {area.city.name},{' '}
                                 <span style={{ display: 'inline-block' }}>{postcode}</span>
                             </Heading>
-                            <BedroomDetails property={this.props.property} />
-                            <BathroomDetails property={this.props.property} />
-                            <FeatureGrid property={this.props.property} />
+                            <Section title="Bedrooms">
+                                <BedroomDetails property={this.props.property} />
+                            </Section>
+                            <Section title="Bathrooms">
+                                <BathroomDetails property={this.props.property} />
+                            </Section>
+                            <Section title="Amenities">
+                                <FeatureGrid property={this.props.property} />
+                            </Section>
                         </Box>
                         <SideCard property={this.props.property} />
                     </Flex>

@@ -13,27 +13,22 @@ class BedroomDetails extends Component {
         const hasDoubleBedrooms = !!doubleBedrooms && doubleBedrooms > 0
         const hasSingleBedrooms = !!singleBedrooms && singleBedrooms > 0
         return (
-            <Box mb={4}>
-                <Heading fontSize={[3]} color="grey.3" mb={2}>
-                    Bathrooms
-                </Heading>
-                <Flex>
-                    {hasDoubleBedrooms && (
-                        <FeatureSquare
-                            value={doubleBedrooms}
-                            name="Double bedrooms"
-                            icon={doubleBedroomIcon}
-                        />
-                    )}
-                    {hasSingleBedrooms && (
-                        <FeatureSquare
-                            value={singleBedrooms}
-                            name="Single bedrooms"
-                            icon={singleBedroomIcon}
-                        />
-                    )}
-                </Flex>
-            </Box>
+            <Flex>
+                {hasDoubleBedrooms && (
+                    <FeatureSquare
+                        value={doubleBedrooms}
+                        name="Double bedrooms"
+                        icon={doubleBedroomIcon}
+                    />
+                )}
+                {hasSingleBedrooms && (
+                    <FeatureSquare
+                        value={singleBedrooms}
+                        name="Single bedrooms"
+                        icon={singleBedroomIcon}
+                    />
+                )}
+            </Flex>
         )
     }
 }

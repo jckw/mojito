@@ -138,38 +138,33 @@ class FeatureGrid extends Component {
 
         return (
             <Relative>
-                <Box mb={4} mt={2}>
-                    <Heading fontSize={[3]} color="grey.3" mb={1}>
-                        Amenities
-                    </Heading>
-                    <Absolute bottom={0} left={0} right={0}>
-                        {!this.state.showAll && (
-                            <Flex
-                                justifyContent="center"
-                                css={{
-                                    height: '54px',
-                                    backgroundImage:
-                                        'linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, #FFFFFF 100%)'
-                                }}
-                                onClick={this.showAll}
-                            >
-                                <img src={downArrow} />
-                            </Flex>
-                        )}
-                    </Absolute>
-                    <Flex flexDirection={['column', 'row']}>
-                        <FeatureSection
-                            title="Included"
-                            items={includedFeatures}
-                            showAll={this.state.showAll}
-                        />
-                        <FeatureSection
-                            title="Not included"
-                            items={notIncludedFeatures}
-                            showAll={this.state.showAll}
-                        />
-                    </Flex>
-                </Box>
+                <Absolute bottom={0} left={0} right={0}>
+                    {!this.state.showAll && (
+                        <Flex
+                            justifyContent="center"
+                            css={{
+                                height: '54px',
+                                backgroundImage:
+                                    'linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, #FFFFFF 100%)'
+                            }}
+                            onClick={this.showAll}
+                        >
+                            <img src={downArrow} />
+                        </Flex>
+                    )}
+                </Absolute>
+                <Flex flexDirection={['column', 'row']}>
+                    <FeatureSection
+                        title="Included"
+                        items={includedFeatures}
+                        showAll={this.state.showAll}
+                    />
+                    <FeatureSection
+                        title="Not included"
+                        items={notIncludedFeatures}
+                        showAll={this.state.showAll}
+                    />
+                </Flex>
             </Relative>
         )
     }

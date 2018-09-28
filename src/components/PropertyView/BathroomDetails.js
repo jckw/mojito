@@ -12,19 +12,12 @@ class BathroomDetails extends Component {
         const nonEnsuites = bathrooms - ensuites
 
         return (
-            <Box mb={4}>
-                <Heading fontSize={[3]} color="grey.3" mb={2}>
-                    Bedrooms
-                </Heading>
-                <Flex>
-                    {!!nonEnsuites && (
-                        <FeatureSquare value={nonEnsuites} name="Bathrooms" icon={towelIcon} />
-                    )}
-                    {!!ensuites && (
-                        <FeatureSquare value={ensuites} name="Ensuites" icon={towelIcon} />
-                    )}
-                </Flex>
-            </Box>
+            <Flex>
+                {!!nonEnsuites && (
+                    <FeatureSquare value={nonEnsuites} name="Bathrooms" icon={towelIcon} />
+                )}
+                {!!ensuites && <FeatureSquare value={ensuites} name="Ensuites" icon={towelIcon} />}
+            </Flex>
         )
     }
 }
