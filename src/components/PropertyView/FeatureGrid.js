@@ -136,6 +136,14 @@ class FeatureGrid extends Component {
         //     f => this.props.property[f] !== true && this.props.property[f.key] !== false
         // )
 
+        if (includedFeatures.length < 1 && notIncludedFeatures.length < 1) {
+            return (
+                <Text color="grey.0" fontWeight="light" my={2}>
+                    We don't have any data on what is included with this property.
+                </Text>
+            )
+        }
+
         return (
             <Relative>
                 <Absolute bottom={0} left={0} right={0}>
