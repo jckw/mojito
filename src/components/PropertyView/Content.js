@@ -8,6 +8,7 @@ import Container from '../Container'
 import FeatureGrid from './FeatureGrid'
 import SideCard from './SideCard'
 import BedroomDetails from './BedroomDetails'
+import BathroomDetails from './BathroomDetails'
 
 class Content extends Component {
     render() {
@@ -30,6 +31,7 @@ class Content extends Component {
                                 <span style={{ display: 'inline-block' }}>{postcode}</span>
                             </Heading>
                             <BedroomDetails property={this.props.property} />
+                            <BathroomDetails property={this.props.property} />
                             <FeatureGrid property={this.props.property} />
                         </Box>
                         <SideCard property={this.props.property} />
@@ -56,6 +58,7 @@ export default createFragmentContainer(Content, {
             ...FeatureGrid_property
             ...SideCard_property
             ...BedroomDetails_property
+            ...BathroomDetails_property
         }
     `
 })

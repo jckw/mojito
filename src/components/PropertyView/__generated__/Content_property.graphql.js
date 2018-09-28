@@ -8,6 +8,7 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type BathroomDetails_property$ref = any;
 type BedroomDetails_property$ref = any;
 type FeatureGrid_property$ref = any;
 type PhotoHeader_property$ref = any;
@@ -24,7 +25,7 @@ export type Content_property = {|
     |},
   |},
   +bedrooms: number,
-  +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref & BedroomDetails_property$ref,
+  +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref & BedroomDetails_property$ref & BathroomDetails_property$ref,
   +$refType: Content_property$ref,
 |};
 */
@@ -109,10 +110,15 @@ return {
       "kind": "FragmentSpread",
       "name": "BedroomDetails_property",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "BathroomDetails_property",
+      "args": null
     }
   ]
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '216abb3fa1878f1a23c0bf3d028329d6';
+(node/*: any*/).hash = '85ab13e2becaec88e0fce0dac2991344';
 module.exports = node;
