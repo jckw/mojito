@@ -10,6 +10,7 @@ import LeaseInfo from './LeaseInfo'
 
 class SideCard extends Component {
     render() {
+        const { hasPhotos } = this.props
         const { price, totalPrice } = this.props.property
         return (
             <Card
@@ -18,18 +19,19 @@ class SideCard extends Component {
                 borderRadius={5}
                 bg="#F7F7F7"
                 boxShadow="0px 4px 8px -4px rgba(0, 0, 0, 0.5)"
-                mt={[0, '-50px']}
                 css={{ boxSizing: 'border-box' }}
                 ml={[0, 2]}
             >
                 <AgencyHeader property={this.props.property} />
-                <Flex mt={3} flexDirection={['row']} alignItems="flex-start">
+                <Flex flexDirection={['row']} alignItems="flex-start" css={{ flexWrap: 'wrap' }}>
                     <Card
                         bg="green.normal"
                         css={{
                             display: 'inline-flex',
-                            boxShadow: '0px 2px 10px -5px rgba(0,0,0,0.9)'
+                            boxShadow: '0px 2px 10px -5px rgba(0,0,0,0.9)',
+                            flexShrink: 0
                         }}
+                        mt={3}
                         color="white"
                         px={2}
                         py={1}
@@ -52,8 +54,10 @@ class SideCard extends Component {
                         bg="green.pale"
                         css={{
                             display: 'inline-flex',
-                            boxShadow: '0px 2px 10px -5px rgba(74,159,128,0.9)'
+                            boxShadow: '0px 2px 10px -5px rgba(74,159,128,0.9)',
+                            flexShrink: 0
                         }}
+                        mt={3}
                         color="white"
                         px={2}
                         py={1}

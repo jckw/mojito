@@ -10,6 +10,7 @@ const FeatureSquare = ({ value, name, icon }) => (
         bg="#64AC92"
         color="white"
         css={{ minWidth: '120px' }}
+        mr={4}
     >
         <Flex justifyContent="space-between" alignItems="center" mb={3}>
             <img src={icon} />
