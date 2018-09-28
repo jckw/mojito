@@ -8,6 +8,7 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
+type AreaDetails_property$ref = any;
 type BathroomDetails_property$ref = any;
 type BedroomDetails_property$ref = any;
 type FeatureGrid_property$ref = any;
@@ -28,7 +29,7 @@ export type Content_property = {|
     +name: string
   |},
   +bedrooms: number,
-  +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref & BedroomDetails_property$ref & BathroomDetails_property$ref,
+  +$fragmentRefs: PhotoHeader_property$ref & FeatureGrid_property$ref & SideCard_property$ref & BedroomDetails_property$ref & BathroomDetails_property$ref & AreaDetails_property$ref,
   +$refType: Content_property$ref,
 |};
 */
@@ -53,16 +54,14 @@ return {
   "argumentDefinitions": [],
   "selections": [
     {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "street",
-      "args": null,
-      "storageKey": null
+      "kind": "FragmentSpread",
+      "name": "PhotoHeader_property",
+      "args": null
     },
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "postcode",
+      "name": "street",
       "args": null,
       "storageKey": null
     },
@@ -106,9 +105,11 @@ return {
       "storageKey": null
     },
     {
-      "kind": "FragmentSpread",
-      "name": "PhotoHeader_property",
-      "args": null
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "postcode",
+      "args": null,
+      "storageKey": null
     },
     {
       "kind": "FragmentSpread",
@@ -129,10 +130,15 @@ return {
       "kind": "FragmentSpread",
       "name": "BathroomDetails_property",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "AreaDetails_property",
+      "args": null
     }
   ]
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '9135260ecc7e732568d1c5d6e3bfa3b1';
+(node/*: any*/).hash = '138b5d282bd98b6e6a65f14f2678cb07';
 module.exports = node;

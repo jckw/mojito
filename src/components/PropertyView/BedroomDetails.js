@@ -17,14 +17,14 @@ class BedroomDetails extends Component {
                 {hasDoubleBedrooms && (
                     <FeatureSquare
                         value={doubleBedrooms}
-                        name="Double bedrooms"
+                        name="Double bedroom"
                         icon={doubleBedroomIcon}
                     />
                 )}
                 {hasSingleBedrooms && (
                     <FeatureSquare
                         value={singleBedrooms}
-                        name="Single bedrooms"
+                        name="Single bedroom"
                         icon={singleBedroomIcon}
                     />
                 )}

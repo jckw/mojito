@@ -14,9 +14,9 @@ class BathroomDetails extends Component {
         return (
             <Flex>
                 {!!nonEnsuites && (
-                    <FeatureSquare value={nonEnsuites} name="Bathrooms" icon={towelIcon} />
+                    <FeatureSquare value={nonEnsuites} name="Bathroom" icon={towelIcon} />
                 )}
-                {!!ensuites && <FeatureSquare value={ensuites} name="Ensuites" icon={towelIcon} />}
+                {!!ensuites && <FeatureSquare value={ensuites} name="Ensuite" icon={towelIcon} />}
             </Flex>
         )
     }

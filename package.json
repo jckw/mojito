@@ -5,6 +5,7 @@
     "dependencies": {
         "babel-plugin-macros": "2.4.0",
         "babel-plugin-relay": "1.7.0-rc.1",
+        "date-fns": "^2.0.0-alpha.18",
         "eslint-config-universe": "^1.0.7",
         "geocoder": "^0.2.3",
         "graphql": "0.13.2",

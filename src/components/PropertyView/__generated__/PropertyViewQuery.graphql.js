@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 539617bd7d2dfd98835f897355db865d
+ * @relayHash 0f8d70d9dce935a78b1763c1c7b007f5
  */
 
 /* eslint-disable */
@@ -60,6 +60,7 @@ fragment Content_property on PropertyType {
   ...SideCard_property
   ...BedroomDetails_property
   ...BathroomDetails_property
+  ...AreaDetails_property
 }
 
 fragment PhotoHeader_property on PropertyType {
@@ -100,6 +101,7 @@ fragment SideCard_property on PropertyType {
   price
   totalPrice
   ...AgencyHeader_property
+  ...LeaseInfo_property
 }
 
 fragment BedroomDetails_property on PropertyType {
@@ -112,11 +114,28 @@ fragment BathroomDetails_property on PropertyType {
   ensuites
 }
 
+fragment AreaDetails_property on PropertyType {
+  area {
+    name
+    description
+    city {
+      name
+      id
+    }
+    id
+  }
+}
+
 fragment AgencyHeader_property on PropertyType {
   agency {
     name
     id
   }
+}
+
+fragment LeaseInfo_property on PropertyType {
+  leaseLengthMonths
+  leaseStartDate
 }
 */
 
@@ -184,7 +203,7 @@ return {
   "operationKind": "query",
   "name": "PropertyViewQuery",
   "id": null,
-  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  variant {\n    name\n    id\n  }\n  bedrooms\n  ...PhotoHeader_property\n  ...FeatureGrid_property\n  ...SideCard_property\n  ...BedroomDetails_property\n  ...BathroomDetails_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  furnished\n  dishwasher\n  bath\n  shower\n  garden\n  dryer\n  washingMachine\n  microwave\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment SideCard_property on PropertyType {\n  price\n  totalPrice\n  ...AgencyHeader_property\n}\n\nfragment BedroomDetails_property on PropertyType {\n  doubleBedrooms\n  singleBedrooms\n}\n\nfragment BathroomDetails_property on PropertyType {\n  bathrooms\n  ensuites\n}\n\nfragment AgencyHeader_property on PropertyType {\n  agency {\n    name\n    id\n  }\n}\n",
+  "text": "query PropertyViewQuery(\n  $propertySlug: String!\n  $citySlug: String!\n  $areaSlug: String!\n) {\n  property(propertySlug: $propertySlug, citySlug: $citySlug, areaSlug: $areaSlug) {\n    ...Content_property\n    id\n  }\n}\n\nfragment Content_property on PropertyType {\n  street\n  postcode\n  area {\n    name\n    city {\n      name\n      id\n    }\n    id\n  }\n  variant {\n    name\n    id\n  }\n  bedrooms\n  ...PhotoHeader_property\n  ...FeatureGrid_property\n  ...SideCard_property\n  ...BedroomDetails_property\n  ...BathroomDetails_property\n  ...AreaDetails_property\n}\n\nfragment PhotoHeader_property on PropertyType {\n  photos(first: 1) {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n}\n\nfragment FeatureGrid_property on PropertyType {\n  furnished\n  dishwasher\n  bath\n  shower\n  garden\n  dryer\n  washingMachine\n  microwave\n  fridge\n  freezer\n  stove\n  oven\n  airConditioning\n  kitchenTable\n  desksInRooms\n  doubleGlazing\n  bikeStorage\n  parkingSpace\n  fireAlarm\n  burglarAlarm\n}\n\nfragment SideCard_property on PropertyType {\n  price\n  totalPrice\n  ...AgencyHeader_property\n  ...LeaseInfo_property\n}\n\nfragment BedroomDetails_property on PropertyType {\n  doubleBedrooms\n  singleBedrooms\n}\n\nfragment BathroomDetails_property on PropertyType {\n  bathrooms\n  ensuites\n}\n\nfragment AreaDetails_property on PropertyType {\n  area {\n    name\n    description\n    city {\n      name\n      id\n    }\n    id\n  }\n}\n\nfragment AgencyHeader_property on PropertyType {\n  agency {\n    name\n    id\n  }\n}\n\nfragment LeaseInfo_property on PropertyType {\n  leaseLengthMonths\n  leaseStartDate\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -228,7 +247,7 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "oven",
+            "name": "airConditioning",
             "args": null,
             "storageKey": null
           },
@@ -259,7 +278,14 @@ return {
                 "plural": false,
                 "selections": v4
               },
-              v3
+              v3,
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "description",
+                "args": null,
+                "storageKey": null
+              }
             ]
           },
           {
@@ -407,14 +433,14 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "postcode",
+            "name": "oven",
             "args": null,
             "storageKey": null
           },
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "airConditioning",
+            "name": "postcode",
             "args": null,
             "storageKey": null
           },
@@ -490,6 +516,20 @@ return {
             "concreteType": "LettingAgencyType",
             "plural": false,
             "selections": v4
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "leaseLengthMonths",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "leaseStartDate",
+            "args": null,
+            "storageKey": null
           },
           {
             "kind": "ScalarField",

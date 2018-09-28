@@ -6,6 +6,7 @@ import { Heading, Card, Flex, Box, Text, Button } from 'rebass'
 import AgencyHeader from './AgencyHeader'
 
 import outLink from '../../assets/outLink.svg'
+import LeaseInfo from './LeaseInfo'
 
 class SideCard extends Component {
     render() {
@@ -71,15 +72,7 @@ class SideCard extends Component {
                         </Flex>
                     </Card>
                 </Flex>
-                <Text
-                    css={{ letterSpacing: '0.05em' }}
-                    color="grey.0"
-                    fontWeight="medium"
-                    fontSize={0}
-                    mt={3}
-                >
-                    12 MONTH LEASE • STARTS AUGUST 18TH
-                </Text>
+                <LeaseInfo property={this.props.property} />
                 <Box>
                     <Button width="100%" mt={3} variant="outlineLarge">
                         Agency listing <img src={outLink} />
@@ -101,6 +94,7 @@ export default createFragmentContainer(SideCard, {
             price
             totalPrice
             ...AgencyHeader_property
+            ...LeaseInfo_property
         }
     `
 })

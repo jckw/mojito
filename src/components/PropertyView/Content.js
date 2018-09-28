@@ -9,6 +9,7 @@ import FeatureGrid from './FeatureGrid'
 import SideCard from './SideCard'
 import BedroomDetails from './BedroomDetails'
 import BathroomDetails from './BathroomDetails'
+import AreaDetails from './AreaDetails'
 
 import greyPin from '../../assets/greyPin.svg'
 
@@ -19,7 +20,7 @@ function capFirst(string) {
 const Section = ({ title, children }) => (
     <Box mb={4}>
         <Heading fontSize={[3]} color="grey.3" mb={2}>
-            Bathrooms
+            {title}
         </Heading>
         {children}
     </Box>
@@ -70,6 +71,9 @@ class Content extends Component {
                             <Section title="Amenities">
                                 <FeatureGrid property={this.props.property} />
                             </Section>
+                            <Section title="Area">
+                                <AreaDetails property={this.props.property} />
+                            </Section>
                         </Box>
                         <SideCard property={this.props.property} />
                     </Flex>
@@ -99,6 +103,7 @@ export default createFragmentContainer(Content, {
             ...SideCard_property
             ...BedroomDetails_property
             ...BathroomDetails_property
+            ...AreaDetails_property
         }
     `
 })

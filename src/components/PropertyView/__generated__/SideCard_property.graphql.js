@@ -9,12 +9,13 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 type AgencyHeader_property$ref = any;
+type LeaseInfo_property$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type SideCard_property$ref: FragmentReference;
 export type SideCard_property = {|
   +price: number,
   +totalPrice: number,
-  +$fragmentRefs: AgencyHeader_property$ref,
+  +$fragmentRefs: AgencyHeader_property$ref & LeaseInfo_property$ref,
   +$refType: SideCard_property$ref,
 |};
 */
@@ -45,9 +46,14 @@ const node/*: ConcreteFragment*/ = {
       "kind": "FragmentSpread",
       "name": "AgencyHeader_property",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "LeaseInfo_property",
+      "args": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'a73f7273c9db4bcd2a215852de206d8e';
+(node/*: any*/).hash = '864bca6fe7fdf07ad85c116989669c17';
 module.exports = node;
