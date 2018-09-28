@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import { createFragmentContainer } from 'react-relay'
 import { graphql } from 'babel-plugin-relay/macro'
 import { Box, Flex, Heading, Text } from 'rebass'
+import { Collapse } from 'react-collapse'
+
+import Relative from '../Relative'
+import Absolute from '../Absolute'
+
+import downArrow from '../../assets/downArrow.svg'
+
+const VISIBLE_FEATURES = 5
 
 const features = [
     {
@@ -86,7 +94,41 @@ const features = [
     }
 ]
 
+const Feature = ({ name }) => (
+    <Text color="grey.0" fontWeight="light" my={2}>
+        {name}
+    </Text>
+)
+
+const FeatureSection = ({ title, items, showAll }) => (
+    <Box css={{ flex: 1 }}>
+        <Heading fontSize={[1]} color="grey.1" fontWeight="medium">
+            {title}
+        </Heading>
+        {items.slice(0, VISIBLE_FEATURES).map(f => (
+            <Feature name={f.name} />
+        ))}
+        <Collapse isOpened={showAll}>
+            {items.slice(VISIBLE_FEATURES).map(f => (
+                <Feature name={f.name} />
+            ))}
+        </Collapse>
+    </Box>
+)
+
 class FeatureGrid extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            showAll: false
+        }
+    }
+
+    showAll = () => {
+        this.setState({ showAll: true })
+    }
+
     render() {
         const includedFeatures = features.filter(f => this.props.property[f.key] === true)
         const notIncludedFeatures = features.filter(f => this.props.property[f.key] === false)
@@ -95,33 +137,40 @@ class FeatureGrid extends Component {
         // )
 
         return (
-            <Box mb={4} mt={2}>
-                <Heading fontSize={[3]} color="grey.3" mb={1}>
-                    Amenities
-                </Heading>
-                <Flex flexDirection={['column', 'row']}>
-                    <Box css={{ flex: 1 }}>
-                        <Heading fontSize={[1]} color="grey.1" fontWeight="medium">
-                            Included
-                        </Heading>
-                        {includedFeatures.map(f => (
-                            <Text color="grey.0" fontWeight="light" my={2}>
-                                {f.name}
-                            </Text>
-                        ))}
-                    </Box>
-                    <Box css={{ flex: 1 }} mt={[2, 0]}>
-                        <Heading fontSize={[1]} color="grey.1" fontWeight="medium">
-                            Not included
-                        </Heading>
-                        {notIncludedFeatures.map(f => (
-                            <Text color="grey.0" fontWeight="light" my={2}>
-                                {f.name}
-                            </Text>
-                        ))}
-                    </Box>
-                </Flex>
-            </Box>
+            <Relative>
+                <Box mb={4} mt={2}>
+                    <Heading fontSize={[3]} color="grey.3" mb={1}>
+                        Amenities
+                    </Heading>
+                    <Absolute bottom={0} left={0} right={0}>
+                        {!this.state.showAll && (
+                            <Flex
+                                justifyContent="center"
+                                css={{
+                                    height: '54px',
+                                    backgroundImage:
+                                        'linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, #FFFFFF 100%)'
+                                }}
+                                onClick={this.showAll}
+                            >
+                                <img src={downArrow} />
+                            </Flex>
+                        )}
+                    </Absolute>
+                    <Flex flexDirection={['column', 'row']}>
+                        <FeatureSection
+                            title="Included"
+                            items={includedFeatures}
+                            showAll={this.state.showAll}
+                        />
+                        <FeatureSection
+                            title="Not included"
+                            items={notIncludedFeatures}
+                            showAll={this.state.showAll}
+                        />
+                    </Flex>
+                </Box>
+            </Relative>
         )
     }
 }
