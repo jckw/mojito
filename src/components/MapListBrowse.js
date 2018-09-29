@@ -34,6 +34,16 @@ class MapListBrowse extends Component {
         )
     }
 
+    loadMore = () => {
+        const { relay } = this.props
+
+        relay.loadMore(ITEMS_PER_PAGE, error => {
+            if (error) {
+                console.log(error)
+            }
+        })
+    }
+
     render() {
         const { query } = this.props
 
@@ -97,13 +107,7 @@ export default createPaginationContainer(
     {
         direction: 'forward',
         getConnectionFromProps(props) {
-            return props && props.filteredProperties
-        },
-        getFragmentVariables(prevVars, totalCount) {
-            return {
-                ...prevVars,
-                count: totalCount
-            }
+            return props && props.query && props.query.filteredProperties
         },
         getVariables(
             props,
