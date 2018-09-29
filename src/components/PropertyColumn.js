@@ -14,7 +14,7 @@ class PropertyColumn extends Component {
                 css={{ overflowY: 'scroll' }}
                 m={0}
             >
-                <PropertyList query={query} />
+                <PropertyList query={query} pagination={this.props.pagination} />
             </Container>
         )
     }

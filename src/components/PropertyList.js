@@ -15,6 +15,7 @@ const Grid = styled(Box)`
 class PropertyList extends Component {
     render() {
         const { filteredProperties } = this.props.query
+        const { pagination } = this.props
 
         return (
             <Box>
@@ -29,10 +30,12 @@ class PropertyList extends Component {
                         'minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)'
                     ]}
                 >
-                    {filteredProperties.edges.map(edge => (
+                    {filteredProperties.edges.slice(pagination.from, pagination.until).map(edge => (
                         <PropertyItem key={edge.node.id} property={edge.node} />
                     ))}
                 </Grid>
+                <button onClick={pagination.prevPage}>prev</button>
+                <button onClick={pagination.nextPage}>next</button>
             </Box>
         )
     }

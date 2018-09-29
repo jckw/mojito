@@ -14,8 +14,19 @@ class MapListBrowse extends Component {
     constructor(props) {
         super(props)
 
+        this.INITIAL_PAGINATION_STATE = {
+            from: 0,
+            until: ITEMS_PER_PAGE,
+            page: 1,
+            nextPage: this.nextPage,
+            prevPage: this.prevPage,
+            totalPages: undefined,
+            latestPage: undefined
+        }
+
         this.state = {
-            filters: {}
+            filters: {},
+            pagination: this.INITIAL_PAGINATION_STATE
         }
     }
 
@@ -29,17 +40,79 @@ class MapListBrowse extends Component {
             finalFilters.geometry = undefined
         }
 
-        this.setState({ filters: { ...this.state.filters, ...finalFilters } }, () =>
-            relay.refetchConnection(ITEMS_PER_PAGE, null, this.state.filters)
+        this.setState(
+            {
+                filters: { ...this.state.filters, ...finalFilters },
+                pagination: this.INITIAL_PAGINATION_STATE
+            },
+            () => relay.refetchConnection(ITEMS_PER_PAGE, null, this.state.filters)
         )
     }
 
-    loadMore = () => {
+    loadMore = callback => {
         const { relay } = this.props
 
-        relay.loadMore(ITEMS_PER_PAGE, error => {
+        return relay.loadMore(ITEMS_PER_PAGE, error => {
             if (error) {
                 console.log(error)
+            } else {
+                callback()
+            }
+        })
+    }
+
+    nextPage = () => {
+        const { page, totalPages, latestPage } = this.state.pagination
+        const { relay } = this.props
+
+        if (totalPages && page === totalPages) {
+            return
+        }
+
+        if (page < latestPage) {
+            this.bumpPage()
+        }
+
+        if (relay.hasMore()) {
+            this.loadMore(() => {
+                this.bumpPage() // What if this happens before Relay is done fetching data?
+                // Maybe use relay.isLoading()?
+                this.setState({
+                    pagination: {
+                        ...this.state.pagination,
+                        latestPage: page + 1
+                    }
+                })
+            })
+        }
+    }
+
+    bumpPage = () => {
+        const { page, from, until } = this.state.pagination
+
+        this.setState({
+            pagination: {
+                ...this.state.pagination,
+                from: from + ITEMS_PER_PAGE,
+                until: until + ITEMS_PER_PAGE,
+                page: page + 1
+            }
+        })
+    }
+
+    prevPage = () => {
+        const { page, from, until } = this.state.pagination
+
+        if (page <= 1) {
+            return
+        }
+
+        this.setState({
+            pagination: {
+                ...this.state.pagination,
+                from: from - ITEMS_PER_PAGE,
+                until: until - ITEMS_PER_PAGE,
+                page: page - 1
             }
         })
     }
@@ -51,8 +124,12 @@ class MapListBrowse extends Component {
             <Flex flexDirection={['column-reverse', 'column']} css={{ flex: 1 }}>
                 <FilterRow refetch={this.refetch} query={query} />
                 <Flex flexDirection="row" css={{ flex: 1 }}>
-                    <MapView refetch={this.refetch} query={query} />
-                    <PropertyColumn query={query} />
+                    <MapView
+                        refetch={this.refetch}
+                        query={query}
+                        pagination={this.state.pagination}
+                    />
+                    <PropertyColumn query={query} pagination={this.state.pagination} />
                 </Flex>
             </Flex>
         )

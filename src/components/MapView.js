@@ -36,7 +36,7 @@ class MapView extends Component {
                 onBoundsChanged={throttle(this.refetch, 200)}
                 display={['none', 'block']}
             >
-                <MarkerSet query={this.props.query} />
+                <MarkerSet query={this.props.query} pagination={this.props.pagination} />
             </GoogleMap>
         )
     }

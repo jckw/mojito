@@ -5,14 +5,15 @@ import MapMarker from './MapMarker'
 
 class MarkerSet extends Component {
     render() {
-        const { query } = this.props
+        const { filteredProperties } = this.props.query
+        const { pagination } = this.props
 
         return (
             <Box>
-                {query.filteredProperties &&
-                    query.filteredProperties.edges.map(e => (
-                        <MapMarker key={e.node.id} property={e.node} />
-                    ))}
+                {filteredProperties &&
+                    filteredProperties.edges
+                        .slice(pagination.from, pagination.until)
+                        .map(e => <MapMarker key={e.node.id} property={e.node} />)}
             </Box>
         )
     }
