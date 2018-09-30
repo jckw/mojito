@@ -20,8 +20,9 @@ class MapListBrowse extends Component {
             page: 1,
             nextPage: this.nextPage,
             prevPage: this.prevPage,
-            totalPages: undefined,
-            latestPage: undefined
+            latestPage: undefined,
+            hasNextPage: this.hasNextPage,
+            hasPrevPage: this.hasPrevPage
         }
 
         this.state = {
@@ -61,11 +62,16 @@ class MapListBrowse extends Component {
         })
     }
 
+    hasPrevPage = () => this.state.pagination.page !== 1
+
+    hasNextPage = () =>
+        this.state.pagination.page < this.state.pagination.latestPage || this.props.relay.hasMore()
+
     nextPage = () => {
-        const { page, totalPages, latestPage } = this.state.pagination
+        const { page, latestPage } = this.state.pagination
         const { relay } = this.props
 
-        if (totalPages && page === totalPages) {
+        if (!this.hasNextPage()) {
             return
         }
 
@@ -103,7 +109,7 @@ class MapListBrowse extends Component {
     prevPage = () => {
         const { page, from, until } = this.state.pagination
 
-        if (page <= 1) {
+        if (!this.hasPrevPage()) {
             return
         }
 

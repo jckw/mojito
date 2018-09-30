@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { Box } from 'rebass'
+import { Box, Flex, Button, Text } from 'rebass'
 import styled from 'styled-components'
 import { gridTemplateColumns } from 'styled-system'
 
 import PropertyItem from './PropertyItem'
+
+import nextButton from '../assets/nextButton.svg'
+import prevButton from '../assets/prevButton.svg'
 
 const Grid = styled(Box)`
     display: grid;
@@ -34,8 +37,27 @@ class PropertyList extends Component {
                         <PropertyItem key={edge.node.id} property={edge.node} />
                     ))}
                 </Grid>
-                <button onClick={pagination.prevPage}>prev</button>
-                <button onClick={pagination.nextPage}>next</button>
+                <Flex alignItems="center" justifyContent="center" mt={3}>
+                    <Button
+                        variant="plainUnselected"
+                        onClick={pagination.prevPage}
+                        css={{ opacity: pagination.hasPrevPage() ? 1 : 0 }}
+                        mr={2}
+                    >
+                        <img src={prevButton} />
+                    </Button>
+                    <Text fontWeight="light" fontSize={2} color="grey.1" mb={1}>
+                        {pagination.page}
+                    </Text>
+                    <Button
+                        variant="plainUnselected"
+                        onClick={pagination.nextPage}
+                        css={{ opacity: pagination.hasNextPage() ? 1 : 0 }}
+                        ml={2}
+                    >
+                        <img src={nextButton} />
+                    </Button>
+                </Flex>
             </Box>
         )
     }
