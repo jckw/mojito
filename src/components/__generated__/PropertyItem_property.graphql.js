@@ -31,6 +31,18 @@ export type PropertyItem_property = {|
       |}
     |}>
   |},
+  +landmarkDistances: ?{|
+    +edges: $ReadOnlyArray<?{|
+      +node: ?{|
+        +landmark: {|
+          +id: string,
+          +name: string,
+        |},
+        +walkingTime: number,
+        +cyclingTime: number,
+      |}
+    |}>
+  |},
   +$fragmentRefs: PriceTag_property$ref,
   +$refType: PropertyItem_property$ref,
 |};
@@ -38,14 +50,22 @@ export type PropertyItem_property = {|
 
 
 const node/*: ConcreteFragment*/ = (function(){
-var v0 = [
-  {
-    "kind": "ScalarField",
-    "alias": null,
-    "name": "name",
-    "args": null,
-    "storageKey": null
-  }
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v2 = [
+  v1
 ];
 return {
   "kind": "Fragment",
@@ -57,17 +77,11 @@ return {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "id",
+      "name": "bedrooms",
       "args": null,
       "storageKey": null
     },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "street",
-      "args": null,
-      "storageKey": null
-    },
+    v0,
     {
       "kind": "ScalarField",
       "alias": null,
@@ -83,7 +97,7 @@ return {
       "args": null,
       "concreteType": "CityAreaType",
       "plural": false,
-      "selections": v0
+      "selections": v2
     },
     {
       "kind": "ScalarField",
@@ -95,7 +109,7 @@ return {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "bedrooms",
+      "name": "street",
       "args": null,
       "storageKey": null
     },
@@ -114,7 +128,7 @@ return {
       "args": null,
       "concreteType": "LettingAgencyType",
       "plural": false,
-      "selections": v0
+      "selections": v2
     },
     {
       "kind": "LinkedField",
@@ -157,6 +171,66 @@ return {
       ]
     },
     {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "landmarkDistances",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "PropertyLandmarkDistanceConnection",
+      "plural": false,
+      "selections": [
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "edges",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "PropertyLandmarkDistanceEdge",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "name": "node",
+              "storageKey": null,
+              "args": null,
+              "concreteType": "PropertyLandmarkDistanceType",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "LinkedField",
+                  "alias": null,
+                  "name": "landmark",
+                  "storageKey": null,
+                  "args": null,
+                  "concreteType": "LandmarkType",
+                  "plural": false,
+                  "selections": [
+                    v0,
+                    v1
+                  ]
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "walkingTime",
+                  "args": null,
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "cyclingTime",
+                  "args": null,
+                  "storageKey": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "kind": "FragmentSpread",
       "name": "PriceTag_property",
       "args": null
@@ -165,5 +239,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '159bcd34c492151303b3450b3593a8a5';
+(node/*: any*/).hash = 'c75525067768ad4e8e1e48d06d2e8d9e';
 module.exports = node;

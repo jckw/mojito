@@ -7,6 +7,7 @@ import Carousel from 'nuka-carousel'
 import { Link } from 'react-router-dom'
 
 import SelectedPropertyState from '../state/SelectedPropertyState'
+import SelectedLandmarkState from '../state/SelectedLandmarkState'
 import PriceTag from './PriceTag'
 import Relative from './Relative'
 import Absolute from './Absolute'
@@ -14,6 +15,7 @@ import FeatureIcon from './FeatureIcon'
 
 import cyclist from '../assets/icons/cyclist.svg'
 import people from '../assets/icons/people.svg'
+import walker from '../assets/icons/walker.svg'
 import bathroom from '../assets/icons/bathroom.svg'
 import withState from '../utils/withState'
 
@@ -42,8 +44,17 @@ class PropertyItem extends Component {
     }
 
     render() {
-        const { property } = this.props
-        const { street, area, postcode, agency, photos: photoEdges, bedrooms, bathrooms } = property
+        const { property, landmark } = this.props
+        const {
+            street,
+            area,
+            postcode,
+            agency,
+            photos: photoEdges,
+            bedrooms,
+            bathrooms,
+            landmarkDistances
+        } = property
 
         const photos = photoEdges.edges.map(e => (
             <img
@@ -55,6 +66,18 @@ class PropertyItem extends Component {
                 }}
             />
         ))
+
+        const selectedLandmark = landmark.state.selectedLandmark
+        const selectedLandmarkDistance =
+            selectedLandmark &&
+            landmarkDistances.edges.filter(e => e.node.landmark.id === selectedLandmark.id)[0]
+
+        const cyclingTime = selectedLandmarkDistance
+            ? selectedLandmarkDistance.node.cyclingTime
+            : '?'
+        const walkingTime = selectedLandmarkDistance
+            ? selectedLandmarkDistance.node.walkingTime
+            : '?'
 
         return (
             <Box onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
@@ -118,10 +141,10 @@ class PropertyItem extends Component {
                                 py={3}
                                 css={{ borderTop: '1px solid #E7F2EE' }}
                             >
-                                <FeatureIcon name="Mins" icon={cyclist} value={5} />
                                 <FeatureIcon name="Beds" icon={people} value={bedrooms} />
                                 <FeatureIcon name="Baths" icon={bathroom} value={bathrooms} />
-                                <FeatureIcon name="Minute" icon={cyclist} value={30} />
+                                <FeatureIcon name="Minute" icon={walker} value={walkingTime} />
+                                <FeatureIcon name="Minute" icon={cyclist} value={cyclingTime} />
                             </Flex>
                         </Link>
                     </Card>
@@ -131,29 +154,44 @@ class PropertyItem extends Component {
     }
 }
 
-export default createFragmentContainer(withState(PropertyItem, [SelectedPropertyState]), {
-    property: graphql`
-        fragment PropertyItem_property on PropertyType {
-            id
-            street
-            url
-            area {
-                name
-            }
-            postcode
-            bedrooms
-            bathrooms
-            agency {
-                name
-            }
-            photos {
-                edges {
-                    node {
-                        photo
+export default createFragmentContainer(
+    withState(PropertyItem, [SelectedPropertyState, SelectedLandmarkState]),
+    {
+        property: graphql`
+            fragment PropertyItem_property on PropertyType {
+                id
+                street
+                url
+                area {
+                    name
+                }
+                postcode
+                bedrooms
+                bathrooms
+                agency {
+                    name
+                }
+                photos {
+                    edges {
+                        node {
+                            photo
+                        }
                     }
                 }
+                landmarkDistances {
+                    edges {
+                        node {
+                            landmark {
+                                id
+                                name
+                            }
+                            walkingTime
+                            cyclingTime
+                        }
+                    }
+                }
+                ...PriceTag_property
             }
-            ...PriceTag_property
-        }
-    `
-})
+        `
+    }
+)

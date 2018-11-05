@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a903ab9c3203408c015a5c2b1e0b36a8
+ * @relayHash 816f22aa652793d8a48da8dce5081eb6
  */
 
 /* eslint-disable */
@@ -76,6 +76,19 @@ fragment PropertyItem_property on PropertyType {
       }
     }
   }
+  landmarkDistances {
+    edges {
+      node {
+        landmark {
+          id
+          name
+        }
+        walkingTime
+        cyclingTime
+        id
+      }
+    }
+  }
   ...PriceTag_property
 }
 
@@ -119,13 +132,17 @@ v1 = {
 v2 = [
   v1,
   v0
+],
+v3 = [
+  v0,
+  v1
 ];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "SearchQuery",
   "id": null,
-  "text": "query SearchQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  url\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  url\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n    landmarks {\n      edges {\n        node {\n          id\n          name\n        }\n      }\n    }\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query SearchQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  url\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  url\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  landmarkDistances {\n    edges {\n      node {\n        landmark {\n          id\n          name\n        }\n        walkingTime\n        cyclingTime\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n    landmarks {\n      edges {\n        node {\n          id\n          name\n        }\n      }\n    }\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -289,6 +306,64 @@ return {
                     ]
                   },
                   {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "name": "landmarkDistances",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "PropertyLandmarkDistanceConnection",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "name": "edges",
+                        "storageKey": null,
+                        "args": null,
+                        "concreteType": "PropertyLandmarkDistanceEdge",
+                        "plural": true,
+                        "selections": [
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "name": "node",
+                            "storageKey": null,
+                            "args": null,
+                            "concreteType": "PropertyLandmarkDistanceType",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "name": "landmark",
+                                "storageKey": null,
+                                "args": null,
+                                "concreteType": "LandmarkType",
+                                "plural": false,
+                                "selections": v3
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "name": "walkingTime",
+                                "args": null,
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "name": "cyclingTime",
+                                "args": null,
+                                "storageKey": null
+                              },
+                              v0
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
                     "kind": "ScalarField",
                     "alias": null,
                     "name": "price",
@@ -418,10 +493,7 @@ return {
                     "args": null,
                     "concreteType": "LandmarkType",
                     "plural": false,
-                    "selections": [
-                      v0,
-                      v1
-                    ]
+                    "selections": v3
                   }
                 ]
               }

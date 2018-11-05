@@ -7,6 +7,8 @@ import FilterRange from './FilterRange'
 import FilterSelect from './FilterSelect'
 import Absolute from './Absolute'
 import TopRow from './TopRow'
+import SelectedLandmarkState from '../state/SelectedLandmarkState'
+import withState from '../utils/withState'
 
 class FilterRow extends Component {
     constructor(props) {
@@ -27,6 +29,8 @@ class FilterRow extends Component {
             landmark: landmarks.edges[0].node,
             landmarks: landmarks.edges.map(({ node }) => node)
         }
+
+        this.updateGlobalState()
     }
 
     closeInputs = () => {
@@ -73,7 +77,18 @@ class FilterRow extends Component {
     }
 
     onLandmarkChange = event => {
-        this.setState({ landmark: event.target.value })
+        const selectedLandmarkId = event.target.value
+        const selectedLandmark = this.state.landmarks.filter(
+            ({ id }) => id === selectedLandmarkId
+        )[0]
+
+        this.setState({ landmark: selectedLandmark }, this.updateGlobalState)
+    }
+
+    updateGlobalState = () => {
+        const { landmark } = this.props
+
+        landmark.setSelectedLandmark(this.state.landmark)
     }
 
     render() {
@@ -141,7 +156,7 @@ class FilterRow extends Component {
     }
 }
 
-export default createFragmentContainer(FilterRow, {
+export default createFragmentContainer(withState(FilterRow, [SelectedLandmarkState]), {
     query: graphql`
         fragment FilterRow_query on Query {
             meta {
