@@ -16,6 +16,13 @@ export type FilterRow_query = {|
     +minBedrooms: ?number,
     +maxPrice: ?number,
     +minPrice: ?number,
+    +landmarks: ?{|
+      +edges: $ReadOnlyArray<?{|
+        +node: ?{|
+          +name: string
+        |}
+      |}>
+    |},
   |},
   +$refType: FilterRow_query$ref,
 |};
@@ -65,11 +72,51 @@ const node/*: ConcreteFragment*/ = {
           "name": "minPrice",
           "args": null,
           "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "landmarks",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "LandmarkConnection",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "name": "edges",
+              "storageKey": null,
+              "args": null,
+              "concreteType": "LandmarkEdge",
+              "plural": true,
+              "selections": [
+                {
+                  "kind": "LinkedField",
+                  "alias": null,
+                  "name": "node",
+                  "storageKey": null,
+                  "args": null,
+                  "concreteType": "LandmarkType",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "name": "name",
+                      "args": null,
+                      "storageKey": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '2e5dc29eced4e55de9d63e7ba2504bb0';
+(node/*: any*/).hash = '900239fa9d55908a92ff15a548b19476';
 module.exports = node;

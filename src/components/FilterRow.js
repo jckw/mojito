@@ -4,6 +4,7 @@ import { graphql } from 'babel-plugin-relay/macro'
 import { Box } from 'rebass'
 
 import FilterRange from './FilterRange'
+import FilterSelect from './FilterSelect'
 import Absolute from './Absolute'
 import TopRow from './TopRow'
 
@@ -11,7 +12,7 @@ class FilterRow extends Component {
     constructor(props) {
         super(props)
 
-        const { minPrice, maxPrice, minBedrooms, maxBedrooms } = props.query.meta
+        const { minPrice, maxPrice, minBedrooms, maxBedrooms, landmarks } = props.query.meta
 
         this.PRICE_RANGE = [minPrice, maxPrice]
         this.BEDROOMS_RANGE = [minBedrooms, maxBedrooms]
@@ -22,7 +23,9 @@ class FilterRow extends Component {
             showPriceInput: false,
             bedroomsSet: false,
             bedroomsRange: this.BEDROOMS_RANGE,
-            showBedroomsInput: false
+            showBedroomsInput: false,
+            landmark: landmarks.edges[0].node.name,
+            landmarks: landmarks.edges.map(({ node }) => node.name)
         }
     }
 
@@ -69,6 +72,10 @@ class FilterRow extends Component {
         this.setState({ showBedroomsInput: true, bedroomsSet: true })
     }
 
+    onLandmarkChange = event => {
+        this.setState({ landmark: event.target.value })
+    }
+
     render() {
         return (
             <Box>
@@ -91,6 +98,15 @@ class FilterRow extends Component {
                         position: 'relative'
                     }}
                 >
+                    <FilterSelect
+                        showingInput={this.state.showPriceInput}
+                        value={this.state.landmark}
+                        onChange={this.onLandmarkChange}
+                        preText="Distances to "
+                        isSet={true}
+                        onClose={this.closeInputs}
+                        options={this.state.landmarks}
+                    />
                     <FilterRange
                         name="Price per person"
                         showingInput={this.state.showPriceInput}
@@ -132,6 +148,13 @@ export default createFragmentContainer(FilterRow, {
                 minBedrooms
                 maxPrice
                 minPrice
+                landmarks {
+                    edges {
+                        node {
+                            name
+                        }
+                    }
+                }
             }
         }
     `
