@@ -19,7 +19,8 @@ export type FilterRow_query = {|
     +landmarks: ?{|
       +edges: $ReadOnlyArray<?{|
         +node: ?{|
-          +name: string
+          +id: string,
+          +name: string,
         |}
       |}>
     |},
@@ -103,6 +104,13 @@ const node/*: ConcreteFragment*/ = {
                     {
                       "kind": "ScalarField",
                       "alias": null,
+                      "name": "id",
+                      "args": null,
+                      "storageKey": null
+                    },
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
                       "name": "name",
                       "args": null,
                       "storageKey": null
@@ -118,5 +126,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '900239fa9d55908a92ff15a548b19476';
+(node/*: any*/).hash = 'c1dc4474cccb0760ef4ea1dcb396c30a';
 module.exports = node;

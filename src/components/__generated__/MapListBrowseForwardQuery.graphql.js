@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fe63d6edc288f45c405133e9f6cf5183
+ * @relayHash 48aa26d09dc71c25a4d8f1bb9750b1b5
  */
 
 /* eslint-disable */
@@ -104,8 +104,8 @@ fragment FilterRow_query on Query {
     landmarks {
       edges {
         node {
-          name
           id
+          name
         }
       }
     }
@@ -213,14 +213,15 @@ v2 = {
   "args": null,
   "storageKey": null
 },
-v3 = [
-  {
-    "kind": "ScalarField",
-    "alias": null,
-    "name": "name",
-    "args": null,
-    "storageKey": null
-  },
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v4 = [
+  v3,
   v2
 ];
 return {
@@ -228,7 +229,7 @@ return {
   "operationKind": "query",
   "name": "MapListBrowseForwardQuery",
   "id": null,
-  "text": "query MapListBrowseForwardQuery(\n  $count: Int!\n  $cursor: String\n  $geometry: Geometry\n  $minPrice: Float\n  $maxPrice: Float\n  $minBedrooms: Float\n  $maxBedrooms: Float\n) {\n  ...MapListBrowse_query_4C0LBB\n}\n\nfragment MapListBrowse_query_4C0LBB on Query {\n  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry, price_Gte: $minPrice, price_Lte: $maxPrice, bedrooms_Gte: $minBedrooms, bedrooms_Lte: $maxBedrooms) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  url\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  url\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n    landmarks {\n      edges {\n        node {\n          name\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query MapListBrowseForwardQuery(\n  $count: Int!\n  $cursor: String\n  $geometry: Geometry\n  $minPrice: Float\n  $maxPrice: Float\n  $minBedrooms: Float\n  $maxBedrooms: Float\n) {\n  ...MapListBrowse_query_4C0LBB\n}\n\nfragment MapListBrowse_query_4C0LBB on Query {\n  filteredProperties(first: $count, after: $cursor, location_Intersects: $geometry, price_Gte: $minPrice, price_Lte: $maxPrice, bedrooms_Gte: $minBedrooms, bedrooms_Lte: $maxBedrooms) {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  url\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  url\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n    landmarks {\n      edges {\n        node {\n          id\n          name\n        }\n      }\n    }\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -349,7 +350,7 @@ return {
                     "args": null,
                     "concreteType": "CityAreaType",
                     "plural": false,
-                    "selections": v3
+                    "selections": v4
                   },
                   {
                     "kind": "ScalarField",
@@ -391,7 +392,7 @@ return {
                     "args": null,
                     "concreteType": "LettingAgencyType",
                     "plural": false,
-                    "selections": v3
+                    "selections": v4
                   },
                   {
                     "kind": "LinkedField",
@@ -564,7 +565,10 @@ return {
                     "args": null,
                     "concreteType": "LandmarkType",
                     "plural": false,
-                    "selections": v3
+                    "selections": [
+                      v2,
+                      v3
+                    ]
                   }
                 ]
               }

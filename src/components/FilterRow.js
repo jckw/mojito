@@ -24,8 +24,8 @@ class FilterRow extends Component {
             bedroomsSet: false,
             bedroomsRange: this.BEDROOMS_RANGE,
             showBedroomsInput: false,
-            landmark: landmarks.edges[0].node.name,
-            landmarks: landmarks.edges.map(({ node }) => node.name)
+            landmark: landmarks.edges[0].node,
+            landmarks: landmarks.edges.map(({ node }) => node)
         }
     }
 
@@ -100,9 +100,10 @@ class FilterRow extends Component {
                 >
                     <FilterSelect
                         showingInput={this.state.showPriceInput}
-                        value={this.state.landmark}
+                        selectedNode={this.state.landmark}
                         onChange={this.onLandmarkChange}
                         preText="Distances to "
+                        getText={node => node.name}
                         isSet={true}
                         onClose={this.closeInputs}
                         options={this.state.landmarks}
@@ -151,6 +152,7 @@ export default createFragmentContainer(FilterRow, {
                 landmarks {
                     edges {
                         node {
+                            id
                             name
                         }
                     }

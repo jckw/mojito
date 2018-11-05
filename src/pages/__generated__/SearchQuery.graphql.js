@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6c999535b613f438426b0d81f7f4eea1
+ * @relayHash a903ab9c3203408c015a5c2b1e0b36a8
  */
 
 /* eslint-disable */
@@ -88,8 +88,8 @@ fragment FilterRow_query on Query {
     landmarks {
       edges {
         node {
-          name
           id
+          name
         }
       }
     }
@@ -109,14 +109,15 @@ var v0 = {
   "args": null,
   "storageKey": null
 },
-v1 = [
-  {
-    "kind": "ScalarField",
-    "alias": null,
-    "name": "name",
-    "args": null,
-    "storageKey": null
-  },
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v2 = [
+  v1,
   v0
 ];
 return {
@@ -124,7 +125,7 @@ return {
   "operationKind": "query",
   "name": "SearchQuery",
   "id": null,
-  "text": "query SearchQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  url\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  url\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n    landmarks {\n      edges {\n        node {\n          name\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
+  "text": "query SearchQuery {\n  ...MapListBrowse_query\n}\n\nfragment MapListBrowse_query on Query {\n  filteredProperties {\n    edges {\n      node {\n        id\n        ...MapMarker_property\n        ...PropertyItem_property\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  ...FilterRow_query\n}\n\nfragment MapMarker_property on PropertyType {\n  id\n  location {\n    coordinates\n  }\n  url\n}\n\nfragment PropertyItem_property on PropertyType {\n  id\n  street\n  url\n  area {\n    name\n    id\n  }\n  postcode\n  bedrooms\n  bathrooms\n  agency {\n    name\n    id\n  }\n  photos {\n    edges {\n      node {\n        photo\n        id\n      }\n    }\n  }\n  ...PriceTag_property\n}\n\nfragment FilterRow_query on Query {\n  meta {\n    maxBedrooms\n    minBedrooms\n    maxPrice\n    minPrice\n    landmarks {\n      edges {\n        node {\n          id\n          name\n        }\n      }\n    }\n  }\n}\n\nfragment PriceTag_property on PropertyType {\n  price\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -202,7 +203,7 @@ return {
                     "args": null,
                     "concreteType": "CityAreaType",
                     "plural": false,
-                    "selections": v1
+                    "selections": v2
                   },
                   {
                     "kind": "ScalarField",
@@ -244,7 +245,7 @@ return {
                     "args": null,
                     "concreteType": "LettingAgencyType",
                     "plural": false,
-                    "selections": v1
+                    "selections": v2
                   },
                   {
                     "kind": "LinkedField",
@@ -417,7 +418,10 @@ return {
                     "args": null,
                     "concreteType": "LandmarkType",
                     "plural": false,
-                    "selections": v1
+                    "selections": [
+                      v0,
+                      v1
+                    ]
                   }
                 ]
               }

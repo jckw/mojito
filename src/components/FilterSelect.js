@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-import { Flex, Button, Card, Box, Text } from 'rebass'
+import { Button, Text } from 'rebass'
 
-import Absolute from './Absolute'
 import Position from './Position'
 
 class FilterRange extends Component {
     render() {
-        const { showingInput, value, onChange, onClick, preText, options } = this.props
+        const {
+            showingInput,
+            selectedNode,
+            onChange,
+            onClick,
+            preText,
+            getText,
+            options
+        } = this.props
 
         return (
             <Position
@@ -17,9 +24,11 @@ class FilterRange extends Component {
                 <Button variant="plainSelected" onClick={onClick}>
                     <Text>
                         {preText}
-                        <select value={value} onChange={onChange}>
-                            {options.map(o => (
-                                <option value={o}>{o}</option>
+                        <select value={selectedNode.id} onChange={onChange}>
+                            {options.map(node => (
+                                <option value={node.id} key={node.id}>
+                                    {getText(node)}
+                                </option>
                             ))}
                         </select>
                     </Text>
