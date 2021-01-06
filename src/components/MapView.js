@@ -28,7 +28,7 @@ class MapView extends Component {
     render() {
         return (
             <GoogleMap
-                ref={map => (this.map = map)}
+                ref={(map) => (this.map = map)}
                 defaultZoom={14}
                 defaultCenter={{ lat: 51.7471381, lng: -1.2344602000000577 }}
                 defaultOptions={{ styles: mapStyle, disableDefaultUI: true }}
@@ -45,10 +45,10 @@ class MapView extends Component {
 const ComposedMapView = compose(
     withProps({
         googleMapURL:
-            'https://maps.googleapis.com/maps/api/js?key=AIzaSyD6fgy1K4D5fIsJKU3JyXkd1narRswi5Cs&v=3.exp&libraries=geometry,drawing,places',
+            'https://maps.googleapis.com/maps/api/js?key=AIzaSyDAkxsmcoqOH0YRwQuRIOnbYlBmCteKVKIs&v=3.exp&libraries=geometry,drawing,places',
         loadingElement: <div style={{ height: '100vh', flex: '1', background: '#efefef' }} />,
         containerElement: <Hide css={{ flex: 1 }} display={['none', 'block']} />,
-        mapElement: <div style={{ height: '100%' }} />
+        mapElement: <div style={{ height: '100%' }} />,
     }),
     withScriptjs,
     withGoogleMap
